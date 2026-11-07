@@ -38,6 +38,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
       <div
         tabIndex={0}
         role="button"
+        data-cursor="CASE STUDY"
         aria-label={`Open detailed case study for ${project.title}`}
         onClick={() => onOpenModal(project)}
         onKeyDown={(e) => {
@@ -46,7 +47,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
             onOpenModal(project);
           }
         }}
-        className="cursor-pointer relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-cobalt-400"
+        className="cursor-pointer relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-cobalt-400 group/preview"
         title="Click to view detailed case study"
       >
         <ProjectMockup projectId={project.id} accentColor={project.accentColor} />

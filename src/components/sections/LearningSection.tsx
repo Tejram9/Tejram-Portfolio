@@ -1,6 +1,7 @@
 import React from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
+import { ScrollReveal } from '../ui/ScrollReveal';
 import { currentlyLearningData } from '../../data/skills';
 
 export const LearningSection: React.FC = () => {
@@ -18,43 +19,49 @@ export const LearningSection: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {currentlyLearningData.map((item, idx) => (
-            <Card
+            <ScrollReveal
               key={idx}
-              className="p-6 md:p-7 flex flex-col justify-between"
-              hoverEffect
-              glow="cobalt"
-              tacticalBorder
+              direction="up"
+              delay={idx * 0.08}
+              className="h-full flex flex-col"
             >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-mono text-slate-500 font-bold">
-                    {`HORIZON 0${idx + 1}`}
-                  </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cobalt-950/80 border border-cobalt-800/60 text-cobalt-300 font-medium">
-                    {item.stage}
-                  </span>
+              <Card
+                className="p-6 md:p-7 flex flex-col justify-between h-full"
+                hoverEffect
+                glow="cobalt"
+                tacticalBorder
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xs font-mono text-slate-500 font-bold">
+                      {`HORIZON 0${idx + 1}`}
+                    </span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cobalt-950/80 border border-cobalt-800/60 text-cobalt-300 font-medium">
+                      {item.stage}
+                    </span>
+                  </div>
+
+                  <h3 className="text-base sm:text-lg font-display font-bold text-slate-100 mb-2">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-400 leading-relaxed font-normal">
+                    {item.description}
+                  </p>
                 </div>
 
-                <h3 className="text-base sm:text-lg font-display font-bold text-slate-100 mb-2">
-                  {item.title}
-                </h3>
-
-                <p className="text-xs text-slate-400 leading-relaxed font-normal">
-                  {item.description}
-                </p>
-              </div>
-
-              <div className="pt-4 mt-5 border-t border-slate-800/80 flex flex-wrap gap-1.5">
-                {item.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-900 text-slate-300 border border-slate-700/60"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            </Card>
+                <div className="pt-4 mt-5 border-t border-slate-800/80 flex flex-wrap gap-1.5">
+                  {item.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-900 text-slate-300 border border-slate-700/60"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              </Card>
+            </ScrollReveal>
           ))}
         </div>
       </div>

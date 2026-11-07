@@ -11,6 +11,7 @@ import {
 import { profileData } from '../../data/profile';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
+import { Magnetic } from '../ui/Magnetic';
 import { scrollToSection } from '../../lib/utils';
 import { HeroSculpture } from '../3d/HeroSculpture';
 import { FallbackSculpture } from '../3d/FallbackSculpture';
@@ -174,7 +175,10 @@ export const HeroSection: React.FC = () => {
             </div>
 
             {/* 3D Scene wrapped in bulletproof ErrorBoundary */}
-            <div className="w-full h-full">
+            <div
+              className="w-full h-full cursor-grab active:cursor-grabbing"
+              data-cursor="ORBIT 3D"
+            >
               {supportsWebGL && !prefersReducedMotion ? (
                 <ThreeErrorBoundary fallback={<FallbackSculpture />}>
                   <Suspense fallback={<FallbackSculpture />}>
@@ -193,33 +197,37 @@ export const HeroSection: React.FC = () => {
             {/* Interactive 3D Control HUD */}
             {supportsWebGL && !prefersReducedMotion && (
               <div className="absolute bottom-6 z-20 flex items-center gap-2 bg-space-900/90 border border-slate-700/80 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg">
-                <button
-                  onClick={() => setWireframeMode(!wireframeMode)}
-                  className={`text-[11px] font-mono px-2.5 py-1 rounded-full flex items-center gap-1.5 transition-colors ${
-                    wireframeMode
-                      ? 'bg-cobalt-600 text-white font-semibold'
-                      : 'text-slate-300 hover:text-white hover:bg-space-800'
-                  }`}
-                  title="Toggle Wireframe Lattice"
-                >
-                  <Box className="w-3 h-3" />
-                  <span>Wireframe</span>
-                </button>
+                <Magnetic strength={0.2}>
+                  <button
+                    onClick={() => setWireframeMode(!wireframeMode)}
+                    className={`text-[11px] font-mono px-2.5 py-1 rounded-full flex items-center gap-1.5 transition-colors ${
+                      wireframeMode
+                        ? 'bg-cobalt-600 text-white font-semibold'
+                        : 'text-slate-300 hover:text-white hover:bg-space-800'
+                    }`}
+                    title="Toggle Wireframe Lattice"
+                  >
+                    <Box className="w-3 h-3" />
+                    <span>Wireframe</span>
+                  </button>
+                </Magnetic>
 
                 <div className="w-[1px] h-3 bg-slate-700" />
 
-                <button
-                  onClick={() => setAutoRotate(!autoRotate)}
-                  className={`text-[11px] font-mono px-2.5 py-1 rounded-full flex items-center gap-1.5 transition-colors ${
-                    !autoRotate
-                      ? 'bg-amber-600/30 text-amber-300 border border-amber-500/40 font-semibold'
-                      : 'text-slate-300 hover:text-white hover:bg-space-800'
-                  }`}
-                  title="Pause / Resume kinetic rotation"
-                >
-                  <RotateCw className={`w-3 h-3 ${autoRotate ? 'animate-spin-slow' : ''}`} />
-                  <span>{autoRotate ? 'Rotating' : 'Paused'}</span>
-                </button>
+                <Magnetic strength={0.2}>
+                  <button
+                    onClick={() => setAutoRotate(!autoRotate)}
+                    className={`text-[11px] font-mono px-2.5 py-1 rounded-full flex items-center gap-1.5 transition-colors ${
+                      !autoRotate
+                        ? 'bg-amber-600/30 text-amber-300 border border-amber-500/40 font-semibold'
+                        : 'text-slate-300 hover:text-white hover:bg-space-800'
+                    }`}
+                    title="Pause / Resume kinetic rotation"
+                  >
+                    <RotateCw className={`w-3 h-3 ${autoRotate ? 'animate-spin-slow' : ''}`} />
+                    <span>{autoRotate ? 'Rotating' : 'Paused'}</span>
+                  </button>
+                </Magnetic>
               </div>
             )}
           </motion.div>

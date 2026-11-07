@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowUp, Github, Linkedin, Mail, Award, Sparkles } from 'lucide-react';
 import { profileData } from '../../data/profile';
 import { scrollToSection } from '../../lib/utils';
+import { Magnetic } from '../ui/Magnetic';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -81,33 +82,39 @@ export const Footer: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-3 pt-2">
-              <a
-                href={profileData.socialLinks.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-xl bg-space-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cobalt-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-cobalt-500"
-                aria-label="GitHub Profile"
-              >
-                <Github className="w-4 h-4" />
-              </a>
+              <Magnetic strength={0.25}>
+                <a
+                  href={profileData.socialLinks.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-xl bg-space-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cobalt-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-cobalt-500 block"
+                  aria-label="GitHub Profile"
+                >
+                  <Github className="w-4 h-4" />
+                </a>
+              </Magnetic>
 
-              <a
-                href={profileData.socialLinks.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-xl bg-space-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cobalt-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-cobalt-500"
-                aria-label="LinkedIn Profile"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
+              <Magnetic strength={0.25}>
+                <a
+                  href={profileData.socialLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-xl bg-space-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cobalt-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-cobalt-500 block"
+                  aria-label="LinkedIn Profile"
+                >
+                  <Linkedin className="w-4 h-4" />
+                </a>
+              </Magnetic>
 
-              <a
-                href={`mailto:${profileData.socialLinks.email}`}
-                className="p-3 rounded-xl bg-space-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cobalt-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-cobalt-500"
-                aria-label="Send Email"
-              >
-                <Mail className="w-4 h-4" />
-              </a>
+              <Magnetic strength={0.25}>
+                <a
+                  href={`mailto:${profileData.socialLinks.email}`}
+                  className="p-3 rounded-xl bg-space-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cobalt-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-cobalt-500 block"
+                  aria-label="Send Email"
+                >
+                  <Mail className="w-4 h-4" />
+                </a>
+              </Magnetic>
             </div>
           </div>
         </div>
@@ -124,14 +131,16 @@ export const Footer: React.FC = () => {
               <span>React 18 • Three.js • Tailwind</span>
             </span>
 
-            <button
-              onClick={() => scrollToSection('hero')}
-              className="flex items-center gap-1.5 text-cobalt-400 hover:text-cobalt-300 transition-colors focus:outline-none"
-              aria-label="Back to top"
-            >
-              <span>Back to Top</span>
-              <ArrowUp className="w-3.5 h-3.5" />
-            </button>
+            <Magnetic strength={0.25}>
+              <button
+                onClick={() => scrollToSection('hero')}
+                className="flex items-center gap-1.5 text-cobalt-400 hover:text-cobalt-300 transition-colors focus:outline-none"
+                aria-label="Back to top"
+              >
+                <span>Back to Top</span>
+                <ArrowUp className="w-3.5 h-3.5" />
+              </button>
+            </Magnetic>
           </div>
         </div>
       </div>

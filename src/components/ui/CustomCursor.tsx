@@ -8,6 +8,7 @@ export const CustomCursor: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isCanvasHovered, setIsCanvasHovered] = useState(false);
+  const [cursorLabel, setCursorLabel] = useState<string | null>(null);
 
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
@@ -35,9 +36,17 @@ export const CustomCursor: React.FC = () => {
       pos.current = { x: e.clientX, y: e.clientY };
       if (!isVisible) setIsVisible(true);
 
-      // Check what element is currently under cursor
       const target = e.target as HTMLElement | null;
       if (target) {
+        // Detect contextual data-cursor attribute
+        const labeledTarget = target.closest('[data-cursor]');
+        if (labeledTarget) {
+          const label = labeledTarget.getAttribute('data-cursor');
+          setCursorLabel(label);
+        } else {
+          setCursorLabel(null);
+        }
+
         const isClickable = Boolean(
           target.closest('a, button, [role="button"], input, textarea, select, [tabindex="0"]')
         );
@@ -61,8 +70,7 @@ export const CustomCursor: React.FC = () => {
 
     // Smooth lerp loop for the follower ring
     const loop = () => {
-      // Lerp ring position towards real mouse coordinates
-      const ease = 0.22;
+      const ease = cursorLabel ? 0.28 : 0.22;
       ringPos.current.x += (pos.current.x - ringPos.current.x) * ease;
       ringPos.current.y += (pos.current.y - ringPos.current.y) * ease;
 
@@ -86,7 +94,7 @@ export const CustomCursor: React.FC = () => {
       document.documentElement.removeEventListener('mouseenter', onMouseEnter);
       if (animFrameId.current) cancelAnimationFrame(animFrameId.current);
     };
-  }, [hasPointer, isMobile, prefersReducedMotion, isVisible]);
+  }, [hasPointer, isMobile, prefersReducedMotion, isVisible, cursorLabel]);
 
   if (!hasPointer || isMobile || prefersReducedMotion) {
     return null;
@@ -99,11 +107,13 @@ export const CustomCursor: React.FC = () => {
       }`}
       aria-hidden="true"
     >
-      {/* Central Sharp Dot */}
+      {/* Central Sharp Focus Dot */}
       <div
         ref={dotRef}
         className={`fixed top-0 left-0 w-1.5 h-1.5 rounded-full pointer-events-none transition-transform duration-75 ${
-          isClicking
+          cursorLabel
+            ? 'opacity-0 scale-50'
+            : isClicking
             ? 'scale-150 bg-cyber-cyan'
             : isHovered
             ? 'scale-125 bg-cyber-cyan'
@@ -112,21 +122,24 @@ export const CustomCursor: React.FC = () => {
         style={{ willChange: 'transform' }}
       />
 
-      {/* Smooth Ambient Follower Ring */}
+      {/* Smooth Adaptive Follower Ring with Contextual Badge */}
       <div
         ref={ringRef}
-        className={`fixed top-0 left-0 rounded-full pointer-events-none transition-[width,height,border-color,background-color] duration-200 ${
-          isCanvasHovered
-            ? 'w-12 h-12 border border-cyber-cyan/60 bg-cyan-950/20'
+        className={`fixed top-0 left-0 pointer-events-none flex items-center justify-center transition-[width,height,border-color,background-color,border-radius,padding] duration-200 ${
+          cursorLabel
+            ? 'px-3 py-1 rounded-full border border-cyber-cyan/80 bg-space-950/90 text-[10px] font-mono font-bold text-cyber-cyan tracking-wider shadow-[0_0_20px_rgba(56,189,248,0.4)] backdrop-blur-md'
+            : isCanvasHovered
+            ? 'w-14 h-14 rounded-full border border-cyber-cyan/60 bg-cyan-950/20'
             : isHovered
-            ? 'w-10 h-10 border border-cobalt-400/80 bg-cobalt-500/10'
+            ? 'w-10 h-10 rounded-full border border-cobalt-400/80 bg-cobalt-500/10'
             : isClicking
-            ? 'w-6 h-6 border-2 border-cobalt-300 bg-cobalt-600/20'
-            : 'w-7 h-7 border border-slate-400/30 bg-transparent'
+            ? 'w-6 h-6 rounded-full border-2 border-cobalt-300 bg-cobalt-600/20'
+            : 'w-7 h-7 rounded-full border border-slate-400/30 bg-transparent'
         }`}
         style={{ willChange: 'transform' }}
-      />
+      >
+        {cursorLabel && <span className="select-none uppercase leading-none">{cursorLabel}</span>}
+      </div>
     </div>
   );
 };
-

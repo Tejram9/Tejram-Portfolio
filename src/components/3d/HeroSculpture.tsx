@@ -1,227 +1,75 @@
-import React, { useRef, useMemo, Suspense } from 'react';
+import React, { useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, OrbitControls } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
+import { CrystallineCore } from './CrystallineCore';
+import { GyroscopicRings } from './GyroscopicRings';
+import { ConstellationNetwork } from './ConstellationNetwork';
+import { AtmosphericField } from './AtmosphericField';
 
-interface KineticCoreProps {
+interface SceneContainerProps {
   isMobile: boolean;
   wireframeMode: boolean;
   autoRotate: boolean;
 }
 
-// Inner kinetic sculpture representing strategic systems & data nodes
-function KineticCore({ isMobile, wireframeMode, autoRotate }: KineticCoreProps) {
-  const groupRef = useRef<THREE.Group>(null);
-  const coreRef = useRef<THREE.Mesh>(null);
-  const ring1Ref = useRef<THREE.Mesh>(null);
-  const ring2Ref = useRef<THREE.Mesh>(null);
-  const ring3Ref = useRef<THREE.Mesh>(null);
-  const nodesRef = useRef<THREE.Group>(null);
+// Hierarchical scene coordinator handling smooth mouse parallax & orbital dynamics
+function SceneCoordinator({ isMobile, wireframeMode, autoRotate }: SceneContainerProps) {
+  const masterGroupRef = useRef<THREE.Group>(null);
+  const pointerRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
-  // Generate constellation nodes (representing strategic chess/network coordinates)
-  const nodePositions = useMemo(() => {
-    const coords: [number, number, number][] = [
-      [1.8, 0.4, 0.5],
-      [-1.7, -0.6, 0.8],
-      [0.6, 1.9, -0.5],
-      [-0.8, 1.7, 0.6],
-      [1.1, -1.6, -0.7],
-      [-1.2, -1.5, -0.6],
-      [0.2, -1.9, 1.0],
-      [1.5, 0.9, -1.2],
-    ];
-    return coords;
-  }, []);
+  useFrame((state) => {
+    // Smooth lerped pointer coordinates
+    pointerRef.current.x = THREE.MathUtils.lerp(pointerRef.current.x, state.pointer.x, 0.05);
+    pointerRef.current.y = THREE.MathUtils.lerp(pointerRef.current.y, state.pointer.y, 0.05);
 
-  useFrame((state, delta) => {
-    const t = state.clock.getElapsedTime();
-
-    if (groupRef.current && autoRotate) {
-      groupRef.current.rotation.y += delta * 0.25;
-    }
-
-    if (coreRef.current && autoRotate) {
-      coreRef.current.rotation.x = t * 0.35;
-      coreRef.current.rotation.y = t * 0.5;
-    }
-
-    if (ring1Ref.current && autoRotate) {
-      ring1Ref.current.rotation.x = t * 0.25;
-      ring1Ref.current.rotation.y = t * 0.18;
-    }
-
-    if (ring2Ref.current && autoRotate) {
-      ring2Ref.current.rotation.y = -t * 0.3;
-      ring2Ref.current.rotation.z = t * 0.2;
-    }
-
-    if (ring3Ref.current && autoRotate) {
-      ring3Ref.current.rotation.x = -t * 0.15;
-      ring3Ref.current.rotation.z = -t * 0.35;
-    }
-
-    if (nodesRef.current && autoRotate) {
-      nodesRef.current.rotation.y = -t * 0.12;
+    if (masterGroupRef.current) {
+      // Subtle layered parallax tilt (responsive to mouse without causing dizziness)
+      masterGroupRef.current.rotation.y = THREE.MathUtils.lerp(
+        masterGroupRef.current.rotation.y,
+        pointerRef.current.x * 0.28,
+        0.05
+      );
+      masterGroupRef.current.rotation.x = THREE.MathUtils.lerp(
+        masterGroupRef.current.rotation.x,
+        -pointerRef.current.y * 0.22,
+        0.05
+      );
     }
   });
 
   return (
-    <group ref={groupRef}>
-      {/* Central Strategic Core: Faceted Icosahedron with Wireframe Overlay */}
-      <Float speed={autoRotate ? 2 : 0} rotationIntensity={0.5} floatIntensity={0.6}>
-        {/* Solid crystalline translucent core */}
-        <mesh ref={coreRef}>
-          <icosahedronGeometry args={[isMobile ? 1.0 : 1.25, 1]} />
-          <meshPhysicalMaterial
-            color="#2563eb"
-            emissive="#1e3a8a"
-            emissiveIntensity={0.6}
-            roughness={0.15}
-            metalness={0.9}
-            transparent
-            opacity={wireframeMode ? 0.15 : 0.75}
-            wireframe={wireframeMode}
-          />
-        </mesh>
+    <group ref={masterGroupRef}>
+      {/* 1. Core Polyhedron Kernel */}
+      <CrystallineCore
+        isMobile={isMobile}
+        wireframeMode={wireframeMode}
+        autoRotate={autoRotate}
+        pointer={pointerRef}
+      />
 
-        {/* Outer subtle geometric wireframe cage */}
-        <mesh>
-          <icosahedronGeometry args={[isMobile ? 1.08 : 1.35, 1]} />
-          <meshBasicMaterial
-            color="#60a5fa"
-            wireframe
-            transparent
-            opacity={wireframeMode ? 0.9 : 0.4}
-          />
-        </mesh>
-      </Float>
+      {/* 2. Gyroscopic Coordinate Orbit Rings */}
+      <GyroscopicRings
+        isMobile={isMobile}
+        wireframeMode={wireframeMode}
+        autoRotate={autoRotate}
+      />
 
-      {/* Orbiting Strategic Rings (Gyroscopic coordinate bounds) */}
-      <mesh ref={ring1Ref}>
-        <torusGeometry args={[isMobile ? 1.6 : 1.95, 0.02, 16, 100]} />
-        <meshStandardMaterial
-          color="#38bdf8"
-          emissive="#0284c7"
-          emissiveIntensity={0.8}
-          roughness={0.2}
-          metalness={0.8}
-          wireframe={wireframeMode}
-        />
-      </mesh>
+      {/* 3. Constellation Node System (Trace lines & data vertices) */}
+      <ConstellationNetwork
+        isMobile={isMobile}
+        autoRotate={autoRotate}
+      />
 
-      <mesh ref={ring2Ref} rotation={[Math.PI / 3, Math.PI / 4, 0]}>
-        <torusGeometry args={[isMobile ? 1.9 : 2.3, 0.018, 16, 100]} />
-        <meshStandardMaterial
-          color="#818cf8"
-          emissive="#4f46e5"
-          emissiveIntensity={0.7}
-          roughness={0.3}
-          metalness={0.8}
-          wireframe={wireframeMode}
-        />
-      </mesh>
+      {/* 4. Atmospheric Cosmic Particle Field */}
+      <AtmosphericField count={isMobile ? 55 : 100} />
 
-      <mesh ref={ring3Ref} rotation={[-Math.PI / 4, 0, Math.PI / 3]}>
-        <torusGeometry args={[isMobile ? 2.2 : 2.65, 0.015, 16, 100]} />
-        <meshStandardMaterial
-          color="#3b82f6"
-          emissive="#1d4ed8"
-          emissiveIntensity={0.5}
-          roughness={0.4}
-          metalness={0.9}
-          transparent
-          opacity={0.6}
-          wireframe={wireframeMode}
-        />
-      </mesh>
-
-      {/* Interconnected System Nodes (Tactical Network Points) */}
-      <group ref={nodesRef}>
-        {nodePositions.map((pos, idx) => (
-          <group key={idx} position={pos}>
-            <mesh>
-              <octahedronGeometry args={[0.075, 0]} />
-              <meshStandardMaterial
-                color="#67e8f9"
-                emissive="#38bdf8"
-                emissiveIntensity={1.3}
-              />
-            </mesh>
-            <pointLight distance={1.2} intensity={0.8} color="#38bdf8" />
-          </group>
-        ))}
-      </group>
-
-      {/* Strategic Coordinate Anchor Crosshairs */}
-      <mesh position={[0, -2.4, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[0.8, 0.82, 32]} />
-        <meshBasicMaterial color="#3b82f6" transparent opacity={0.35} />
+      {/* Tactical Floor Horizon Ring */}
+      <mesh position={[0, isMobile ? -2.3 : -2.6, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[1.0, 1.025, 48]} />
+        <meshBasicMaterial color="#38bdf8" transparent opacity={0.3} />
       </mesh>
     </group>
-  );
-}
-
-// Particle field with bounded particle count for high 60fps performance
-function ParticleField({ count = 90 }: { count?: number }) {
-  const pointsRef = useRef<THREE.Points>(null);
-
-  const [positions, colors] = useMemo(() => {
-    const pos = new Float32Array(count * 3);
-    const col = new Float32Array(count * 3);
-
-    const c1 = new THREE.Color('#38bdf8');
-    const c2 = new THREE.Color('#3b82f6');
-    const c3 = new THREE.Color('#818cf8');
-
-    for (let i = 0; i < count; i++) {
-      const radius = 2.4 + Math.random() * 2.5;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(Math.random() * 2 - 1);
-
-      pos[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
-      pos[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-      pos[i * 3 + 2] = radius * Math.cos(phi);
-
-      const chosen = Math.random() > 0.5 ? c1 : Math.random() > 0.5 ? c2 : c3;
-      col[i * 3] = chosen.r;
-      col[i * 3 + 1] = chosen.g;
-      col[i * 3 + 2] = chosen.b;
-    }
-
-    return [pos, col];
-  }, [count]);
-
-  useFrame((_, delta) => {
-    if (pointsRef.current) {
-      pointsRef.current.rotation.y += delta * 0.05;
-      pointsRef.current.rotation.x += delta * 0.02;
-    }
-  });
-
-  return (
-    <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={count}
-          array={positions}
-          itemSize={3}
-        />
-        <bufferAttribute
-          attach="attributes-color"
-          count={count}
-          array={colors}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.045}
-        vertexColors
-        transparent
-        opacity={0.75}
-        blending={THREE.AdditiveBlending}
-      />
-    </points>
   );
 }
 
@@ -237,34 +85,48 @@ export const HeroSculpture: React.FC<HeroSculptureProps> = ({
   autoRotate = true,
 }) => {
   return (
-    <div className="w-full h-full relative cursor-grab active:cursor-grabbing select-none touch-none">
+    <div className="w-full h-full relative select-none touch-none cursor-grab active:cursor-grabbing">
       <Canvas
-        camera={{ position: [0, 0, isMobile ? 5.6 : 5.0], fov: 45 }}
-        dpr={typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1}
-        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+        camera={{ position: [0, 0, isMobile ? 5.8 : 5.1], fov: 45 }}
+        dpr={typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 1.75) : 1}
+        gl={{
+          antialias: true,
+          alpha: true,
+          powerPreference: 'high-performance',
+          stencil: false,
+        }}
       >
         <Suspense fallback={null}>
-          <ambientLight intensity={0.7} />
-          <directionalLight position={[5, 6, 5]} intensity={1.5} color="#60a5fa" />
-          <directionalLight position={[-5, -4, -4]} intensity={1.2} color="#38bdf8" />
-          <pointLight position={[0, -2, -3]} intensity={1.8} color="#818cf8" />
-          <pointLight position={[0, 0, 0]} intensity={1.0} color="#2563eb" />
+          {/* Studio Lighting Setup for High-Contrast Editorial Glass & Metal */}
+          <ambientLight intensity={0.65} color="#0f172a" />
+          
+          {/* Cobalt Key Light */}
+          <directionalLight position={[6, 7, 5]} intensity={1.6} color="#60a5fa" />
+          
+          {/* Electric Cyan Rim Fill */}
+          <directionalLight position={[-6, -4, -4]} intensity={1.3} color="#38bdf8" />
+          
+          {/* Violet Depth Backlight */}
+          <pointLight position={[0, -3, -3.5]} intensity={1.8} color="#818cf8" distance={9} />
+          
+          {/* Warm Amber Specular Accent for Visual Contrast */}
+          <pointLight position={[3, -2, 3]} intensity={0.9} color="#38bdf8" distance={6} />
 
-          <KineticCore
+          {/* Master 3D Kinetic System */}
+          <SceneCoordinator
             isMobile={isMobile}
             wireframeMode={wireframeMode}
             autoRotate={autoRotate}
           />
-          <ParticleField count={isMobile ? 50 : 90} />
 
-          {/* Orbit Controls enabling free rotation without page scroll lock */}
+          {/* Orbit Controls with bounded angles & smooth rotational damping */}
           <OrbitControls
             enableZoom={false}
             enablePan={false}
-            rotateSpeed={0.75}
+            rotateSpeed={0.7}
             dampingFactor={0.06}
-            maxPolarAngle={Math.PI / 1.5}
-            minPolarAngle={Math.PI / 3}
+            maxPolarAngle={Math.PI / 1.55}
+            minPolarAngle={Math.PI / 2.8}
           />
         </Suspense>
       </Canvas>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Project } from '../../types';
 import { ProjectMockup } from './ProjectMockup';
-import { ExternalLink, Github, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { ExternalLink, Github, ArrowUpRight, CheckCircle2, GitFork, AlertCircle, Sparkles } from 'lucide-react';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 
@@ -85,13 +85,61 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
             </p>
           </div>
 
-          {/* Description */}
-          <p className="text-xs sm:text-sm text-slate-300 mt-3 line-clamp-3 leading-relaxed font-normal">
-            {project.description}
-          </p>
+          {/* Problem & Solution Mini Dossier */}
+          <div className="mt-4 space-y-2.5">
+            <div className="p-3 rounded-xl bg-space-900/80 border border-rose-950/40 text-xs">
+              <div className="flex items-center gap-1.5 text-rose-400 font-mono text-[10px] uppercase font-bold tracking-wider mb-1">
+                <AlertCircle className="w-3 h-3 shrink-0" />
+                <span>The Problem</span>
+              </div>
+              <p className="text-slate-300 text-[11px] leading-relaxed line-clamp-2">
+                {project.problemStatement}
+              </p>
+            </div>
+
+            <div className="p-3 rounded-xl bg-space-900/80 border border-emerald-950/40 text-xs">
+              <div className="flex items-center gap-1.5 text-emerald-400 font-mono text-[10px] uppercase font-bold tracking-wider mb-1">
+                <Sparkles className="w-3 h-3 shrink-0" />
+                <span>Engineered Solution</span>
+              </div>
+              <p className="text-slate-300 text-[11px] leading-relaxed line-clamp-2">
+                {project.solution}
+              </p>
+            </div>
+          </div>
+
+          {/* Architecture Pipeline 4-Stage Micro Stepper */}
+          {project.architecturePipeline && (
+            <div className="mt-4 pt-3 border-t border-slate-800/60">
+              <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 uppercase tracking-wider mb-2">
+                <span className="flex items-center gap-1.5 text-cobalt-400 font-semibold">
+                  <GitFork className="w-3 h-3" /> Architecture Pipeline
+                </span>
+                <span>4 Stages</span>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 font-mono text-[10px]">
+                {project.architecturePipeline.map((step) => (
+                  <div
+                    key={step.step}
+                    className="p-2 rounded-lg bg-space-900 border border-slate-800/80 truncate"
+                  >
+                    <span className="text-cobalt-400 font-bold block text-[9px]">
+                      {step.step} // {step.tech}
+                    </span>
+                    <span className="text-slate-200 truncate block text-[10px] mt-0.5">
+                      {step.title}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Key Feature highlights preview */}
-          <div className="mt-5 space-y-1.5">
+          <div className="mt-4 space-y-1.5">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block mb-1">
+              Core Capabilities
+            </span>
             {project.keyFeatures.slice(0, 3).map((feat, idx) => (
               <div key={idx} className="flex items-start gap-2 text-xs text-slate-300">
                 <CheckCircle2 className="w-3.5 h-3.5 text-cyber-cyan shrink-0 mt-0.5" />
@@ -101,7 +149,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
           </div>
 
           {/* Tech Stack Chips */}
-          <div className="flex flex-wrap gap-1.5 mt-6 pt-5 border-t border-slate-800/80">
+          <div className="flex flex-wrap gap-1.5 mt-5 pt-4 border-t border-slate-800/80">
             {project.technologies.map((tech) => (
               <span
                 key={tech}
@@ -143,9 +191,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
 
           <button
             onClick={() => onOpenModal(project)}
-            className="text-xs font-mono text-slate-400 hover:text-cobalt-300 transition-colors flex items-center gap-1 group/btn"
+            className="text-xs font-mono text-cobalt-400 hover:text-cobalt-300 transition-colors flex items-center gap-1 group/btn font-semibold"
           >
-            <span>Case Study</span>
+            <span>Read Case Study</span>
             <span className="group-hover/btn:translate-x-0.5 transition-transform">&rarr;</span>
           </button>
         </div>

@@ -3,6 +3,7 @@ import { Project } from '../../types';
 import { Modal } from '../ui/Modal';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
+import { ProjectMockup } from './ProjectMockup';
 import {
   ExternalLink,
   Github,
@@ -12,6 +13,7 @@ import {
   AlertCircle,
   Sparkles,
   GitFork,
+  Wrench,
 } from 'lucide-react';
 
 interface ProjectDetailModalProps {
@@ -34,19 +36,24 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       title={project.title}
-      subtitle={`${project.category} • Case Study`}
+      subtitle={`${project.category} • Product Case Study`}
       maxWidth="3xl"
     >
       <div className="space-y-6 text-slate-200">
-        {/* Banner with Badge & Live Links */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-xl bg-space-850 border border-slate-800">
+        {/* Large Custom Visual Cover Preview */}
+        <div className="rounded-xl overflow-hidden border border-slate-800 bg-space-950 shadow-inner">
+          <ProjectMockup projectId={project.id} accentColor={project.accentColor} />
+        </div>
+
+        {/* Header Metadata Banner */}
+        <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-xl bg-space-850/90 border border-slate-800">
           <div>
-            <p className="text-sm font-mono text-cobalt-400 font-semibold">
+            <h4 className="text-sm font-mono text-cobalt-300 font-bold">
               {project.tagline}
-            </p>
+            </h4>
             {project.team && (
-              <p className="text-xs text-slate-400 mt-0.5">
-                Collaborative Project • Team {project.team}
+              <p className="text-xs text-slate-400 mt-0.5 font-mono">
+                Collaborative Initiative &bull; Team {project.team}
               </p>
             )}
           </div>
@@ -59,17 +66,17 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           </div>
         </div>
 
-        {/* Navigation Tabs */}
+        {/* Case Study Section Tabs */}
         <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
           {[
-            { id: 'overview', label: 'Problem & Solution' },
-            { id: 'architecture', label: 'System Architecture Pipeline' },
-            { id: 'features', label: 'Core Features & Specs' },
+            { id: 'overview', label: '1. Problem & Solution' },
+            { id: 'architecture', label: '2. Architecture & Challenges' },
+            { id: 'features', label: '3. Features & Tech Stack' },
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as typeof activeTab)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono tracking-wide transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-mono tracking-wide transition-all ${
                 activeTab === tab.id
                   ? 'bg-cobalt-600 text-white font-semibold shadow-sm'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-space-850'
@@ -80,89 +87,109 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           ))}
         </div>
 
-        {/* Tab 1: Overview (Problem & Solution) */}
+        {/* Tab 1: Problem, Solution & Personal Contribution */}
         {activeTab === 'overview' && (
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* The Problem */}
-              <div className="p-4 rounded-xl bg-space-850/60 border border-rose-900/30">
+              {/* The Problem Statement */}
+              <div className="p-4 sm:p-5 rounded-xl bg-space-850/70 border border-rose-900/30">
                 <div className="flex items-center gap-2 text-rose-400 font-mono text-xs uppercase tracking-wider mb-2 font-semibold">
-                  <AlertCircle className="w-4 h-4" />
-                  <span>The Problem Statement</span>
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  <span>The Problem Addressed</span>
                 </div>
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
                   {project.problemStatement}
                 </p>
               </div>
 
-              {/* The Solution */}
-              <div className="p-4 rounded-xl bg-space-850/60 border border-emerald-900/30">
+              {/* Architectural Solution */}
+              <div className="p-4 sm:p-5 rounded-xl bg-space-850/70 border border-emerald-900/30">
                 <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs uppercase tracking-wider mb-2 font-semibold">
-                  <Sparkles className="w-4 h-4" />
-                  <span>Architectural Solution</span>
+                  <Sparkles className="w-4 h-4 shrink-0" />
+                  <span>The Engineering Solution</span>
                 </div>
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
                   {project.solution}
                 </p>
               </div>
             </div>
 
-            {/* My Specific Engineering Contribution */}
-            <div className="p-4 rounded-xl bg-space-850/90 border border-cobalt-900/40">
+            {/* My Engineering Contribution */}
+            <div className="p-4 sm:p-5 rounded-xl bg-space-850 border border-cobalt-900/50">
               <div className="flex items-center gap-2 text-cobalt-400 font-mono text-xs uppercase tracking-wider mb-2 font-semibold">
-                <Code2 className="w-4 h-4" />
+                <Code2 className="w-4 h-4 shrink-0" />
                 <span>My Personal Engineering Contribution</span>
               </div>
-              <p className="text-sm text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
                 {project.myContribution}
               </p>
             </div>
           </div>
         )}
 
-        {/* Tab 2: Architecture Pipeline */}
+        {/* Tab 2: Architecture Pipeline & Genuine Challenges */}
         {activeTab === 'architecture' && (
-          <div className="space-y-4">
-            <div className="flex items-center justify-between text-xs font-mono text-slate-400">
-              <span className="flex items-center gap-1.5 text-cobalt-400 font-semibold uppercase">
-                <GitFork className="w-4 h-4" /> End-to-End System Flow
-              </span>
-              <span>4-Stage Pipeline</span>
+          <div className="space-y-5">
+            {/* 4-Stage Architecture Pipeline */}
+            <div>
+              <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
+                <span className="flex items-center gap-1.5 text-cobalt-400 font-semibold uppercase">
+                  <GitFork className="w-4 h-4" /> End-to-End System Pipeline
+                </span>
+                <span>Data Flow Architecture</span>
+              </div>
+
+              {project.architecturePipeline && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {project.architecturePipeline.map((step, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3.5 rounded-xl bg-space-850 border border-slate-800 hover:border-cobalt-500/40 transition-colors flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-cobalt-950 text-cobalt-300 border border-cobalt-800">
+                            STAGE {step.step}
+                          </span>
+                          <span className="text-[10px] font-mono text-slate-400 bg-space-900 px-2 py-0.5 rounded">
+                            {step.tech}
+                          </span>
+                        </div>
+                        <h5 className="text-xs sm:text-sm font-semibold text-slate-100">
+                          {step.title}
+                        </h5>
+                        <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Visual Architecture Steps */}
-            {project.architecturePipeline && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {project.architecturePipeline.map((step, idx) => (
-                  <div
-                    key={idx}
-                    className="p-3.5 rounded-xl bg-space-850 border border-slate-800 hover:border-cobalt-500/40 transition-colors flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-cobalt-950 text-cobalt-300 border border-cobalt-800">
-                          STAGE {step.step}
-                        </span>
-                        <span className="text-[10px] font-mono text-slate-400 bg-space-900 px-2 py-0.5 rounded">
-                          {step.tech}
-                        </span>
-                      </div>
-                      <h4 className="text-xs md:text-sm font-semibold text-slate-100">
-                        {step.title}
-                      </h4>
-                      <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                        {step.description}
-                      </p>
+            {/* Genuine Technical Challenges Encountered & Solved */}
+            {project.challengesEncountered && project.challengesEncountered.length > 0 && (
+              <div className="p-4 sm:p-5 rounded-xl bg-space-850/90 border border-amber-900/30 space-y-3">
+                <div className="flex items-center gap-2 text-amber-400 font-mono text-xs uppercase tracking-wider font-semibold">
+                  <Wrench className="w-4 h-4 shrink-0" />
+                  <span>Technical Challenges Encountered &amp; Resolved</span>
+                </div>
+                <div className="space-y-2.5">
+                  {project.challengesEncountered.map((ch, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-300 leading-relaxed">
+                      <span className="text-amber-400 font-mono font-bold shrink-0">{`#${idx + 1}`}</span>
+                      <span>{ch}</span>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             )}
 
-            {/* Architectural Highlights Bullet Points */}
+            {/* Architecture Highlights */}
             <div className="p-4 rounded-xl bg-space-850 border border-slate-800 space-y-2">
               <span className="text-xs font-mono uppercase tracking-wider text-slate-400 block mb-2 font-semibold">
-                Key Architectural Highlights
+                System Implementation Highlights
               </span>
               {project.architectureHighlights.map((arch, idx) => (
                 <div
@@ -177,35 +204,37 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           </div>
         )}
 
-        {/* Tab 3: Core Features & Specs */}
+        {/* Tab 3: Key Features & Verified Technology Stack */}
         {activeTab === 'features' && (
-          <div className="space-y-4">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-cyber-cyan" />
-              <span>Full Implemented Features</span>
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {project.keyFeatures.map((feat, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-start gap-2.5 p-2.5 rounded-lg bg-space-850 border border-slate-800/80 text-xs text-slate-300"
-                >
-                  <div className="w-1.5 h-1.5 rounded-full bg-cyber-cyan mt-1.5 shrink-0" />
-                  <span>{feat}</span>
-                </div>
-              ))}
+          <div className="space-y-5">
+            <div>
+              <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2 font-semibold">
+                <CheckCircle2 className="w-4 h-4 text-cyber-cyan" />
+                <span>Implemented Core Features</span>
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {project.keyFeatures.map((feat, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-start gap-2.5 p-3 rounded-lg bg-space-850 border border-slate-800/80 text-xs text-slate-300"
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-cyber-cyan mt-1.5 shrink-0" />
+                    <span className="leading-relaxed">{feat}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Technologies Used */}
+            {/* Verified Technology Stack */}
             <div className="pt-4 border-t border-slate-800">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">
-                Verified Technology Stack
+              <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2.5 font-semibold">
+                Technology Architecture
               </h4>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="text-xs font-mono px-3 py-1 rounded-md bg-space-800 text-slate-200 border border-slate-700/60"
+                    className="text-xs font-mono px-3.5 py-1.5 rounded-md bg-space-800 text-slate-200 border border-slate-700/60"
                   >
                     {tech}
                   </span>
@@ -215,7 +244,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           </div>
         )}
 
-        {/* External Actions */}
+        {/* Bottom Actions: Verified Demo & Repository Triggers */}
         <div className="pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-3">
             {project.liveDemoUrl && (

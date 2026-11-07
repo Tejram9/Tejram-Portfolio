@@ -20,6 +20,7 @@ export interface Project {
   myContribution: string;
   architectureHighlights: string[];
   architecturePipeline?: ArchitectureStep[];
+  challengesEncountered?: string[];
   liveDemoUrl?: string;
   githubUrl?: string;
   backendUrl?: string;

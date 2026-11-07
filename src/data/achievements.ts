@@ -54,3 +54,4 @@ export const leadershipRoles: LeadershipRole[] = [
     isConfirmed: true,
   },
 ];
+

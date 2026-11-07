@@ -2,6 +2,7 @@ import React from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
 import { profileData } from '../../data/profile';
+import { StrategicMatrix } from './StrategicMatrix';
 import {
   Compass,
   Layers,
@@ -130,6 +131,9 @@ export const AboutSection: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* The Engineering Chessboard & Strategic Systems Matrix */}
+        <StrategicMatrix />
       </div>
     </section>
   );

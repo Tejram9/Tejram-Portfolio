@@ -149,3 +149,4 @@ Before final public deployment, review and replace these placeholder values in `
 - **Authentic Engineering Storytelling:** Genuine projects (FocusPulse, Suvidha4C, CivicServe, Smart Krishi Sahayak), actual 8.63 CGPA, and confirmed hackathon achievements.
 - **Flawless Responsiveness:** Handcrafted layouts tailored for desktop, tablet, and mobile screens.
 - **Accessibility & Performance:** Semantic markup, reduced-motion fallbacks, zero layout shifts, and tree-shaken assets.
+

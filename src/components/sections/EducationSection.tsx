@@ -156,3 +156,4 @@ export const EducationSection: React.FC = () => {
     </section>
   );
 };
+

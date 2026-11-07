@@ -1,10 +1,16 @@
 import React, { useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float } from '@react-three/drei';
+import { Float, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
+interface KineticCoreProps {
+  isMobile: boolean;
+  wireframeMode: boolean;
+  autoRotate: boolean;
+}
+
 // Inner kinetic sculpture representing strategic systems & data nodes
-function KineticCore({ isMobile }: { isMobile: boolean }) {
+function KineticCore({ isMobile, wireframeMode, autoRotate }: KineticCoreProps) {
   const groupRef = useRef<THREE.Group>(null);
   const coreRef = useRef<THREE.Mesh>(null);
   const ring1Ref = useRef<THREE.Mesh>(null);
@@ -30,54 +36,39 @@ function KineticCore({ isMobile }: { isMobile: boolean }) {
   useFrame((state, delta) => {
     const t = state.clock.getElapsedTime();
 
-    // Responsive pointer interaction
-    const targetX = state.pointer.x * 0.35;
-    const targetY = state.pointer.y * 0.35;
-
-    if (groupRef.current) {
+    if (groupRef.current && autoRotate) {
       groupRef.current.rotation.y += delta * 0.25;
-      // Smooth dampening towards pointer
-      groupRef.current.rotation.x = THREE.MathUtils.lerp(
-        groupRef.current.rotation.x,
-        targetY * 0.5,
-        0.05
-      );
-      groupRef.current.rotation.z = THREE.MathUtils.lerp(
-        groupRef.current.rotation.z,
-        -targetX * 0.5,
-        0.05
-      );
     }
 
-    if (coreRef.current) {
-      coreRef.current.rotation.x = t * 0.4;
-      coreRef.current.rotation.y = t * 0.6;
+    if (coreRef.current && autoRotate) {
+      coreRef.current.rotation.x = t * 0.35;
+      coreRef.current.rotation.y = t * 0.5;
     }
 
-    if (ring1Ref.current) {
-      ring1Ref.current.rotation.x = t * 0.3;
-      ring1Ref.current.rotation.y = t * 0.2;
+    if (ring1Ref.current && autoRotate) {
+      ring1Ref.current.rotation.x = t * 0.25;
+      ring1Ref.current.rotation.y = t * 0.18;
     }
 
-    if (ring2Ref.current) {
-      ring2Ref.current.rotation.y = -t * 0.35;
-      ring2Ref.current.rotation.z = t * 0.25;
+    if (ring2Ref.current && autoRotate) {
+      ring2Ref.current.rotation.y = -t * 0.3;
+      ring2Ref.current.rotation.z = t * 0.2;
     }
 
-    if (ring3Ref.current) {
-      ring3Ref.current.rotation.x = -t * 0.2;
-      ring3Ref.current.rotation.z = -t * 0.4;
+    if (ring3Ref.current && autoRotate) {
+      ring3Ref.current.rotation.x = -t * 0.15;
+      ring3Ref.current.rotation.z = -t * 0.35;
     }
 
-    if (nodesRef.current) {
-      nodesRef.current.rotation.y = -t * 0.15;
+    if (nodesRef.current && autoRotate) {
+      nodesRef.current.rotation.y = -t * 0.12;
     }
   });
 
   return (
     <group ref={groupRef}>
       {/* Central Strategic Core: Faceted Icosahedron with Wireframe Overlay */}
-      <Float speed={2} rotationIntensity={0.6} floatIntensity={0.8}>
+      <Float speed={autoRotate ? 2 : 0} rotationIntensity={0.5} floatIntensity={0.6}>
         {/* Solid crystalline translucent core */}
         <mesh ref={coreRef}>
           <icosahedronGeometry args={[isMobile ? 1.0 : 1.25, 1]} />
@@ -88,8 +79,8 @@ function KineticCore({ isMobile }: { isMobile: boolean }) {
             roughness={0.15}
             metalness={0.9}
             transparent
-            opacity={0.75}
-            wireframe={false}
+            opacity={wireframeMode ? 0.15 : 0.75}
+            wireframe={wireframeMode}
           />
         </mesh>
 
@@ -100,7 +91,7 @@ function KineticCore({ isMobile }: { isMobile: boolean }) {
             color="#60a5fa"
             wireframe
             transparent
-            opacity={0.4}
+            opacity={wireframeMode ? 0.9 : 0.4}
           />
         </mesh>
       </Float>
@@ -114,6 +105,7 @@ function KineticCore({ isMobile }: { isMobile: boolean }) {
           emissiveIntensity={0.8}
           roughness={0.2}
           metalness={0.8}
+          wireframe={wireframeMode}
         />
       </mesh>
 
@@ -125,6 +117,7 @@ function KineticCore({ isMobile }: { isMobile: boolean }) {
           emissiveIntensity={0.7}
           roughness={0.3}
           metalness={0.8}
+          wireframe={wireframeMode}
         />
       </mesh>
 
@@ -138,6 +131,7 @@ function KineticCore({ isMobile }: { isMobile: boolean }) {
           metalness={0.9}
           transparent
           opacity={0.6}
+          wireframe={wireframeMode}
         />
       </mesh>
 
@@ -146,14 +140,13 @@ function KineticCore({ isMobile }: { isMobile: boolean }) {
         {nodePositions.map((pos, idx) => (
           <group key={idx} position={pos}>
             <mesh>
-              <octahedronGeometry args={[0.07, 0]} />
+              <octahedronGeometry args={[0.075, 0]} />
               <meshStandardMaterial
                 color="#67e8f9"
                 emissive="#38bdf8"
-                emissiveIntensity={1.2}
+                emissiveIntensity={1.3}
               />
             </mesh>
-            {/* Small node halo */}
             <pointLight distance={1.2} intensity={0.8} color="#38bdf8" />
           </group>
         ))}
@@ -162,7 +155,7 @@ function KineticCore({ isMobile }: { isMobile: boolean }) {
       {/* Strategic Coordinate Anchor Crosshairs */}
       <mesh position={[0, -2.4, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.8, 0.82, 32]} />
-        <meshBasicMaterial color="#3b82f6" transparent opacity={0.3} />
+        <meshBasicMaterial color="#3b82f6" transparent opacity={0.35} />
       </mesh>
     </group>
   );
@@ -225,20 +218,26 @@ function ParticleField({ count = 90 }: { count?: number }) {
         size={0.045}
         vertexColors
         transparent
-        opacity={0.7}
+        opacity={0.75}
         blending={THREE.AdditiveBlending}
       />
     </points>
   );
 }
 
-interface HeroSculptureProps {
+export interface HeroSculptureProps {
   isMobile?: boolean;
+  wireframeMode?: boolean;
+  autoRotate?: boolean;
 }
 
-export const HeroSculpture: React.FC<HeroSculptureProps> = ({ isMobile = false }) => {
+export const HeroSculpture: React.FC<HeroSculptureProps> = ({
+  isMobile = false,
+  wireframeMode = false,
+  autoRotate = true,
+}) => {
   return (
-    <div className="w-full h-full relative cursor-grab active:cursor-grabbing select-none">
+    <div className="w-full h-full relative cursor-grab active:cursor-grabbing select-none touch-none">
       <Canvas
         camera={{ position: [0, 0, isMobile ? 5.6 : 5.0], fov: 45 }}
         dpr={typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1}
@@ -246,17 +245,27 @@ export const HeroSculpture: React.FC<HeroSculptureProps> = ({ isMobile = false }
       >
         <Suspense fallback={null}>
           <ambientLight intensity={0.7} />
-          {/* Cobalt key light */}
           <directionalLight position={[5, 6, 5]} intensity={1.5} color="#60a5fa" />
-          {/* Electric cyan fill light */}
           <directionalLight position={[-5, -4, -4]} intensity={1.2} color="#38bdf8" />
-          {/* Violet backlight for depth */}
           <pointLight position={[0, -2, -3]} intensity={1.8} color="#818cf8" />
-          {/* Core center accent */}
           <pointLight position={[0, 0, 0]} intensity={1.0} color="#2563eb" />
 
-          <KineticCore isMobile={isMobile} />
+          <KineticCore
+            isMobile={isMobile}
+            wireframeMode={wireframeMode}
+            autoRotate={autoRotate}
+          />
           <ParticleField count={isMobile ? 50 : 90} />
+
+          {/* Orbit Controls enabling free rotation without page scroll lock */}
+          <OrbitControls
+            enableZoom={false}
+            enablePan={false}
+            rotateSpeed={0.75}
+            dampingFactor={0.06}
+            maxPolarAngle={Math.PI / 1.5}
+            minPolarAngle={Math.PI / 3}
+          />
         </Suspense>
       </Canvas>
     </div>

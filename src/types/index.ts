@@ -1,3 +1,10 @@
+export interface ArchitectureStep {
+  step: string;
+  title: string;
+  description: string;
+  tech: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -12,6 +19,7 @@ export interface Project {
   technologies: string[];
   myContribution: string;
   architectureHighlights: string[];
+  architecturePipeline?: ArchitectureStep[];
   liveDemoUrl?: string;
   githubUrl?: string;
   backendUrl?: string;

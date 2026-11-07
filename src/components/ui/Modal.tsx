@@ -46,10 +46,17 @@ export const Modal: React.FC<ModalProps> = ({
     '4xl': 'max-w-4xl',
   }[maxWidth];
 
+  const titleId = title ? `modal-title-${title.replace(/\s+/g, '-').toLowerCase()}` : undefined;
+
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+        >
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -78,7 +85,7 @@ export const Modal: React.FC<ModalProps> = ({
                     </span>
                   )}
                   {title && (
-                    <h3 className="text-xl md:text-2xl font-display font-bold text-slate-100">
+                    <h3 id={titleId} className="text-xl md:text-2xl font-display font-bold text-slate-100">
                       {title}
                     </h3>
                   )}

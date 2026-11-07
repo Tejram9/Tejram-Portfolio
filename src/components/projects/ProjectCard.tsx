@@ -15,8 +15,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
     <div className="group relative rounded-2xl bg-space-850/90 border border-slate-800/80 hover:border-slate-700 backdrop-blur-md overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.7)]">
       {/* Visual Interactive Preview */}
       <div
+        tabIndex={0}
+        role="button"
+        aria-label={`Open detailed case study for ${project.title}`}
         onClick={() => onOpenModal(project)}
-        className="cursor-pointer relative overflow-hidden"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onOpenModal(project);
+          }
+        }}
+        className="cursor-pointer relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-cobalt-400"
         title="Click to view detailed case study"
       >
         <ProjectMockup projectId={project.id} accentColor={project.accentColor} />
@@ -47,11 +56,20 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
 
           {/* Title */}
           <h3
+            tabIndex={0}
+            role="button"
+            aria-label={`Case study: ${project.title}`}
             onClick={() => onOpenModal(project)}
-            className="text-2xl font-display font-bold text-slate-100 group-hover:text-cobalt-300 transition-colors cursor-pointer flex items-center justify-between"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onOpenModal(project);
+              }
+            }}
+            className="text-2xl font-display font-bold text-slate-100 group-hover:text-cobalt-300 transition-colors cursor-pointer flex items-center justify-between focus:outline-none focus:text-cobalt-300"
           >
             <span>{project.title}</span>
-            <ArrowUpRight className="w-5 h-5 text-slate-500 group-hover:text-cobalt-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            <ArrowUpRight className="w-5 h-5 text-slate-400 group-hover:text-cobalt-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
           </h3>
 
           <p className="text-xs text-slate-400 font-mono mt-1">
@@ -125,3 +143,4 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
     </div>
   );
 };
+

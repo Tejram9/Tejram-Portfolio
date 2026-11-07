@@ -104,8 +104,18 @@ export const SkillsSection: React.FC = () => {
             return (
               <div
                 key={skill.name}
+                tabIndex={0}
+                role="button"
+                aria-pressed={isSelected}
+                aria-label={`Inspect ${skill.name} technical specification`}
                 onClick={() => setSelectedSkill(isSelected ? null : skill)}
-                className={`p-4 rounded-xl transition-all duration-200 cursor-pointer border flex flex-col justify-between ${
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedSkill(isSelected ? null : skill);
+                  }
+                }}
+                className={`p-4 rounded-xl transition-all duration-200 cursor-pointer border flex flex-col justify-between focus:outline-none focus:ring-2 focus:ring-cobalt-400 ${
                   isSelected
                     ? 'bg-space-800 border-cobalt-500 shadow-[0_0_20px_rgba(37,99,235,0.25)]'
                     : 'bg-space-850/80 border-slate-800/80 hover:border-slate-700 hover:bg-space-800/50'

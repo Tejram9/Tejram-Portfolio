@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { HeroSection } from './components/sections/HeroSection';
@@ -9,9 +10,12 @@ import { JourneySection } from './components/sections/JourneySection';
 import { AchievementsSection } from './components/sections/AchievementsSection';
 import { LearningSection } from './components/sections/LearningSection';
 import { ContactSection } from './components/sections/ContactSection';
+import { CommandPalette } from './components/ui/CommandPalette';
 import { useScrollSpy } from './hooks/useScrollSpy';
 
 export function App() {
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+
   const sectionIds = [
     'hero',
     'about',
@@ -26,13 +30,29 @@ export function App() {
 
   const activeSection = useScrollSpy(sectionIds, 120);
 
+  // Global Ctrl+K / Cmd+K listener
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setIsCommandPaletteOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div className="min-h-screen bg-space-950 text-slate-100 flex flex-col selection:bg-cobalt-600/30 selection:text-white relative">
-      {/* Top Navbar */}
-      <Navbar activeSection={activeSection} />
+      {/* Top Navbar with Scroll Progress & Command Palette trigger */}
+      <Navbar
+        activeSection={activeSection}
+        onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+      />
 
-      {/* Main Content Flow */}
-      <main className="flex-1">
+      {/* Main Content Flow with Accessible Landmark */}
+      <main id="main-content" className="flex-1 focus:outline-none" tabIndex={-1}>
         <HeroSection />
         <AboutSection />
         <EducationSection />
@@ -46,6 +66,12 @@ export function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Keyboard-Accessible Command Palette */}
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+      />
     </div>
   );
 }

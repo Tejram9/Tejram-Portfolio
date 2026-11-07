@@ -14,6 +14,8 @@ import {
   Send,
   MessageSquare,
   Sparkles,
+  ExternalLink,
+  MailCheck,
 } from 'lucide-react';
 
 export const ContactSection: React.FC = () => {
@@ -25,8 +27,10 @@ export const ContactSection: React.FC = () => {
   });
 
   const [copied, setCopied] = useState(false);
+  const [copiedDraft, setCopiedDraft] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success'>('idle');
+  const [generatedMailto, setGeneratedMailto] = useState('');
 
   const handleCopyEmail = async () => {
     const success = await copyToClipboard(profileData.socialLinks.email);
@@ -41,11 +45,20 @@ export const ContactSection: React.FC = () => {
     }
   };
 
+  const handleCopyDraft = async () => {
+    const draftText = `Subject: ${formData.subject || `Inquiry from ${formData.name}`}\nFrom: ${formData.name} <${formData.email}>\n\n${formData.message}`;
+    const success = await copyToClipboard(draftText);
+    if (success) {
+      setCopiedDraft(true);
+      confetti({ particleCount: 30, spread: 50, origin: { y: 0.7 } });
+      setTimeout(() => setCopiedDraft(false), 3000);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Form fallback: generate mailto URI with user's inputted details
     const subjectEncoded = encodeURIComponent(
       formData.subject || `Inquiry from ${formData.name}`
     );
@@ -53,17 +66,24 @@ export const ContactSection: React.FC = () => {
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     );
     const mailtoUrl = `mailto:${profileData.socialLinks.email}?subject=${subjectEncoded}&body=${bodyEncoded}`;
+    setGeneratedMailto(mailtoUrl);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      confetti({
-        particleCount: 70,
-        spread: 70,
-        origin: { y: 0.7 },
-      });
-      window.open(mailtoUrl, '_blank');
-    }, 600);
+    // Synchronous execution avoids Chrome popup blocker restrictions
+    setIsSubmitting(false);
+    setSubmitStatus('success');
+
+    confetti({
+      particleCount: 75,
+      spread: 75,
+      origin: { y: 0.7 },
+    });
+
+    // Attempt direct dispatch without popup blocker trigger
+    try {
+      window.location.href = mailtoUrl;
+    } catch (err) {
+      console.warn('Mailto direct link fallback:', err);
+    }
   };
 
   return (
@@ -104,13 +124,14 @@ export const ContactSection: React.FC = () => {
 
                   <button
                     onClick={handleCopyEmail}
-                    className="p-2 rounded-lg bg-space-800 hover:bg-space-750 text-slate-300 hover:text-white border border-slate-700/60 transition-all flex items-center gap-1.5 text-xs font-mono shrink-0"
+                    className="p-2 rounded-lg bg-space-800 hover:bg-space-750 text-slate-300 hover:text-white border border-slate-700/60 transition-all flex items-center gap-1.5 text-xs font-mono shrink-0 focus:outline-none focus:ring-2 focus:ring-cobalt-500"
                     title="Copy email to clipboard"
+                    aria-label="Copy email address"
                   >
                     {copied ? (
                       <>
                         <Check className="w-3.5 h-3.5 text-emerald-400" />
-                        <span className="text-emerald-400">Copied!</span>
+                        <span className="text-emerald-400 font-semibold">Copied!</span>
                       </>
                     ) : (
                       <>
@@ -147,13 +168,13 @@ export const ContactSection: React.FC = () => {
                   href={profileData.socialLinks.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-xl bg-space-900 hover:bg-space-800 border border-slate-800 hover:border-slate-700 text-slate-200 transition-all group"
+                  className="flex items-center justify-between p-3 rounded-xl bg-space-900 hover:bg-space-800 border border-slate-800 hover:border-slate-700 text-slate-200 transition-all group focus:outline-none focus:ring-2 focus:ring-cobalt-500"
                 >
                   <div className="flex items-center gap-3">
                     <Github className="w-5 h-5 text-cobalt-400" />
                     <div>
                       <span className="text-sm font-medium block">GitHub</span>
-                      <span className="text-[11px] font-mono text-slate-500">
+                      <span className="text-[11px] font-mono text-slate-400">
                         @Tejram9 • Repositories &amp; Contributions
                       </span>
                     </div>
@@ -167,13 +188,13 @@ export const ContactSection: React.FC = () => {
                   href={profileData.socialLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-xl bg-space-900 hover:bg-space-800 border border-slate-800 hover:border-slate-700 text-slate-200 transition-all group"
+                  className="flex items-center justify-between p-3 rounded-xl bg-space-900 hover:bg-space-800 border border-slate-800 hover:border-slate-700 text-slate-200 transition-all group focus:outline-none focus:ring-2 focus:ring-cobalt-500"
                 >
                   <div className="flex items-center gap-3">
                     <Linkedin className="w-5 h-5 text-cobalt-400" />
                     <div>
                       <span className="text-sm font-medium block">LinkedIn</span>
-                      <span className="text-[11px] font-mono text-slate-500">
+                      <span className="text-[11px] font-mono text-slate-400">
                         Professional Network Profile
                       </span>
                     </div>
@@ -204,39 +225,66 @@ export const ContactSection: React.FC = () => {
               </div>
 
               {submitStatus === 'success' ? (
-                <div className="p-6 rounded-xl bg-emerald-950/40 border border-emerald-800/60 text-center space-y-3">
+                <div className="p-6 rounded-xl bg-emerald-950/40 border border-emerald-800/60 text-center space-y-4">
                   <div className="w-12 h-12 rounded-full bg-emerald-900/60 border border-emerald-700/60 flex items-center justify-center mx-auto text-emerald-400">
-                    <Check className="w-6 h-6" />
+                    <MailCheck className="w-6 h-6" />
                   </div>
                   <h4 className="text-lg font-bold text-emerald-200">
-                    Email Client Dispatched!
+                    Message Formatted &amp; Ready!
                   </h4>
                   <p className="text-xs text-slate-300 max-w-md mx-auto leading-relaxed">
-                    Your message draft has been formatted and opened in your email client. You can also copy my email directly at{' '}
-                    <span className="font-mono text-emerald-400 font-semibold">
-                      {profileData.socialLinks.email}
-                    </span>
-                    .
+                    Your email client should have opened with the message ready to send. If your browser blocked the email client or you use webmail (Gmail/Outlook), choose an option below:
                   </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      setSubmitStatus('idle');
-                      setFormData({ name: '', email: '', subject: '', message: '' });
-                    }}
-                  >
-                    Send Another Message
-                  </Button>
+
+                  <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                    {generatedMailto && (
+                      <a
+                        href={generatedMailto}
+                        className="px-4 py-2 rounded-xl bg-cobalt-600 hover:bg-cobalt-500 text-white text-xs font-semibold shadow-md flex items-center gap-2 transition-all"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>Open in Email App</span>
+                      </a>
+                    )}
+
+                    <button
+                      onClick={handleCopyDraft}
+                      className="px-4 py-2 rounded-xl bg-space-850 hover:bg-space-800 text-slate-200 border border-slate-700 text-xs font-mono flex items-center gap-2 transition-all"
+                    >
+                      {copiedDraft ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                          <span className="text-emerald-400">Draft Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5 text-slate-400" />
+                          <span>Copy Message Text</span>
+                        </>
+                      )}
+                    </button>
+
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        setSubmitStatus('idle');
+                        setFormData({ name: '', email: '', subject: '', message: '' });
+                      }}
+                    >
+                      Reset Form
+                    </Button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5">
+                      <label htmlFor="contact-name" className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-medium">
                         Your Name *
                       </label>
                       <input
+                        id="contact-name"
                         type="text"
                         required
                         value={formData.name}
@@ -244,15 +292,16 @@ export const ContactSection: React.FC = () => {
                           setFormData({ ...formData, name: e.target.value })
                         }
                         placeholder="e.g. Aditi Sharma"
-                        className="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 text-slate-100 text-sm placeholder:text-slate-600 outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 text-slate-100 text-sm placeholder:text-slate-500 outline-none transition-all"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5">
+                      <label htmlFor="contact-email" className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-medium">
                         Your Email *
                       </label>
                       <input
+                        id="contact-email"
                         type="email"
                         required
                         value={formData.email}
@@ -260,31 +309,33 @@ export const ContactSection: React.FC = () => {
                           setFormData({ ...formData, email: e.target.value })
                         }
                         placeholder="aditi@example.com"
-                        className="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 text-slate-100 text-sm placeholder:text-slate-600 outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 text-slate-100 text-sm placeholder:text-slate-500 outline-none transition-all"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5">
+                    <label htmlFor="contact-subject" className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-medium">
                       Subject
                     </label>
                     <input
+                      id="contact-subject"
                       type="text"
                       value={formData.subject}
                       onChange={(e) =>
                         setFormData({ ...formData, subject: e.target.value })
                       }
                       placeholder="e.g. Project Collaboration / Internship Inquiry"
-                      className="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 text-slate-100 text-sm placeholder:text-slate-600 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 text-slate-100 text-sm placeholder:text-slate-500 outline-none transition-all"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5">
+                    <label htmlFor="contact-message" className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-medium">
                       Message *
                     </label>
                     <textarea
+                      id="contact-message"
                       required
                       rows={5}
                       value={formData.message}
@@ -292,7 +343,7 @@ export const ContactSection: React.FC = () => {
                         setFormData({ ...formData, message: e.target.value })
                       }
                       placeholder="Share your idea, questions, or opportunity details..."
-                      className="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 text-slate-100 text-sm placeholder:text-slate-600 outline-none transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 text-slate-100 text-sm placeholder:text-slate-500 outline-none transition-all resize-none"
                     />
                   </div>
 
@@ -307,8 +358,8 @@ export const ContactSection: React.FC = () => {
                     >
                       {isSubmitting ? 'Formatting Dispatch...' : 'Send Message'}
                     </Button>
-                    <span className="block text-[11px] font-mono text-slate-500 text-center mt-2">
-                      Launches formatted mailto or copies directly to clipboard
+                    <span className="block text-[11px] font-mono text-slate-400 text-center mt-2">
+                      Formats message &amp; opens in your preferred email client
                     </span>
                   </div>
                 </form>

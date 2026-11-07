@@ -28,3 +28,4 @@ export function useScrollSpy(sectionIds: string[], offset = 100): string {
 
   return activeId;
 }
+

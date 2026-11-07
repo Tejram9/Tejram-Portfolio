@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { ProjectCard } from '../projects/ProjectCard';
 import { ProjectDetailModal } from '../projects/ProjectDetailModal';
@@ -8,6 +8,22 @@ import { Project } from '../../types';
 export const ProjectsSection: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOpenProjectEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<{ projectId: string }>;
+      if (customEvent.detail?.projectId) {
+        const found = projectsData.find((p) => p.id === customEvent.detail.projectId);
+        if (found) {
+          setSelectedProject(found);
+          setIsModalOpen(true);
+        }
+      }
+    };
+
+    window.addEventListener('open-project-modal', handleOpenProjectEvent);
+    return () => window.removeEventListener('open-project-modal', handleOpenProjectEvent);
+  }, []);
 
   const handleOpenModal = (project: Project) => {
     setSelectedProject(project);

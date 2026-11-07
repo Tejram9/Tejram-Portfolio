@@ -8,43 +8,56 @@ export interface DeviceInfo {
 }
 
 export function useDevicePerformance(): DeviceInfo {
-  const [deviceInfo, setDeviceInfo] = useState<DeviceInfo>({
-    isMobile: false,
-    prefersReducedMotion: false,
-    supportsWebGL: true,
-    isLowPower: false,
+  const [deviceInfo, setDeviceInfo] = useState<DeviceInfo>(() => {
+    const isClient = typeof window !== 'undefined';
+    const isMobileCheck = isClient ? window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent) : false;
+    let webgl = true;
+    if (isClient) {
+      try {
+        const canvas = document.createElement('canvas');
+        webgl = Boolean(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
+      } catch (e) {
+        webgl = false;
+      }
+    }
+    return {
+      isMobile: isMobileCheck,
+      prefersReducedMotion: false,
+      supportsWebGL: webgl,
+      isLowPower: isMobileCheck,
+    };
   });
 
   useEffect(() => {
-    const isMobileCheck = window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent);
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     
-    // Test WebGL availability
-    let webgl = true;
-    try {
-      const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-      webgl = Boolean(gl);
-    } catch (e) {
-      webgl = false;
-    }
-
-    setDeviceInfo({
-      isMobile: isMobileCheck,
+    setDeviceInfo(prev => ({
+      ...prev,
       prefersReducedMotion: motionQuery.matches,
-      supportsWebGL: webgl,
-      isLowPower: isMobileCheck,
-    });
+    }));
 
     const handleResize = () => {
       setDeviceInfo(prev => ({
         ...prev,
         isMobile: window.innerWidth < 768,
+        isLowPower: window.innerWidth < 768,
+      }));
+    };
+
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      setDeviceInfo(prev => ({
+        ...prev,
+        prefersReducedMotion: e.matches,
       }));
     };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    motionQuery.addEventListener('change', handleMotionChange);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      motionQuery.removeEventListener('change', handleMotionChange);
+    };
   }, []);
 
   return deviceInfo;

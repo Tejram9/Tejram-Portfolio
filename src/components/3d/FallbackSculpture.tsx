@@ -122,3 +122,4 @@ export const FallbackSculpture: React.FC = () => {
     </div>
   );
 };
+

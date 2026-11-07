@@ -45,9 +45,10 @@ export const profileData = {
   currentFocus: "Java, Data Structures & Algorithms, Spring Boot & Distributed Systems",
   socialLinks: {
     github: "https://github.com/Tejram9",
-    linkedin: "https://www.linkedin.com/in/tejram-dudhapachare",
-    email: "tejramkd9@gmail.com",
+    linkedin: "https://www.linkedin.com/in/tejram-dudhapachare", // Editable: replace with official LinkedIn URL
+    email: "tejramkd9@gmail.com", // Editable: replace with official email address
     collegeUrl: "https://www.ssgmce.ac.in",
+    resumeUrl: "", // Editable: place 'resume.pdf' in the public/ directory or specify an external link here to activate direct download
   },
   strategicPillars: [
     {

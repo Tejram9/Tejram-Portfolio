@@ -4,6 +4,7 @@ import { Menu, X, ArrowUpRight, Sparkles, Search, Clock } from 'lucide-react';
 import { scrollToSection } from '../../lib/utils';
 import { profileData } from '../../data/profile';
 import { Magnetic } from '../ui/Magnetic';
+import { ResumeButton } from '../ui/ResumeButton';
 
 interface NavbarProps {
   activeSection: string;
@@ -223,6 +224,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onOpenCommandPale
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>{profileData.availabilityStatus}</span>
               </div>
+
+              <ResumeButton variant="outline" size="sm" className="w-full" />
 
               <button
                 onClick={() => handleNavClick('contact')}

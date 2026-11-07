@@ -12,6 +12,7 @@ import { profileData } from '../../data/profile';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { Magnetic } from '../ui/Magnetic';
+import { ResumeButton } from '../ui/ResumeButton';
 import { scrollToSection } from '../../lib/utils';
 import { HeroSculpture } from '../3d/HeroSculpture';
 import { FallbackSculpture } from '../3d/FallbackSculpture';
@@ -138,6 +139,8 @@ export const HeroSection: React.FC = () => {
               >
                 Let&apos;s Connect
               </Button>
+
+              <ResumeButton variant="outline" size="lg" />
 
               <Button
                 variant="ghost"

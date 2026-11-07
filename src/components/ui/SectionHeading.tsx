@@ -41,14 +41,14 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       {/* Top Meta Line: Index, Eyebrow & Coordinate */}
       <div
         className={cn(
-          'flex flex-wrap items-center gap-3 font-mono text-[11px] md:text-xs tracking-wider uppercase mb-3 text-cobalt-400',
+          'flex flex-wrap items-center gap-3 font-mono text-[11px] md:text-xs tracking-wider uppercase mb-3 text-amber-400',
           align === 'center' ? 'justify-center' : 'justify-start'
         )}
       >
         {number && (
           <span className="text-slate-500 font-semibold">{number}</span>
         )}
-        <span className="inline-block w-6 h-[1px] bg-cobalt-500/50" />
+        <span className="inline-block w-6 h-[1px] bg-amber-500/50" />
         <span className="font-semibold tracking-widest text-slate-300">{eyebrow}</span>
         {coordinateTag && (
           <>
@@ -64,14 +64,14 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-slate-50 tracking-[-0.03em] leading-[1.08]">
         {title}{' '}
         {highlight && (
-          <span className="italic font-display bg-gradient-to-r from-cobalt-300 via-cyber-cyan to-cobalt-400 bg-clip-text text-transparent font-normal">
+          <span className="italic font-display bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent font-normal">
             {highlight}
           </span>
         )}
       </h2>
 
       {/* Editorial Hairline Rule */}
-      <div className={cn('h-[1px] w-20 bg-gradient-to-r from-cobalt-500/60 to-transparent mt-4 mb-3', align === 'center' && 'mx-auto')} />
+      <div className={cn('h-[1px] w-20 bg-gradient-to-r from-amber-500/60 to-transparent mt-4 mb-3', align === 'center' && 'mx-auto')} />
 
       {/* Supporting Narrative Description */}
       {description && (

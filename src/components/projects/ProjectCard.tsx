@@ -21,7 +21,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
         {/* Top Architectural Header Bar */}
         <div className="px-5 py-3 border-b border-slate-800/80 bg-space-900/60 flex items-center justify-between text-[11px] font-mono">
           <div className="flex items-center gap-2">
-            <span className="text-cobalt-400 font-bold">{indexFormatted} //</span>
+            <span className="text-amber-400 font-bold">{indexFormatted} //</span>
             <span className="text-slate-300 uppercase tracking-wider">{project.category}</span>
             {project.team && (
               <span className="text-slate-500 hidden sm:inline">• Team {project.team}</span>
@@ -47,14 +47,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
             onOpenModal(project);
           }
         }}
-        className="cursor-pointer relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-cobalt-400 group/preview"
+        className="cursor-pointer relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-amber-400 group/preview"
         title="Click to view detailed case study"
       >
         <ProjectMockup projectId={project.id} accentColor={project.accentColor} />
         
         {/* Subtle hover overlay hint */}
-        <div className="absolute inset-0 bg-cobalt-950/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-          <span className="px-3.5 py-1.5 rounded-full bg-space-950/95 border border-cobalt-400/50 text-xs font-mono text-cobalt-300 flex items-center gap-2 shadow-2xl backdrop-blur-md">
+        <div className="absolute inset-0 bg-amber-950/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <span className="px-3.5 py-1.5 rounded-full bg-space-950/95 border border-amber-400/50 text-xs font-mono text-amber-300 flex items-center gap-2 shadow-2xl backdrop-blur-md">
             <span>Explore Case Study</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </span>
@@ -77,13 +77,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
                   onOpenModal(project);
                 }
               }}
-              className="text-2xl sm:text-3xl font-display font-extrabold text-slate-100 group-hover:text-cobalt-300 transition-colors cursor-pointer flex items-center justify-between focus:outline-none tracking-tight"
+              className="text-2xl sm:text-3xl font-display font-extrabold text-slate-100 group-hover:text-amber-300 transition-colors cursor-pointer flex items-center justify-between focus:outline-none tracking-tight"
             >
               <span>{project.title}</span>
-              <ArrowUpRight className="w-5 h-5 text-slate-500 group-hover:text-cobalt-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+              <ArrowUpRight className="w-5 h-5 text-slate-500 group-hover:text-amber-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
             </h3>
 
-            <p className="text-xs font-mono text-cobalt-400/90 mt-1">
+            <p className="text-xs font-mono text-amber-400/90 mt-1">
               {project.tagline}
             </p>
           </div>
@@ -115,7 +115,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
           {project.architecturePipeline && (
             <div className="mt-4 pt-3 border-t border-slate-800/60">
               <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 uppercase tracking-wider mb-2">
-                <span className="flex items-center gap-1.5 text-cobalt-400 font-semibold">
+                <span className="flex items-center gap-1.5 text-amber-400 font-semibold">
                   <GitFork className="w-3 h-3" /> Architecture Pipeline
                 </span>
                 <span>4 Stages</span>
@@ -126,7 +126,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
                     key={step.step}
                     className="p-2 rounded-lg bg-space-900 border border-slate-800/80 truncate"
                   >
-                    <span className="text-cobalt-400 font-bold block text-[9px]">
+                    <span className="text-amber-400 font-bold block text-[9px]">
                       {step.step} // {step.tech}
                     </span>
                     <span className="text-slate-200 truncate block text-[10px] mt-0.5">
@@ -145,7 +145,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
             </span>
             {project.keyFeatures.slice(0, 3).map((feat, idx) => (
               <div key={idx} className="flex items-start gap-2 text-xs text-slate-300">
-                <CheckCircle2 className="w-3.5 h-3.5 text-cyber-cyan shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
                 <span className="truncate">{feat}</span>
               </div>
             ))}
@@ -196,7 +196,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
 
           <button
             onClick={() => onOpenModal(project)}
-            className="text-xs font-mono text-cobalt-400 hover:text-cobalt-300 transition-colors flex items-center gap-1 group/btn font-semibold"
+            className="text-xs font-mono text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1 group/btn font-semibold"
           >
             <span>Read Case Study</span>
             <span className="group-hover/btn:translate-x-0.5 transition-transform">&rarr;</span>

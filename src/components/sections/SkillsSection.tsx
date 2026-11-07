@@ -68,7 +68,7 @@ export const SkillsSection: React.FC = () => {
   return (
     <section id="skills" className="py-28 relative overflow-hidden bg-space-950/60 hairline-border-t">
       {/* Background radial glow */}
-      <div className="absolute top-1/2 left-1/4 w-[500px] h-[350px] bg-cobalt-600/06 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 w-[500px] h-[350px] bg-amber-600/06 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
@@ -91,9 +91,9 @@ export const SkillsSection: React.FC = () => {
                   setActiveCategory(cat.id);
                   setSelectedSkill(null);
                 }}
-                className={`relative px-4 py-2 rounded-xl text-xs font-mono tracking-wider transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-cobalt-400 ${
+                className={`relative px-4 py-2 rounded-xl text-xs font-mono tracking-wider transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-amber-400 ${
                   isActive
-                    ? 'text-white font-semibold'
+                    ? 'text-slate-950 font-bold'
                     : 'bg-space-900 hover:bg-space-850 text-slate-400 hover:text-slate-200 border border-slate-800'
                 }`}
               >
@@ -101,7 +101,7 @@ export const SkillsSection: React.FC = () => {
                   <motion.span
                     layoutId="skills-filter-pill"
                     transition={{ type: 'spring', stiffness: 380, damping: 28 }}
-                    className="absolute inset-0 rounded-xl bg-cobalt-600 shadow-[0_0_18px_rgba(37,99,235,0.4)] -z-10"
+                    className="absolute inset-0 rounded-xl bg-amber-500 shadow-[0_0_18px_rgba(245,158,11,0.4)] -z-10"
                   />
                 )}
                 {cat.label}
@@ -129,16 +129,16 @@ export const SkillsSection: React.FC = () => {
                     setSelectedSkill(isSelected ? null : skill);
                   }
                 }}
-                className={`p-5 rounded-2xl transition-all duration-200 cursor-pointer border flex flex-col justify-between focus:outline-none focus:ring-2 focus:ring-cobalt-400 ${
+                className={`p-5 rounded-2xl transition-all duration-200 cursor-pointer border flex flex-col justify-between focus:outline-none focus:ring-2 focus:ring-amber-400 ${
                   isSelected
-                    ? 'bg-space-850 border-cobalt-500 shadow-[0_0_24px_rgba(37,99,235,0.28)]'
+                    ? 'bg-space-850 border-amber-500 shadow-[0_0_24px_rgba(245,158,11,0.28)]'
                     : 'glass-card hover:bg-space-850/80'
                 }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-3.5">
-                    <div className="p-2.5 rounded-xl bg-space-900 border border-slate-700/60 text-cobalt-400 transition-colors">
-                      {iconMap[skill.icon] || <Code2 className="w-5 h-5 text-cobalt-400" />}
+                    <div className="p-2.5 rounded-xl bg-space-900 border border-slate-700/60 text-amber-400 transition-colors">
+                      {iconMap[skill.icon] || <Code2 className="w-5 h-5 text-amber-400" />}
                     </div>
 
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-900 border border-slate-700/60 text-slate-300">
@@ -161,7 +161,7 @@ export const SkillsSection: React.FC = () => {
                     {skill.usedInProjects.map((proj) => (
                       <span
                         key={proj}
-                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-900 text-cobalt-300 border border-cobalt-900/50"
+                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-900 text-amber-300 border border-amber-900/40"
                       >
                         {proj}
                       </span>
@@ -176,10 +176,10 @@ export const SkillsSection: React.FC = () => {
 
         {/* Selected Skill Detail Banner */}
         {selectedSkill && (
-          <div className="mt-8 p-6 rounded-2xl bg-space-900 border border-cobalt-500/50 shadow-2xl animate-in fade-in duration-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="mt-8 p-6 rounded-2xl bg-space-900 border border-amber-500/50 shadow-2xl animate-in fade-in duration-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono uppercase text-cobalt-400 font-semibold">
+                <span className="text-xs font-mono uppercase text-amber-400 font-semibold">
                   Selected Specification
                 </span>
                 <span className="text-slate-500">•</span>
@@ -191,7 +191,7 @@ export const SkillsSection: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-xs font-mono px-3 py-1.5 rounded-lg bg-cobalt-950 border border-cobalt-800 text-cobalt-300 font-semibold">
+              <span className="text-xs font-mono px-3 py-1.5 rounded-lg bg-amber-950/80 border border-amber-800 text-amber-300 font-semibold">
                 {selectedSkill.status}
               </span>
               <button

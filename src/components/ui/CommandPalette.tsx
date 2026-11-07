@@ -62,7 +62,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Navigation',
         title: 'Home // Top',
         subtitle: 'Hero introduction & 3D kinetic core',
-        icon: <Compass className="w-4 h-4 text-cobalt-400" />,
+        icon: <Compass className="w-4 h-4 text-amber-400" />,
         action: () => {
           scrollToSection('hero');
           onClose();
@@ -73,7 +73,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Navigation',
         title: 'Beyond the Code // Philosophy',
         subtitle: 'Student identity & strategic systems thinking',
-        icon: <Sparkles className="w-4 h-4 text-cobalt-400" />,
+        icon: <Sparkles className="w-4 h-4 text-amber-400" />,
         action: () => {
           scrollToSection('about');
           onClose();
@@ -84,7 +84,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Navigation',
         title: 'Education // SSGMCE Profile',
         subtitle: 'SGBAU Computer Science Engineering (8.63 CGPA)',
-        icon: <GraduationCap className="w-4 h-4 text-cyber-cyan" />,
+        icon: <GraduationCap className="w-4 h-4 text-amber-400" />,
         action: () => {
           scrollToSection('education');
           onClose();
@@ -95,7 +95,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Navigation',
         title: 'Tech Stack & Skills',
         subtitle: 'Java, Spring Boot, React, TypeScript, Databases',
-        icon: <Layers className="w-4 h-4 text-indigo-400" />,
+        icon: <Layers className="w-4 h-4 text-amber-400" />,
         action: () => {
           scrollToSection('skills');
           onClose();
@@ -128,7 +128,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Navigation',
         title: 'Achievements & Community',
         subtitle: 'Hackathon 4th place & Navonmesh expo',
-        icon: <Trophy className="w-4 h-4 text-cyber-cyan" />,
+        icon: <Trophy className="w-4 h-4 text-amber-400" />,
         action: () => {
           scrollToSection('achievements');
           onClose();
@@ -152,7 +152,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       category: 'Projects',
       title: p.title,
       subtitle: `${p.tagline} • ${p.technologies.slice(0, 3).join(', ')}`,
-      icon: <FolderGit2 className="w-4 h-4 text-cobalt-400" />,
+      icon: <FolderGit2 className="w-4 h-4 text-amber-400" />,
       action: () => {
         scrollToSection('projects');
         setTimeout(() => {
@@ -261,7 +261,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           >
             {/* Search Input Bar */}
             <div className="flex items-center gap-3 px-4 py-3.5 border-b border-slate-800 bg-space-850/70">
-              <Search className="w-5 h-5 text-cobalt-400 shrink-0" />
+              <Search className="w-5 h-5 text-amber-400 shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
@@ -302,7 +302,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                       onMouseEnter={() => setSelectedIndex(idx)}
                       className={`flex items-center justify-between p-3 rounded-xl cursor-pointer transition-colors ${
                         isSelected
-                          ? 'bg-cobalt-600/25 border border-cobalt-500/40 text-slate-100'
+                          ? 'bg-amber-500/20 border border-amber-400/40 text-slate-100'
                           : 'hover:bg-space-800/60 text-slate-300 border border-transparent'
                       }`}
                     >
@@ -310,7 +310,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                         <div
                           className={`p-2 rounded-lg shrink-0 ${
                             isSelected
-                              ? 'bg-cobalt-950 text-cobalt-300 border border-cobalt-800'
+                              ? 'bg-amber-950 text-amber-300 border border-amber-800'
                               : 'bg-space-850 text-slate-400 border border-slate-800'
                           }`}
                         >
@@ -359,7 +359,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   Select
                 </span>
               </div>
-              <span className="text-cobalt-400 font-semibold">Tejram Dudhapachare // SSGMCE</span>
+              <span className="text-amber-400 font-semibold">Tejram Dudhapachare // SSGMCE</span>
             </div>
           </motion.div>
         </div>

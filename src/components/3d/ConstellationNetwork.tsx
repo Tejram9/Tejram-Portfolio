@@ -12,17 +12,17 @@ export const ConstellationNetwork: React.FC<ConstellationNetworkProps> = ({
 }) => {
   const groupRef = useRef<THREE.Group>(null);
 
-  // Tactical Node Coordinates (Representing system boundaries & chess coordinates)
+  // Tactical Node Coordinates (Solar Amber & Champagne Spectrum)
   const nodeData = useMemo(() => {
     return [
-      { pos: [1.85, 0.6, 0.7] as [number, number, number], label: 'API::REST', color: '#38bdf8' },
-      { pos: [-1.75, -0.7, 0.85] as [number, number, number], label: 'DB::RELATIONAL', color: '#60a5fa' },
-      { pos: [0.7, 1.95, -0.6] as [number, number, number], label: 'JAVA::SPRING', color: '#818cf8' },
-      { pos: [-0.9, 1.8, 0.75] as [number, number, number], label: 'AI::ENGINE', color: '#38bdf8' },
-      { pos: [1.2, -1.7, -0.8] as [number, number, number], label: 'SEC::WATERMARK', color: '#34d399' },
-      { pos: [-1.3, -1.6, -0.7] as [number, number, number], label: 'ALGO::GRAPH', color: '#f472b6' },
-      { pos: [0.3, -2.1, 1.1] as [number, number, number], label: 'UI::MODERN', color: '#38bdf8' },
-      { pos: [1.6, 1.1, -1.3] as [number, number, number], label: 'CLOUD::DEPLOY', color: '#60a5fa' },
+      { pos: [1.85, 0.6, 0.7] as [number, number, number], label: 'API::REST', color: '#fbbf24' },
+      { pos: [-1.75, -0.7, 0.85] as [number, number, number], label: 'DB::RELATIONAL', color: '#f59e0b' },
+      { pos: [0.7, 1.95, -0.6] as [number, number, number], label: 'JAVA::SPRING', color: '#fde68a' },
+      { pos: [-0.9, 1.8, 0.75] as [number, number, number], label: 'AI::ENGINE', color: '#fcd34d' },
+      { pos: [1.2, -1.7, -0.8] as [number, number, number], label: 'SEC::WATERMARK', color: '#d97706' },
+      { pos: [-1.3, -1.6, -0.7] as [number, number, number], label: 'ALGO::GRAPH', color: '#fbbf24' },
+      { pos: [0.3, -2.1, 1.1] as [number, number, number], label: 'UI::MODERN', color: '#fef08a' },
+      { pos: [1.6, 1.1, -1.3] as [number, number, number], label: 'CLOUD::DEPLOY', color: '#f59e0b' },
     ];
   }, []);
 
@@ -30,7 +30,6 @@ export const ConstellationNetwork: React.FC<ConstellationNetworkProps> = ({
   const linePositions = useMemo(() => {
     const points: number[] = [];
     nodeData.forEach((node) => {
-      // Line from node position to near core
       points.push(node.pos[0], node.pos[1], node.pos[2]);
       points.push(node.pos[0] * 0.45, node.pos[1] * 0.45, node.pos[2] * 0.45);
     });
@@ -46,7 +45,7 @@ export const ConstellationNetwork: React.FC<ConstellationNetworkProps> = ({
 
   return (
     <group ref={groupRef}>
-      {/* Tactical Connecting Data Lines */}
+      {/* Tactical Connecting Data Lines in Champagne Gold */}
       <lineSegments>
         <bufferGeometry>
           <bufferAttribute
@@ -57,7 +56,7 @@ export const ConstellationNetwork: React.FC<ConstellationNetworkProps> = ({
           />
         </bufferGeometry>
         <lineBasicMaterial
-          color="#38bdf8"
+          color="#fbbf24"
           transparent
           opacity={0.35}
           blending={THREE.AdditiveBlending}
@@ -83,4 +82,3 @@ export const ConstellationNetwork: React.FC<ConstellationNetworkProps> = ({
     </group>
   );
 };
-

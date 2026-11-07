@@ -53,38 +53,38 @@ export const GyroscopicRings: React.FC<GyroscopicRingsProps> = ({
 
   return (
     <group>
-      {/* Primary Gyro Ring (Cobalt & Cyan Glow) */}
+      {/* Primary Gyro Ring (Champagne Gold Glow) */}
       <mesh ref={ring1Ref}>
         <torusGeometry args={[r1, isMobile ? 0.02 : 0.024, 16, 80]} />
         <meshStandardMaterial
-          color="#38bdf8"
-          emissive="#0284c7"
+          color="#fbbf24"
+          emissive="#d97706"
           emissiveIntensity={0.9}
           roughness={0.2}
-          metalness={0.8}
+          metalness={0.85}
           wireframe={wireframeMode}
         />
       </mesh>
 
-      {/* Secondary Gyro Ring (Indigo & Violet Shift) */}
+      {/* Secondary Gyro Ring (Warm Bronze & Aureolin) */}
       <mesh ref={ring2Ref} rotation={[Math.PI / 3, Math.PI / 4, 0]}>
         <torusGeometry args={[r2, isMobile ? 0.016 : 0.02, 16, 80]} />
         <meshStandardMaterial
-          color="#818cf8"
-          emissive="#4338ca"
-          emissiveIntensity={0.7}
-          roughness={0.3}
-          metalness={0.8}
+          color="#f59e0b"
+          emissive="#b45309"
+          emissiveIntensity={0.75}
+          roughness={0.28}
+          metalness={0.85}
           wireframe={wireframeMode}
         />
       </mesh>
 
-      {/* Tertiary Outer Coordinate Ring (Fine Cobalt Line) */}
+      {/* Tertiary Outer Coordinate Ring (Fine Champagne Line) */}
       <mesh ref={ring3Ref} rotation={[-Math.PI / 3.5, 0, Math.PI / 3]}>
         <torusGeometry args={[r3, isMobile ? 0.012 : 0.016, 16, 80]} />
         <meshStandardMaterial
-          color="#60a5fa"
-          emissive="#1d4ed8"
+          color="#fde68a"
+          emissive="#d97706"
           emissiveIntensity={0.6}
           roughness={0.4}
           metalness={0.9}
@@ -94,15 +94,15 @@ export const GyroscopicRings: React.FC<GyroscopicRingsProps> = ({
         />
       </mesh>
 
-      {/* Kinetic Data Signal Pulse */}
+      {/* Kinetic Data Signal Pulse (Solar Light Packet) */}
       <mesh ref={signalRef}>
         <sphereGeometry args={[0.06, 12, 12]} />
         <meshStandardMaterial
-          color="#ffffff"
-          emissive="#38bdf8"
+          color="#fffbeb"
+          emissive="#fbbf24"
           emissiveIntensity={2.5}
         />
-        <pointLight distance={1.2} intensity={1.5} color="#38bdf8" />
+        <pointLight distance={1.2} intensity={1.5} color="#fbbf24" />
       </mesh>
     </group>
   );

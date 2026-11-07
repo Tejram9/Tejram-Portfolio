@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
           {/* Identity & Mission */}
           <div className="md:col-span-5 space-y-5">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-space-900 border border-cobalt-500/40 flex items-center justify-center font-mono font-bold text-cobalt-300 text-xs shadow-[0_0_15px_rgba(37,99,235,0.2)]">
+              <div className="w-9 h-9 rounded-xl bg-space-900 border border-amber-400/40 flex items-center justify-center font-mono font-bold text-amber-300 text-xs shadow-[0_0_15px_rgba(245,158,11,0.2)]">
                 TD
               </div>
               <div>
@@ -34,8 +34,8 @@ export const Footer: React.FC = () => {
               Computer Science Engineering student at Shri Sant Gajanan Maharaj College of Engineering, Shegaon. Focused on building pragmatic full-stack solutions, resilient Java backend architectures, and AI integrations.
             </p>
 
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-space-900 border border-slate-800 text-xs font-mono text-cobalt-400">
-              <Award className="w-3.5 h-3.5 text-cyber-cyan" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-space-900 border border-slate-800 text-xs font-mono text-amber-400">
+              <Award className="w-3.5 h-3.5 text-amber-400" />
               <span>ARISE Diwali Portfolio Competition 2026</span>
             </div>
           </div>
@@ -58,7 +58,7 @@ export const Footer: React.FC = () => {
                 <li key={sec.id}>
                   <button
                     onClick={() => scrollToSection(sec.id)}
-                    className="hover:text-cobalt-300 transition-colors focus:outline-none focus:text-cobalt-300"
+                    className="hover:text-amber-300 transition-colors focus:outline-none focus:text-amber-300"
                   >
                     {sec.label}
                   </button>
@@ -76,7 +76,7 @@ export const Footer: React.FC = () => {
               <p className="text-slate-200 font-sans font-medium">SSGMCE Shegaon</p>
               <p>Sant Gadge Baba Amravati University (SGBAU)</p>
               <p>Bachelor of Engineering &mdash; Class of 2027</p>
-              <p className="text-cobalt-400 font-semibold pt-1 border-t border-slate-800">
+              <p className="text-amber-400 font-semibold pt-1 border-t border-slate-800">
                 Official CGPA: 8.63 (Verified)
               </p>
             </div>
@@ -87,7 +87,7 @@ export const Footer: React.FC = () => {
                   href={profileData.socialLinks.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-space-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cobalt-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-cobalt-500 block"
+                  className="p-3 rounded-xl bg-space-900 border border-slate-800 text-slate-300 hover:text-white hover:border-amber-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-amber-500 block"
                   aria-label="GitHub Profile"
                 >
                   <Github className="w-4 h-4" />
@@ -99,7 +99,7 @@ export const Footer: React.FC = () => {
                   href={profileData.socialLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-space-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cobalt-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-cobalt-500 block"
+                  className="p-3 rounded-xl bg-space-900 border border-slate-800 text-slate-300 hover:text-white hover:border-amber-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-amber-500 block"
                   aria-label="LinkedIn Profile"
                 >
                   <Linkedin className="w-4 h-4" />
@@ -109,7 +109,7 @@ export const Footer: React.FC = () => {
               <Magnetic strength={0.25}>
                 <a
                   href={`mailto:${profileData.socialLinks.email}`}
-                  className="p-3 rounded-xl bg-space-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cobalt-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-cobalt-500 block"
+                  className="p-3 rounded-xl bg-space-900 border border-slate-800 text-slate-300 hover:text-white hover:border-amber-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-amber-500 block"
                   aria-label="Send Email"
                 >
                   <Mail className="w-4 h-4" />
@@ -127,14 +127,14 @@ export const Footer: React.FC = () => {
 
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5 text-slate-400">
-              <Sparkles className="w-3 h-3 text-cobalt-400" />
+              <Sparkles className="w-3 h-3 text-amber-400" />
               <span>React 18 • Three.js • Tailwind</span>
             </span>
 
             <Magnetic strength={0.25}>
               <button
                 onClick={() => scrollToSection('hero')}
-                className="flex items-center gap-1.5 text-cobalt-400 hover:text-cobalt-300 transition-colors focus:outline-none"
+                className="flex items-center gap-1.5 text-amber-400 hover:text-amber-300 transition-colors focus:outline-none"
                 aria-label="Back to top"
               >
                 <span>Back to Top</span>

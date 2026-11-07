@@ -60,7 +60,7 @@ export const projectsData: Project[] = [
     ],
     liveDemoUrl: 'https://focuspulse-mthc.onrender.com/',
     githubUrl: 'https://github.com/Tejram9/FocusPulse',
-    accentColor: '#38bdf8',
+    accentColor: '#f59e0b',
     metricsOrHighlight: 'Navonmesh\'26 Project Expo Showcase',
   },
   {
@@ -120,7 +120,7 @@ export const projectsData: Project[] = [
       'Multi-role workflow coordination: defining discrete role-based access control (RBAC) boundaries between citizens, intermediaries, and administrators in Spring Boot to ensure unauthorized users cannot mutate application lifecycle milestones.',
     ],
     liveDemoUrl: 'https://suvidhax-frontend.onrender.com/',
-    accentColor: '#3b82f6',
+    accentColor: '#fbbf24',
     metricsOrHighlight: 'Multi-Role Enterprise-Style Architecture',
   },
   {

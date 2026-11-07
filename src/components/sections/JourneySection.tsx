@@ -50,7 +50,7 @@ export const JourneySection: React.FC = () => {
                   <motion.span
                     layoutId="journey-filter-pill"
                     transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-cobalt-600 to-cobalt-500 border border-cobalt-400/60 shadow-[0_0_16px_rgba(37,99,235,0.4)] -z-10"
+                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 border border-amber-400/60 shadow-[0_0_16px_rgba(245,158,11,0.4)] -z-10"
                   />
                 )}
                 {cat}
@@ -61,7 +61,7 @@ export const JourneySection: React.FC = () => {
 
         <div className="relative mt-8">
           {/* Vertical Timeline spine line */}
-          <div className="hidden md:block absolute left-1/2 top-4 bottom-4 w-[2px] bg-gradient-to-b from-cobalt-500/70 via-cyber-cyan/50 to-slate-800 -translate-x-1/2" />
+          <div className="hidden md:block absolute left-1/2 top-4 bottom-4 w-[2px] bg-gradient-to-b from-amber-500/70 via-amber-400/50 to-slate-800 -translate-x-1/2" />
 
           <AnimatePresence mode="wait">
             <motion.div
@@ -93,10 +93,10 @@ export const JourneySection: React.FC = () => {
                         <Card
                           className={`p-6 md:p-8 transition-all duration-300 ${
                             isHovered
-                              ? 'border-cobalt-400/80 shadow-[0_10px_35px_-10px_rgba(37,99,235,0.4)] scale-[1.01]'
+                              ? 'border-amber-400/80 shadow-[0_10px_35px_-10px_rgba(245,158,11,0.4)] scale-[1.01]'
                               : ''
                           }`}
-                          glow={isHovered ? 'cyan' : milestone.status === 'Continuous' ? 'cyan' : 'cobalt'}
+                          glow={isHovered ? 'amber' : milestone.status === 'Continuous' ? 'amber' : 'cobalt'}
                           tacticalBorder
                         >
                           <div
@@ -104,14 +104,14 @@ export const JourneySection: React.FC = () => {
                               isEven ? 'md:justify-end' : 'justify-start'
                             }`}
                           >
-                            <Calendar className="w-3.5 h-3.5 text-cobalt-400" />
-                            <span className="text-cobalt-300 font-semibold">
+                            <Calendar className="w-3.5 h-3.5 text-amber-400" />
+                            <span className="text-amber-300 font-semibold">
                               {milestone.period}
                             </span>
                             <span className="text-slate-600">•</span>
                             <span className="text-slate-400 font-medium">{milestone.category}</span>
                             {milestone.status === 'Continuous' && (
-                              <span className="ml-1 px-2 py-0.5 rounded bg-cyan-950/80 border border-cyan-800 text-[9px] font-mono text-cyan-300">
+                              <span className="ml-1 px-2 py-0.5 rounded bg-amber-950/80 border border-amber-800 text-[9px] font-mono text-amber-300">
                                 In Progress
                               </span>
                             )}
@@ -133,7 +133,7 @@ export const JourneySection: React.FC = () => {
                                   isEven ? 'md:flex-row-reverse md:text-right' : 'text-left'
                                 }`}
                               >
-                                <CheckCircle2 className="w-3.5 h-3.5 text-cyber-cyan shrink-0 mt-0.5" />
+                                <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
                                 <span className="leading-relaxed">{learn}</span>
                               </div>
                             ))}
@@ -147,8 +147,8 @@ export const JourneySection: React.FC = () => {
                       <div
                         className={`w-12 h-12 rounded-full bg-space-950 border-2 transition-all duration-300 flex items-center justify-center text-xs font-mono font-bold z-10 ${
                           isHovered
-                            ? 'border-cyber-cyan text-cyber-cyan scale-125 shadow-[0_0_24px_rgba(56,189,248,0.7)]'
-                            : 'border-cobalt-500 text-cobalt-300 shadow-[0_0_18px_rgba(37,99,235,0.45)]'
+                            ? 'border-amber-400 text-amber-300 scale-125 shadow-[0_0_24px_rgba(251,191,36,0.6)]'
+                            : 'border-amber-600 text-amber-400 shadow-[0_0_18px_rgba(245,158,11,0.35)]'
                         }`}
                       >
                         0{idx + 1}

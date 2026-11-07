@@ -48,7 +48,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
         {/* Header Metadata Banner */}
         <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-xl bg-space-850/90 border border-slate-800">
           <div>
-            <h4 className="text-sm font-mono text-cobalt-300 font-bold">
+            <h4 className="text-sm font-mono text-amber-300 font-bold">
               {project.tagline}
             </h4>
             {project.team && (
@@ -78,7 +78,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
               onClick={() => setActiveTab(tab.id as typeof activeTab)}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-mono tracking-wide transition-all ${
                 activeTab === tab.id
-                  ? 'bg-cobalt-600 text-white font-semibold shadow-sm'
+                  ? 'bg-amber-500 text-slate-950 font-semibold shadow-sm'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-space-850'
               }`}
             >
@@ -115,8 +115,8 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             </div>
 
             {/* My Engineering Contribution */}
-            <div className="p-4 sm:p-5 rounded-xl bg-space-850 border border-cobalt-900/50">
-              <div className="flex items-center gap-2 text-cobalt-400 font-mono text-xs uppercase tracking-wider mb-2 font-semibold">
+            <div className="p-4 sm:p-5 rounded-xl bg-space-850 border border-amber-900/40">
+              <div className="flex items-center gap-2 text-amber-400 font-mono text-xs uppercase tracking-wider mb-2 font-semibold">
                 <Code2 className="w-4 h-4 shrink-0" />
                 <span>My Personal Engineering Contribution</span>
               </div>
@@ -133,7 +133,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             {/* 4-Stage Architecture Pipeline */}
             <div>
               <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
-                <span className="flex items-center gap-1.5 text-cobalt-400 font-semibold uppercase">
+                <span className="flex items-center gap-1.5 text-amber-400 font-semibold uppercase">
                   <GitFork className="w-4 h-4" /> End-to-End System Pipeline
                 </span>
                 <span>Data Flow Architecture</span>
@@ -144,11 +144,11 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                   {project.architecturePipeline.map((step, idx) => (
                     <div
                       key={idx}
-                      className="p-3.5 rounded-xl bg-space-850 border border-slate-800 hover:border-cobalt-500/40 transition-colors flex flex-col justify-between"
+                      className="p-3.5 rounded-xl bg-space-850 border border-slate-800 hover:border-amber-500/40 transition-colors flex flex-col justify-between"
                     >
                       <div>
                         <div className="flex items-center justify-between mb-1.5">
-                          <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-cobalt-950 text-cobalt-300 border border-cobalt-800">
+                          <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800">
                             STAGE {step.step}
                           </span>
                           <span className="text-[10px] font-mono text-slate-400 bg-space-900 px-2 py-0.5 rounded">
@@ -196,7 +196,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                   key={idx}
                   className="flex items-start gap-2.5 text-xs text-slate-300 font-mono"
                 >
-                  <span className="text-cobalt-400 font-bold shrink-0">{`[${idx + 1}]`}</span>
+                  <span className="text-amber-400 font-bold shrink-0">{`[${idx + 1}]`}</span>
                   <span className="font-sans leading-relaxed">{arch}</span>
                 </div>
               ))}
@@ -209,7 +209,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           <div className="space-y-5">
             <div>
               <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2 font-semibold">
-                <CheckCircle2 className="w-4 h-4 text-cyber-cyan" />
+                <CheckCircle2 className="w-4 h-4 text-amber-400" />
                 <span>Implemented Core Features</span>
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -218,7 +218,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                     key={idx}
                     className="flex items-start gap-2.5 p-3 rounded-lg bg-space-850 border border-slate-800/80 text-xs text-slate-300"
                   >
-                    <div className="w-1.5 h-1.5 rounded-full bg-cyber-cyan mt-1.5 shrink-0" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
                     <span className="leading-relaxed">{feat}</span>
                   </div>
                 ))}

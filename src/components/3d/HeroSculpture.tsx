@@ -67,7 +67,7 @@ function SceneCoordinator({ isMobile, wireframeMode, autoRotate }: SceneContaine
       {/* Tactical Floor Horizon Ring */}
       <mesh position={[0, isMobile ? -2.3 : -2.6, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[1.0, 1.025, 48]} />
-        <meshBasicMaterial color="#38bdf8" transparent opacity={0.3} />
+        <meshBasicMaterial color="#fbbf24" transparent opacity={0.3} />
       </mesh>
     </group>
   );
@@ -97,20 +97,20 @@ export const HeroSculpture: React.FC<HeroSculptureProps> = ({
         }}
       >
         <Suspense fallback={null}>
-          {/* Studio Lighting Setup for High-Contrast Editorial Glass & Metal */}
-          <ambientLight intensity={0.65} color="#0f172a" />
+          {/* Studio Lighting Setup for High-Contrast Editorial Amber & Gold Brass */}
+          <ambientLight intensity={0.65} color="#1c1917" />
           
-          {/* Cobalt Key Light */}
-          <directionalLight position={[6, 7, 5]} intensity={1.6} color="#60a5fa" />
+          {/* Solar Gold Key Light */}
+          <directionalLight position={[6, 7, 5]} intensity={1.7} color="#fbbf24" />
           
-          {/* Electric Cyan Rim Fill */}
-          <directionalLight position={[-6, -4, -4]} intensity={1.3} color="#38bdf8" />
+          {/* Champagne Rim Fill */}
+          <directionalLight position={[-6, -4, -4]} intensity={1.4} color="#fde68a" />
           
-          {/* Violet Depth Backlight */}
-          <pointLight position={[0, -3, -3.5]} intensity={1.8} color="#818cf8" distance={9} />
+          {/* Warm Bronze Depth Backlight */}
+          <pointLight position={[0, -3, -3.5]} intensity={1.9} color="#d97706" distance={9} />
           
-          {/* Warm Amber Specular Accent for Visual Contrast */}
-          <pointLight position={[3, -2, 3]} intensity={0.9} color="#38bdf8" distance={6} />
+          {/* Diamond Champagne Specular Accent for Visual Glint */}
+          <pointLight position={[3, -2, 3]} intensity={1.0} color="#fffbeb" distance={6} />
 
           {/* Master 3D Kinetic System */}
           <SceneCoordinator

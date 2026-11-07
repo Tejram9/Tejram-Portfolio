@@ -31,8 +31,8 @@ export const HeroSection: React.FC = () => {
     >
       {/* Background Ambience & Deep Charcoal Studio Gradients */}
       <div className="absolute inset-0 bg-space-950 pointer-events-none" />
-      <div className="absolute top-1/4 left-1/5 w-[520px] h-[520px] bg-cobalt-600/12 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[480px] h-[480px] bg-cyber-cyan/08 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/5 w-[520px] h-[520px] bg-amber-600/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[480px] h-[480px] bg-amber-400/06 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Architectural Dot Grid Overlay */}
       <div className="absolute inset-0 bg-grid-architectural opacity-40 pointer-events-none" />
@@ -68,7 +68,7 @@ export const HeroSection: React.FC = () => {
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-extrabold text-slate-50 tracking-[-0.035em] leading-[1.04]">
                 <span>{profileData.headline.line1}</span>
                 <br />
-                <span className="bg-gradient-to-r from-cobalt-300 via-cyber-cyan to-cobalt-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent">
                   Turning them into <span className="italic font-display font-medium text-slate-100">reality.</span>
                 </span>
               </h1>
@@ -78,7 +78,7 @@ export const HeroSection: React.FC = () => {
                 <span className="font-mono text-xs uppercase tracking-[0.2em] text-slate-500">
                   DEVELOPER /
                 </span>
-                <span className="text-xl sm:text-2xl font-display font-bold text-slate-100 tracking-tight border-b border-cobalt-500/50 pb-0.5">
+                <span className="text-xl sm:text-2xl font-display font-bold text-slate-100 tracking-tight border-b border-amber-400/50 pb-0.5">
                   {profileData.name}
                 </span>
               </div>
@@ -101,11 +101,11 @@ export const HeroSection: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.25 }}
               className="p-4 rounded-xl glass-studio max-w-xl flex items-start gap-3.5 relative corner-crosshairs"
             >
-              <div className="p-2 rounded-lg bg-cobalt-950 border border-cobalt-800/80 text-cobalt-400 shrink-0 mt-0.5">
+              <div className="p-2 rounded-lg bg-amber-950/60 border border-amber-800/60 text-amber-400 shrink-0 mt-0.5">
                 <Code2 className="w-4 h-4" />
               </div>
               <div className="text-xs space-y-0.5">
-                <span className="font-mono uppercase tracking-wider text-cobalt-400 font-semibold block">
+                <span className="font-mono uppercase tracking-wider text-amber-400 font-semibold block">
                   Currently building &amp; learning:
                 </span>
                 <p className="text-slate-300 font-sans leading-normal">
@@ -166,7 +166,7 @@ export const HeroSection: React.FC = () => {
               <span className="absolute top-3 left-4 text-[10px] font-mono text-slate-500 tracking-wider">
                 SYS::NEXUS_3D_KERNEL
               </span>
-              <span className="absolute top-3 right-4 text-[10px] font-mono text-cobalt-400 flex items-center gap-1.5">
+              <span className="absolute top-3 right-4 text-[10px] font-mono text-amber-400 flex items-center gap-1.5">
                 <Move3d className="w-3.5 h-3.5" /> Drag / Orbit View
               </span>
               <span className="absolute bottom-3 left-4 text-[10px] font-mono text-slate-500">
@@ -205,7 +205,7 @@ export const HeroSection: React.FC = () => {
                     onClick={() => setWireframeMode(!wireframeMode)}
                     className={`text-[11px] font-mono px-2.5 py-1 rounded-full flex items-center gap-1.5 transition-colors ${
                       wireframeMode
-                        ? 'bg-cobalt-600 text-white font-semibold'
+                        ? 'bg-amber-500 text-slate-950 font-semibold'
                         : 'text-slate-300 hover:text-white hover:bg-space-800'
                     }`}
                     title="Toggle Wireframe Lattice"
@@ -244,9 +244,9 @@ export const HeroSection: React.FC = () => {
           className="pt-6 flex flex-col items-center justify-center cursor-pointer"
           onClick={() => scrollToSection('about')}
         >
-          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-slate-500 hover:text-cobalt-300 transition-colors flex items-center gap-2">
+          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-slate-500 hover:text-amber-300 transition-colors flex items-center gap-2">
             <span>Scroll to Explore</span>
-            <ArrowDown className="w-3.5 h-3.5 animate-bounce text-cobalt-400" />
+            <ArrowDown className="w-3.5 h-3.5 animate-bounce text-amber-400" />
           </span>
         </motion.div>
       </div>

@@ -8,29 +8,53 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Deep Velvety Obsidian & Warm Graphite
         space: {
-          950: '#04070e',
-          900: '#070b14',
-          850: '#0a0f1c',
-          800: '#0e1626',
-          750: '#131e33',
-          700: '#1b2a45',
+          950: '#08090d',
+          900: '#0d0f14',
+          850: '#13161e',
+          800: '#1a1e28',
+          750: '#222734',
+          700: '#2c3344',
         },
+        // Solar Amber & Champagne Gold (replaces cold blue with luxury studio palette)
         cobalt: {
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
+          300: '#fde68a', // Soft Champagne
+          400: '#fcd34d', // Radiant Champagne Gold
+          500: '#fbbf24', // Core Solar Amber Gold
+          600: '#f59e0b', // Burnished Amber
+          700: '#d97706', // Warm Bronze
+          800: '#b45309', // Deep Bronze Shadow
+          900: '#78350f', // Dark Bronze Obsidian
+          950: '#2a1404', // Warm Dark Glass Tint
+        },
+        amber: {
+          50: '#fffbeb',
+          100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#fbbf24',
+          500: '#f59e0b',
+          600: '#d97706',
+          700: '#b45309',
+          800: '#92400e',
+          900: '#78350f',
+          950: '#451a03',
+        },
+        gold: {
+          100: '#fef9c3',
+          200: '#fef08a',
+          300: '#fde047',
+          400: '#eab308',
+          500: '#ca8a04',
+          600: '#a16207',
         },
         cyber: {
-          cyan: '#38bdf8',
+          cyan: '#fbbf24', // Unified with radiant gold
           emerald: '#10b981',
           amber: '#f59e0b',
           rose: '#f43f5e',
-          violet: '#8b5cf6',
+          violet: '#a855f7',
         },
       },
       fontFamily: {
@@ -40,7 +64,7 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'subtle-grid': 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0)',
+        'subtle-grid': 'radial-gradient(circle at 1px 1px, rgba(251, 191, 36, 0.08) 1px, transparent 0)',
       },
       animation: {
         'pulse-subtle': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -57,4 +81,3 @@ export default {
   },
   plugins: [],
 }
-

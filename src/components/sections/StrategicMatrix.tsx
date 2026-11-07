@@ -86,7 +86,7 @@ export const StrategicMatrix: React.FC = () => {
           </p>
         </div>
 
-        <Badge variant="cyan" size="md">
+        <Badge variant="amber" size="md">
           Tactical Matrix
         </Badge>
       </div>
@@ -107,7 +107,7 @@ export const StrategicMatrix: React.FC = () => {
                 onClick={() => setActiveMove(move)}
                 className={`p-3.5 rounded-xl text-left transition-all border flex items-center justify-between group ${
                   isSelected
-                    ? 'bg-space-800 border-cobalt-500 shadow-[0_0_18px_rgba(37,99,235,0.25)]'
+                    ? 'bg-space-800 border-amber-500 shadow-[0_0_18px_rgba(245,158,11,0.25)]'
                     : 'bg-space-850/80 border-slate-800 hover:border-slate-700 hover:bg-space-800/50'
                 }`}
               >
@@ -115,8 +115,8 @@ export const StrategicMatrix: React.FC = () => {
                   <div
                     className={`w-9 h-9 rounded-lg font-mono font-bold text-xs flex items-center justify-center border transition-colors ${
                       isSelected
-                        ? 'bg-cobalt-600 text-white border-cobalt-400 shadow-sm'
-                        : 'bg-space-900 text-slate-400 border-slate-700/80 group-hover:text-cobalt-300'
+                        ? 'bg-amber-500 text-slate-950 font-semibold border-amber-300 shadow-sm'
+                        : 'bg-space-900 text-slate-400 border-slate-700/80 group-hover:text-amber-300'
                     }`}
                   >
                     {move.coord}
@@ -134,7 +134,7 @@ export const StrategicMatrix: React.FC = () => {
                 <ArrowRight
                   className={`w-4 h-4 transition-transform ${
                     isSelected
-                      ? 'text-cobalt-400 translate-x-1'
+                      ? 'text-amber-400 translate-x-1'
                       : 'text-slate-600 group-hover:text-slate-400'
                   }`}
                 />
@@ -149,7 +149,7 @@ export const StrategicMatrix: React.FC = () => {
             <div>
               <div className="flex items-center justify-between gap-3 pb-4 border-b border-slate-800/80">
                 <div className="flex items-center gap-2.5">
-                  <span className="px-2.5 py-1 rounded-md bg-cobalt-950 border border-cobalt-800/80 text-cobalt-300 font-mono text-xs font-bold">
+                  <span className="px-2.5 py-1 rounded-md bg-amber-950/60 border border-amber-800/80 text-amber-300 font-mono text-xs font-bold">
                     SQ {activeMove.coord}
                   </span>
                   <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">
@@ -168,9 +168,9 @@ export const StrategicMatrix: React.FC = () => {
 
               {/* Chess Analogy Callout */}
               <div className="mt-3 p-3.5 rounded-xl bg-space-900/90 border border-slate-800/90 flex items-start gap-3">
-                <Sparkles className="w-4 h-4 text-cyber-cyan shrink-0 mt-0.5" />
+                <Sparkles className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                 <div className="text-xs leading-relaxed">
-                  <span className="font-mono text-cyber-cyan font-semibold block mb-0.5">
+                  <span className="font-mono text-amber-400 font-semibold block mb-0.5">
                     CHESS STRATEGIC PRINCIPLE:
                   </span>
                   <span className="text-slate-300 font-sans italic">
@@ -182,10 +182,10 @@ export const StrategicMatrix: React.FC = () => {
               {/* Engineering Implementation */}
               <div className="mt-4 space-y-2">
                 <span className="text-xs font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                  <Terminal className="w-3.5 h-3.5 text-cobalt-400" />
+                  <Terminal className="w-3.5 h-3.5 text-amber-400" />
                   <span>Engineering Execution</span>
                 </span>
-                <p className="text-xs md:text-sm text-slate-300 leading-relaxed pl-5 border-l-2 border-cobalt-500/40">
+                <p className="text-xs md:text-sm text-slate-300 leading-relaxed pl-5 border-l-2 border-amber-500/40">
                   {activeMove.engineeringImplementation}
                 </p>
               </div>
@@ -204,7 +204,7 @@ export const StrategicMatrix: React.FC = () => {
 
             <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
               <span>Strategy &rarr; Architecture &rarr; Production</span>
-              <span className="text-cobalt-400">Tejram Dudhapachare</span>
+              <span className="text-amber-400">Tejram Dudhapachare</span>
             </div>
           </Card>
         </div>

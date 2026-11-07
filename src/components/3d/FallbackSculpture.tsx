@@ -4,8 +4,8 @@ export const FallbackSculpture: React.FC = () => {
   return (
     <div className="w-full h-full flex items-center justify-center relative select-none">
       {/* Background radial glow */}
-      <div className="absolute w-72 h-72 rounded-full bg-cobalt-600/20 blur-3xl pointer-events-none" />
-      <div className="absolute w-48 h-48 rounded-full bg-cyber-cyan/15 blur-2xl pointer-events-none" />
+      <div className="absolute w-72 h-72 rounded-full bg-amber-600/15 blur-3xl pointer-events-none" />
+      <div className="absolute w-48 h-48 rounded-full bg-amber-400/10 blur-2xl pointer-events-none" />
 
       {/* SVG Kinetic Sculpture */}
       <svg
@@ -16,14 +16,14 @@ export const FallbackSculpture: React.FC = () => {
       >
         <defs>
           <linearGradient id="coreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.8" />
-            <stop offset="50%" stopColor="#2563eb" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#1e3a8a" stopOpacity="0.95" />
+            <stop offset="0%" stopColor="#fde68a" stopOpacity="0.8" />
+            <stop offset="50%" stopColor="#fbbf24" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#b45309" stopOpacity="0.95" />
           </linearGradient>
           <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.8" />
-            <stop offset="50%" stopColor="#818cf8" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#2563eb" stopOpacity="0.8" />
+            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.8" />
+            <stop offset="50%" stopColor="#f59e0b" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#d97706" stopOpacity="0.8" />
           </linearGradient>
           <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="6" result="blur" />
@@ -51,7 +51,7 @@ export const FallbackSculpture: React.FC = () => {
           rx="155"
           ry="55"
           transform="rotate(45 200 200)"
-          stroke="#60a5fa"
+          stroke="#fcd34d"
           strokeWidth="1.2"
           strokeOpacity="0.5"
           strokeDasharray="4 6"
@@ -65,7 +65,7 @@ export const FallbackSculpture: React.FC = () => {
           rx="140"
           ry="70"
           transform="rotate(80 200 200)"
-          stroke="#38bdf8"
+          stroke="#fbbf24"
           strokeWidth="1"
           strokeOpacity="0.35"
         />
@@ -76,29 +76,29 @@ export const FallbackSculpture: React.FC = () => {
           <polygon
             points="200,105 275,160 200,215 125,160"
             fill="url(#coreGrad)"
-            stroke="#93c5fd"
+            stroke="#fde68a"
             strokeWidth="1.5"
             opacity="0.85"
             filter="url(#glow)"
           />
           <polygon
             points="200,215 275,160 245,260 200,295"
-            fill="#1d4ed8"
-            stroke="#60a5fa"
+            fill="#b45309"
+            stroke="#fcd34d"
             strokeWidth="1.2"
             opacity="0.75"
           />
           <polygon
             points="200,215 125,160 155,260 200,295"
-            fill="#1e40af"
-            stroke="#60a5fa"
+            fill="#92400e"
+            stroke="#fcd34d"
             strokeWidth="1.2"
             opacity="0.75"
           />
           {/* Top crystalline cap */}
           <polygon
             points="200,105 245,140 200,215 155,140"
-            fill="#38bdf8"
+            fill="#fbbf24"
             stroke="#ffffff"
             strokeWidth="1"
             opacity="0.4"
@@ -106,15 +106,15 @@ export const FallbackSculpture: React.FC = () => {
         </g>
 
         {/* Strategic Data Constellation Nodes */}
-        <circle cx="280" cy="140" r="4" fill="#38bdf8" filter="url(#glow)" />
-        <line x1="280" y1="140" x2="275" y2="160" stroke="#38bdf8" strokeWidth="1" strokeDasharray="2 2" />
+        <circle cx="280" cy="140" r="4" fill="#fbbf24" filter="url(#glow)" />
+        <line x1="280" y1="140" x2="275" y2="160" stroke="#fbbf24" strokeWidth="1" strokeDasharray="2 2" />
 
-        <circle cx="110" cy="180" r="3.5" fill="#60a5fa" filter="url(#glow)" />
-        <line x1="110" y1="180" x2="125" y2="160" stroke="#60a5fa" strokeWidth="1" strokeDasharray="2 2" />
+        <circle cx="110" cy="180" r="3.5" fill="#fcd34d" filter="url(#glow)" />
+        <line x1="110" y1="180" x2="125" y2="160" stroke="#fcd34d" strokeWidth="1" strokeDasharray="2 2" />
 
-        <circle cx="240" cy="275" r="4.5" fill="#38bdf8" filter="url(#glow)" />
-        <circle cx="150" cy="275" r="3.5" fill="#818cf8" filter="url(#glow)" />
-        <circle cx="200" cy="85" r="4" fill="#67e8f9" filter="url(#glow)" />
+        <circle cx="240" cy="275" r="4.5" fill="#fbbf24" filter="url(#glow)" />
+        <circle cx="150" cy="275" r="3.5" fill="#f59e0b" filter="url(#glow)" />
+        <circle cx="200" cy="85" r="4" fill="#fde68a" filter="url(#glow)" />
 
         {/* Center Node Spark */}
         <circle cx="200" cy="185" r="3" fill="#ffffff" filter="url(#glow)" />
@@ -122,4 +122,3 @@ export const FallbackSculpture: React.FC = () => {
     </div>
   );
 };
-

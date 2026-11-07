@@ -49,8 +49,8 @@ export const ResumeButton: React.FC<ResumeButtonProps> = ({
         maxWidth="md"
       >
         <div className="space-y-4 text-slate-300 text-xs sm:text-sm">
-          <div className="p-4 rounded-xl bg-cobalt-950/60 border border-cobalt-800/60 flex items-start gap-3">
-            <FileText className="w-5 h-5 text-cobalt-400 shrink-0 mt-0.5" />
+          <div className="p-4 rounded-xl bg-amber-950/60 border border-amber-800/60 flex items-start gap-3">
+            <FileText className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
             <div>
               <h5 className="font-semibold text-slate-100 font-display text-sm">
                 Authentic Document Policy
@@ -66,8 +66,8 @@ export const ResumeButton: React.FC<ResumeButtonProps> = ({
               Instructions to Activate Direct Download:
             </span>
             <ol className="list-decimal pl-4 space-y-1.5 text-xs text-slate-300 font-mono">
-              <li>Place your official resume PDF file at: <code className="text-cyber-cyan bg-space-950 px-1 py-0.5 rounded">public/resume.pdf</code></li>
-              <li>Or set <code className="text-cyber-cyan bg-space-950 px-1 py-0.5 rounded">socialLinks.resumeUrl = &apos;/resume.pdf&apos;</code> in <code className="text-slate-200">src/data/profile.ts</code></li>
+              <li>Place your official resume PDF file at: <code className="text-amber-300 bg-space-950 px-1 py-0.5 rounded">public/resume.pdf</code></li>
+              <li>Or set <code className="text-amber-300 bg-space-950 px-1 py-0.5 rounded">socialLinks.resumeUrl = &apos;/resume.pdf&apos;</code> in <code className="text-slate-200">src/data/profile.ts</code></li>
             </ol>
           </div>
 

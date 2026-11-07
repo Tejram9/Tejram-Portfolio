@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://tejram-portfolio.vercel.app/sitemap.xml
+

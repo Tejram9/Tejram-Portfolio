@@ -153,7 +153,7 @@ export const ContactSection: React.FC = () => {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <Sparkles className="w-4 h-4 text-cyber-cyan" />
+                  <Sparkles className="w-4 h-4 text-amber-400" />
                   <span>2nd Year CSE @ SSGMCE Shegaon</span>
                 </div>
               </div>

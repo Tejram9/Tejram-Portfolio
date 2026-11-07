@@ -57,60 +57,60 @@ export const CrystallineCore: React.FC<CrystallineCoreProps> = ({
 
   return (
     <group>
-      {/* Dynamic Point Light from inside the core */}
+      {/* Dynamic Point Light from inside the core - Luminous Solar Amber */}
       <pointLight
         ref={coreLightRef}
         position={[0, 0, 0]}
-        color="#38bdf8"
+        color="#fbbf24"
         distance={4.5}
         intensity={1.8}
       />
 
       <Float speed={autoRotate ? 2.2 : 0} rotationIntensity={0.4} floatIntensity={0.6}>
-        {/* Core Glass Prism (Icosahedron) */}
+        {/* Core Amber Glass Prism (Icosahedron) */}
         <mesh ref={coreRef}>
           <icosahedronGeometry args={[coreSize, 1]} />
           <meshPhysicalMaterial
-            color="#2563eb"
-            emissive="#1e40af"
-            emissiveIntensity={0.6}
+            color="#f59e0b"
+            emissive="#b45309"
+            emissiveIntensity={0.5}
             roughness={0.12}
-            metalness={0.2}
+            metalness={0.25}
             transmission={wireframeMode ? 0.1 : 0.82}
             thickness={1.4}
             ior={1.48}
             specularIntensity={1.0}
-            specularColor="#93c5fd"
+            specularColor="#fef08a"
             transparent
             opacity={wireframeMode ? 0.2 : 0.9}
             wireframe={wireframeMode}
           />
         </mesh>
 
-        {/* Outer Precision Engineering Framework (Geometric Hex-Cage) */}
+        {/* Outer Precision Engineering Framework (Geometric Brass/Gold Cage) */}
         <mesh ref={outerCageRef}>
           <icosahedronGeometry args={[coreSize * 1.15, 1]} />
           <meshStandardMaterial
-            color="#60a5fa"
-            emissive="#3b82f6"
-            emissiveIntensity={0.3}
+            color="#fcd34d"
+            emissive="#d97706"
+            emissiveIntensity={0.35}
             roughness={0.25}
-            metalness={0.85}
+            metalness={0.88}
             wireframe
             transparent
             opacity={wireframeMode ? 0.95 : 0.55}
           />
         </mesh>
 
-        {/* Inner Crystalline Spark / Octahedron Core */}
+        {/* Inner Crystalline Spark / Brilliant Solar Octahedron Core */}
         <mesh ref={innerOctaRef}>
           <octahedronGeometry args={[coreSize * 0.45, 0]} />
           <meshStandardMaterial
-            color="#38bdf8"
-            emissive="#67e8f9"
-            emissiveIntensity={1.8}
+            color="#fef08a"
+            emissive="#fbbf24"
+            emissiveIntensity={1.9}
             roughness={0.1}
-            metalness={0.9}
+            metalness={0.92}
           />
         </mesh>
       </Float>

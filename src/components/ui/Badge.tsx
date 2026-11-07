@@ -12,19 +12,19 @@ interface BadgeProps {
 
 export const Badge: React.FC<BadgeProps> = ({
   children,
-  variant = 'cobalt',
+  variant = 'amber',
   size = 'md',
   className,
   icon,
   dot = false,
 }) => {
   const variantStyles = {
-    cobalt: 'bg-cobalt-950/70 text-cobalt-300 border-cobalt-800/60 shadow-[0_0_12px_rgba(37,99,235,0.15)]',
-    cyan: 'bg-cyan-950/60 text-cyan-300 border-cyan-800/50 shadow-[0_0_12px_rgba(56,189,248,0.15)]',
+    cobalt: 'bg-amber-950/70 text-amber-300 border-amber-800/60 shadow-[0_0_12px_rgba(245,158,11,0.18)]',
+    cyan: 'bg-amber-950/80 text-amber-200 border-amber-700/60 shadow-[0_0_12px_rgba(251,191,36,0.18)]',
     emerald: 'bg-emerald-950/60 text-emerald-300 border-emerald-800/50 shadow-[0_0_12px_rgba(16,185,129,0.15)]',
     violet: 'bg-violet-950/60 text-violet-300 border-violet-800/50 shadow-[0_0_12px_rgba(139,92,246,0.15)]',
-    amber: 'bg-amber-950/60 text-amber-300 border-amber-800/50 shadow-[0_0_12px_rgba(245,158,11,0.15)]',
-    slate: 'bg-slate-800/70 text-slate-300 border-slate-700/60',
+    amber: 'bg-amber-950/80 text-amber-300 border-amber-700/70 shadow-[0_0_14px_rgba(245,158,11,0.22)]',
+    slate: 'bg-space-850/90 text-slate-300 border-slate-700/60',
   };
 
   const sizeStyles = {
@@ -33,8 +33,8 @@ export const Badge: React.FC<BadgeProps> = ({
   };
 
   const dotColors = {
-    cobalt: 'bg-cobalt-400',
-    cyan: 'bg-cyber-cyan',
+    cobalt: 'bg-amber-400',
+    cyan: 'bg-amber-300',
     emerald: 'bg-emerald-400',
     violet: 'bg-violet-400',
     amber: 'bg-amber-400',
@@ -52,15 +52,12 @@ export const Badge: React.FC<BadgeProps> = ({
     >
       {dot && (
         <span
-          className={cn(
-            'w-1.5 h-1.5 rounded-full animate-pulse',
-            dotColors[variant]
-          )}
+          className={cn('w-1.5 h-1.5 rounded-full shrink-0 animate-pulse', dotColors[variant])}
+          aria-hidden="true"
         />
       )}
-      {icon && <span className="opacity-90">{icon}</span>}
+      {icon && <span className="shrink-0">{icon}</span>}
       <span>{children}</span>
     </span>
   );
 };
-

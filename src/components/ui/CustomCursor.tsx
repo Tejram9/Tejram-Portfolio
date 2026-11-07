@@ -114,10 +114,10 @@ export const CustomCursor: React.FC = () => {
           cursorLabel
             ? 'opacity-0 scale-50'
             : isClicking
-            ? 'scale-150 bg-cyber-cyan'
+            ? 'scale-150 bg-amber-300'
             : isHovered
-            ? 'scale-125 bg-cyber-cyan'
-            : 'bg-slate-200'
+            ? 'scale-125 bg-amber-400'
+            : 'bg-amber-100'
         }`}
         style={{ willChange: 'transform' }}
       />
@@ -127,14 +127,14 @@ export const CustomCursor: React.FC = () => {
         ref={ringRef}
         className={`fixed top-0 left-0 pointer-events-none flex items-center justify-center transition-[width,height,border-color,background-color,border-radius,padding] duration-200 ${
           cursorLabel
-            ? 'px-3 py-1 rounded-full border border-cyber-cyan/80 bg-space-950/90 text-[10px] font-mono font-bold text-cyber-cyan tracking-wider shadow-[0_0_20px_rgba(56,189,248,0.4)] backdrop-blur-md'
+            ? 'px-3 py-1 rounded-full border border-amber-400/80 bg-space-950/95 text-[10px] font-mono font-bold text-amber-300 tracking-wider shadow-[0_0_20px_rgba(245,158,11,0.4)] backdrop-blur-md'
             : isCanvasHovered
-            ? 'w-14 h-14 rounded-full border border-cyber-cyan/60 bg-cyan-950/20'
+            ? 'w-14 h-14 rounded-full border border-amber-400/70 bg-amber-950/20'
             : isHovered
-            ? 'w-10 h-10 rounded-full border border-cobalt-400/80 bg-cobalt-500/10'
+            ? 'w-10 h-10 rounded-full border border-amber-400/80 bg-amber-500/10'
             : isClicking
-            ? 'w-6 h-6 rounded-full border-2 border-cobalt-300 bg-cobalt-600/20'
-            : 'w-7 h-7 rounded-full border border-slate-400/30 bg-transparent'
+            ? 'w-6 h-6 rounded-full border-2 border-amber-300 bg-amber-600/20'
+            : 'w-7 h-7 rounded-full border border-amber-400/30 bg-transparent'
         }`}
         style={{ willChange: 'transform' }}
       >

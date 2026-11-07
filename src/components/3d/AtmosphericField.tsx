@@ -13,10 +13,11 @@ export const AtmosphericField: React.FC<AtmosphericFieldProps> = ({ count = 90 }
     const pos = new Float32Array(count * 3);
     const col = new Float32Array(count * 3);
 
-    const c1 = new THREE.Color('#38bdf8');
-    const c2 = new THREE.Color('#3b82f6');
-    const c3 = new THREE.Color('#818cf8');
-    const cWhite = new THREE.Color('#e0f2fe');
+    // Warm Solar Amber & Champagne Stardust Colors
+    const c1 = new THREE.Color('#fbbf24');
+    const c2 = new THREE.Color('#f59e0b');
+    const c3 = new THREE.Color('#fde68a');
+    const cWhite = new THREE.Color('#fffbeb');
 
     for (let i = 0; i < count; i++) {
       const radius = 2.2 + Math.random() * 3.2;
@@ -71,4 +72,3 @@ export const AtmosphericField: React.FC<AtmosphericFieldProps> = ({ count = 90 }
     </points>
   );
 };
-

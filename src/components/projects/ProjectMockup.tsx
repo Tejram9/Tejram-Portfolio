@@ -34,7 +34,7 @@ export const ProjectMockup: React.FC<ProjectMockupProps> = ({ projectId }) => {
             <span className="ml-2 text-[11px] font-mono text-slate-400">FocusPulse // TrackX</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/80 border border-cyan-800/60 text-cyan-300">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-950/80 border border-amber-800/60 text-amber-300">
               Session Active
             </span>
           </div>
@@ -51,7 +51,7 @@ export const ProjectMockup: React.FC<ProjectMockupProps> = ({ projectId }) => {
                   cx="50"
                   cy="50"
                   r="42"
-                  stroke="#38bdf8"
+                  stroke="#f59e0b"
                   strokeWidth="6"
                   strokeDasharray="264"
                   strokeDashoffset="66"
@@ -61,11 +61,11 @@ export const ProjectMockup: React.FC<ProjectMockupProps> = ({ projectId }) => {
               </svg>
               <div className="absolute flex flex-col items-center">
                 <span className="text-sm md:text-base font-mono font-bold text-slate-100">25:00</span>
-                <span className="text-[9px] uppercase font-mono text-cyan-400">Deep Flow</span>
+                <span className="text-[9px] uppercase font-mono text-amber-400">Deep Flow</span>
               </div>
             </div>
             <div className="flex items-center gap-1.5 text-[10px] text-slate-400">
-              <Timer className="w-3 h-3 text-cyan-400" />
+              <Timer className="w-3 h-3 text-amber-400" />
               <span>Sprint #3 Completed</span>
             </div>
           </div>
@@ -75,7 +75,7 @@ export const ProjectMockup: React.FC<ProjectMockupProps> = ({ projectId }) => {
             {/* Chart preview */}
             <div className="bg-space-900/90 rounded-xl p-2.5 border border-slate-800/80 flex-1 flex flex-col justify-between">
               <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
-                <span className="flex items-center gap-1"><BarChart2 className="w-3 h-3 text-cyan-400" /> Chart.js Trends</span>
+                <span className="flex items-center gap-1"><BarChart2 className="w-3 h-3 text-amber-400" /> Chart.js Trends</span>
                 <span className="text-emerald-400 font-semibold">+18%</span>
               </div>
               {/* Mini visual bar distribution */}
@@ -83,7 +83,7 @@ export const ProjectMockup: React.FC<ProjectMockupProps> = ({ projectId }) => {
                 {[40, 65, 80, 50, 95, 75, 90].map((val, i) => (
                   <div key={i} className="flex-1 bg-space-800 rounded-t flex items-end overflow-hidden h-full">
                     <div
-                      className="w-full bg-gradient-to-t from-cobalt-600 to-cyber-cyan rounded-t transition-all"
+                      className="w-full bg-gradient-to-t from-amber-600 to-amber-300 rounded-t transition-all"
                       style={{ height: `${val}%` }}
                     />
                   </div>
@@ -105,7 +105,7 @@ export const ProjectMockup: React.FC<ProjectMockupProps> = ({ projectId }) => {
         {/* Footer info pill */}
         <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 pt-2 border-t border-slate-800/60 relative z-10">
           <span>Python / Flask Core</span>
-          <span className="text-cyan-400">Live on Render</span>
+          <span className="text-amber-400">Live on Render</span>
         </div>
       </div>
     );
@@ -235,7 +235,7 @@ export const ProjectMockup: React.FC<ProjectMockupProps> = ({ projectId }) => {
               </div>
               <div>
                 <div className="text-xs font-semibold text-slate-100 flex items-center gap-1">
-                  Ramesh K. <Check className="w-3 h-3 text-cyber-cyan" />
+                  Ramesh K. <Check className="w-3 h-3 text-emerald-400" />
                 </div>
                 <div className="text-[10px] text-slate-400">Certified Electrician • 1.2 km away</div>
               </div>

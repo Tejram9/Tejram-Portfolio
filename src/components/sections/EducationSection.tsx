@@ -41,20 +41,20 @@ export const EducationSection: React.FC = () => {
                 {/* Header row */}
                 <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-800/80">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-cobalt-950/90 border border-cobalt-700/60 flex items-center justify-center text-cobalt-300 shadow-[0_0_24px_rgba(37,99,235,0.25)] shrink-0">
+                    <div className="w-14 h-14 rounded-2xl bg-amber-950/80 border border-amber-700/60 flex items-center justify-center text-amber-300 shadow-[0_0_24px_rgba(245,158,11,0.25)] shrink-0">
                       <GraduationCap className="w-7 h-7" />
                     </div>
                     <div>
                       <h3 className="text-xl sm:text-2xl font-display font-extrabold text-slate-100 tracking-tight">
                         {education.degree}
                       </h3>
-                      <p className="text-sm font-mono text-cobalt-400 font-semibold mt-0.5">
+                      <p className="text-sm font-mono text-amber-400 font-semibold mt-0.5">
                         {education.major}
                       </p>
                     </div>
                   </div>
 
-                  <Badge variant="cyan" size="md">
+                  <Badge variant="amber" size="md">
                     {education.currentYear}
                   </Badge>
                 </div>
@@ -74,7 +74,7 @@ export const EducationSection: React.FC = () => {
                   </div>
 
                   <div className="flex items-center gap-3 text-xs text-slate-400 font-mono pl-8">
-                    <Calendar className="w-3.5 h-3.5 text-cobalt-400" />
+                    <Calendar className="w-3.5 h-3.5 text-amber-400" />
                     <span>Academic Term: 2023 &ndash; 2027 • Second Year Active</span>
                   </div>
                 </div>
@@ -82,14 +82,14 @@ export const EducationSection: React.FC = () => {
                 {/* Core Academic Subjects */}
                 <div className="pt-5 border-t border-slate-800/80">
                   <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-400 mb-3.5 font-semibold">
-                    <BookOpen className="w-3.5 h-3.5 text-cobalt-400" />
+                    <BookOpen className="w-3.5 h-3.5 text-amber-400" />
                     <span>Foundational Coursework &amp; Laboratories</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {education.coreSubjects.map((subject) => (
                       <span
                         key={subject}
-                        className="text-xs font-mono px-3.5 py-1.5 rounded-lg bg-space-900 text-slate-200 border border-slate-700/60 hover:border-cobalt-500/50 transition-colors"
+                        className="text-xs font-mono px-3.5 py-1.5 rounded-lg bg-space-900 text-slate-200 border border-slate-700/60 hover:border-amber-500/50 transition-colors"
                       >
                         {subject}
                       </span>
@@ -108,7 +108,7 @@ export const EducationSection: React.FC = () => {
                   href={profileData.socialLinks.collegeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-cobalt-400 hover:text-cobalt-300 transition-colors"
+                  className="flex items-center gap-1.5 text-amber-400 hover:text-amber-300 transition-colors"
                 >
                   <span>College Portal</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -152,7 +152,7 @@ export const EducationSection: React.FC = () => {
               <div className="pt-6 border-t border-slate-800/80 space-y-2.5">
                 {education.highlights.map((highlight, idx) => (
                   <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-cobalt-400 mt-1.5 shrink-0" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
                     <span>{highlight}</span>
                   </div>
                 ))}

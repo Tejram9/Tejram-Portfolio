@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Menu, X, ArrowUpRight, Sparkles, Search, Clock } from 'lucide-react';
 import { scrollToSection } from '../../lib/utils';
 import { profileData } from '../../data/profile';
+import { Magnetic } from '../ui/Magnetic';
 
 interface NavbarProps {
   activeSection: string;
@@ -126,7 +128,11 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onOpenCommandPale
                   }`}
                 >
                   {isActive && (
-                    <span className="absolute inset-0 rounded-full bg-cobalt-600/30 border border-cobalt-400/40 -z-10 shadow-[0_0_12px_rgba(37,99,235,0.3)]" />
+                    <motion.span
+                      layoutId="navbar-active-dock-pill"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      className="absolute inset-0 rounded-full bg-cobalt-600/35 border border-cobalt-400/50 -z-10 shadow-[0_0_14px_rgba(37,99,235,0.4)]"
+                    />
                   )}
                   {item.label}
                 </button>
@@ -143,26 +149,30 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onOpenCommandPale
             </div>
 
             {/* Command Palette Trigger */}
-            <button
-              onClick={onOpenCommandPalette}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-space-900/80 border border-slate-800 hover:border-cobalt-500/60 text-xs font-mono text-slate-300 hover:text-white transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-cobalt-500"
-              title="Search commands, projects, and sections (Ctrl+K or ⌘K)"
-              aria-label="Open Command Palette"
-            >
-              <Search className="w-3.5 h-3.5 text-cobalt-400" />
-              <span>Search</span>
-              <kbd className="px-1.5 py-0.2 text-[10px] bg-space-950 border border-slate-700/80 rounded text-slate-400 font-mono">
-                ⌘K
-              </kbd>
-            </button>
+            <Magnetic strength={0.2}>
+              <button
+                onClick={onOpenCommandPalette}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-space-900/80 border border-slate-800 hover:border-cobalt-500/60 text-xs font-mono text-slate-300 hover:text-white transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-cobalt-500"
+                title="Search commands, projects, and sections (Ctrl+K or ⌘K)"
+                aria-label="Open Command Palette"
+              >
+                <Search className="w-3.5 h-3.5 text-cobalt-400" />
+                <span>Search</span>
+                <kbd className="px-1.5 py-0.2 text-[10px] bg-space-950 border border-slate-700/80 rounded text-slate-400 font-mono">
+                  ⌘K
+                </kbd>
+              </button>
+            </Magnetic>
 
-            <button
-              onClick={() => handleNavClick('contact')}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-cobalt-600 via-cobalt-500 to-cobalt-600 text-white text-xs font-medium shadow-[0_0_16px_rgba(37,99,235,0.3)] hover:shadow-[0_0_22px_rgba(37,99,235,0.5)] transition-all hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-cobalt-400"
-            >
-              <span>Connect</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </button>
+            <Magnetic strength={0.3}>
+              <button
+                onClick={() => handleNavClick('contact')}
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-cobalt-600 via-cobalt-500 to-cobalt-600 text-white text-xs font-medium shadow-[0_0_16px_rgba(37,99,235,0.3)] hover:shadow-[0_0_22px_rgba(37,99,235,0.5)] transition-all hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-cobalt-400"
+              >
+                <span>Connect</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </button>
+            </Magnetic>
           </div>
 
           {/* Mobile Right Controls */}

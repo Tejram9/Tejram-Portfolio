@@ -1,6 +1,7 @@
 import React from 'react';
 import { Project } from '../../types';
 import { ProjectMockup } from './ProjectMockup';
+import { TiltCard } from './TiltCard';
 import { ExternalLink, Github, ArrowUpRight, CheckCircle2, GitFork, AlertCircle, Sparkles } from 'lucide-react';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
@@ -15,22 +16,23 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
   const indexFormatted = `0${index + 1}`;
 
   return (
-    <div className="group relative rounded-2xl glass-card overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-[0_25px_50px_-15px_rgba(0,0,0,0.8)] corner-crosshairs">
-      {/* Top Architectural Header Bar */}
-      <div className="px-5 py-3 border-b border-slate-800/80 bg-space-900/60 flex items-center justify-between text-[11px] font-mono">
-        <div className="flex items-center gap-2">
-          <span className="text-cobalt-400 font-bold">{indexFormatted} //</span>
-          <span className="text-slate-300 uppercase tracking-wider">{project.category}</span>
-          {project.team && (
-            <span className="text-slate-500 hidden sm:inline">• Team {project.team}</span>
+    <TiltCard className="h-full flex flex-col">
+      <div className="group relative rounded-2xl glass-card overflow-hidden flex flex-col justify-between h-full transition-all duration-300 hover:shadow-[0_25px_50px_-15px_rgba(0,0,0,0.8)] corner-crosshairs">
+        {/* Top Architectural Header Bar */}
+        <div className="px-5 py-3 border-b border-slate-800/80 bg-space-900/60 flex items-center justify-between text-[11px] font-mono">
+          <div className="flex items-center gap-2">
+            <span className="text-cobalt-400 font-bold">{indexFormatted} //</span>
+            <span className="text-slate-300 uppercase tracking-wider">{project.category}</span>
+            {project.team && (
+              <span className="text-slate-500 hidden sm:inline">• Team {project.team}</span>
+            )}
+          </div>
+          {project.badge && (
+            <Badge variant={index === 2 ? 'violet' : index === 3 ? 'emerald' : 'cobalt'} size="sm">
+              {project.badge}
+            </Badge>
           )}
         </div>
-        {project.badge && (
-          <Badge variant={index === 2 ? 'violet' : index === 3 ? 'emerald' : 'cobalt'} size="sm">
-            {project.badge}
-          </Badge>
-        )}
-      </div>
 
       {/* Visual Interactive Preview */}
       <div
@@ -170,6 +172,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
                 size="sm"
                 href={project.liveDemoUrl}
                 external
+                magnetic
                 icon={<ExternalLink className="w-3.5 h-3.5" />}
               >
                 Live Demo
@@ -182,6 +185,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
                 size="sm"
                 href={project.githubUrl}
                 external
+                magnetic
                 icon={<Github className="w-3.5 h-3.5" />}
               >
                 Code
@@ -199,5 +203,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onOpen
         </div>
       </div>
     </div>
+    </TiltCard>
   );
 };

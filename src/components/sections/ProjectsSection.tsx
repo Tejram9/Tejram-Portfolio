@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { ProjectCard } from '../projects/ProjectCard';
 import { ProjectDetailModal } from '../projects/ProjectDetailModal';
+import { ScrollReveal } from '../ui/ScrollReveal';
 import { projectsData } from '../../data/projects';
 import { Project } from '../../types';
 
@@ -59,12 +60,18 @@ export const ProjectsSection: React.FC = () => {
         {/* 2x2 Editorial Grid of Major Projects */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
           {projectsData.map((project, idx) => (
-            <ProjectCard
+            <ScrollReveal
               key={project.id}
-              project={project}
-              index={idx}
-              onOpenModal={handleOpenModal}
-            />
+              direction={idx % 2 === 0 ? 'right' : 'left'}
+              delay={idx * 0.1}
+              className="h-full flex flex-col"
+            >
+              <ProjectCard
+                project={project}
+                index={idx}
+                onOpenModal={handleOpenModal}
+              />
+            </ScrollReveal>
           ))}
         </div>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '../../lib/utils';
+import { Magnetic } from './Magnetic';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -8,6 +9,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   external?: boolean;
   icon?: React.ReactNode;
   iconRight?: React.ReactNode;
+  magnetic?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -18,6 +20,7 @@ export const Button: React.FC<ButtonProps> = ({
   external = false,
   icon,
   iconRight,
+  magnetic = false,
   className,
   ...props
 }) => {
@@ -43,26 +46,24 @@ export const Button: React.FC<ButtonProps> = ({
 
   const content = (
     <>
+      {/* Subtle shine reflection sweep across button on hover */}
+      <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
       {icon && <span className="transition-transform duration-200 group-hover:scale-110 shrink-0">{icon}</span>}
-      <span className="tracking-wide">{children}</span>
-      {iconRight && <span className="transition-transform duration-200 group-hover:translate-x-1 shrink-0">{iconRight}</span>}
+      <span className="tracking-wide relative z-10">{children}</span>
+      {iconRight && <span className="transition-transform duration-200 group-hover:translate-x-1 shrink-0 relative z-10">{iconRight}</span>}
     </>
   );
 
-  if (href) {
-    return (
-      <a
-        href={href}
-        target={external ? '_blank' : undefined}
-        rel={external ? 'noopener noreferrer' : undefined}
-        className={cn(baseStyles, variantStyles[variant], sizeStyles[size], 'group', className)}
-      >
-        {content}
-      </a>
-    );
-  }
-
-  return (
+  const element = href ? (
+    <a
+      href={href}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
+      className={cn(baseStyles, variantStyles[variant], sizeStyles[size], 'group', className)}
+    >
+      {content}
+    </a>
+  ) : (
     <button
       className={cn(baseStyles, variantStyles[variant], sizeStyles[size], 'group', className)}
       {...props}
@@ -70,4 +71,10 @@ export const Button: React.FC<ButtonProps> = ({
       {content}
     </button>
   );
+
+  if (magnetic) {
+    return <Magnetic strength={0.3}>{element}</Magnetic>;
+  }
+
+  return element;
 };

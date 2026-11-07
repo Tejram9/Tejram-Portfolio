@@ -1,6 +1,7 @@
 import React from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
+import { ScrollReveal } from '../ui/ScrollReveal';
 import { profileData } from '../../data/profile';
 import { StrategicMatrix } from './StrategicMatrix';
 import {
@@ -37,19 +38,22 @@ export const AboutSection: React.FC = () => {
         />
 
         {/* Editorial Pull-Quote Callout */}
-        <div className="mb-14 p-6 sm:p-8 rounded-2xl glass-studio border-l-4 border-cobalt-500 relative corner-crosshairs">
-          <Quote className="w-8 h-8 text-cobalt-500/30 absolute top-5 right-6" />
-          <p className="text-base sm:text-lg md:text-xl font-display font-medium text-slate-200 italic leading-relaxed max-w-4xl">
-            &quot;Software development is an interplay of strategy, clean data models, resilient APIs, and purposeful user experiences — much like a game of chess where every architectural move sets the stage for future growth.&quot;
-          </p>
-          <div className="mt-3 text-xs font-mono text-cobalt-400 uppercase tracking-widest font-semibold">
-            &mdash; Tejram Kisan Dudhapachare • Second-Year CSE Student @ SSGMCE
+        <ScrollReveal direction="up" delay={0.05}>
+          <div className="mb-14 p-6 sm:p-8 rounded-2xl glass-studio border-l-4 border-cobalt-500 relative corner-crosshairs">
+            <Quote className="w-8 h-8 text-cobalt-500/30 absolute top-5 right-6" />
+            <p className="text-base sm:text-lg md:text-xl font-display font-medium text-slate-200 italic leading-relaxed max-w-4xl">
+              &quot;Software development is an interplay of strategy, clean data models, resilient APIs, and purposeful user experiences — much like a game of chess where every architectural move sets the stage for future growth.&quot;
+            </p>
+            <div className="mt-3 text-xs font-mono text-cobalt-400 uppercase tracking-widest font-semibold">
+              &mdash; Tejram Kisan Dudhapachare • Second-Year CSE Student @ SSGMCE
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left Column: Editorial Introduction & Student Identity */}
           <div className="lg:col-span-7 space-y-6">
+            <ScrollReveal direction="right" delay={0.1}>
             <Card className="p-7 md:p-9" tacticalBorder>
               <div className="flex items-center gap-2 text-xs font-mono text-cobalt-400 uppercase tracking-widest mb-4">
                 <Terminal className="w-4 h-4" />
@@ -97,57 +101,64 @@ export const AboutSection: React.FC = () => {
                 </p>
               </div>
             </div>
+            </ScrollReveal>
           </div>
 
           {/* Right Column: Three Strategic Pillars */}
           <div className="lg:col-span-5 space-y-5">
+            <ScrollReveal direction="left" delay={0.15}>
             <h3 className="text-xs font-mono uppercase tracking-widest text-slate-400 mb-2 font-semibold flex items-center justify-between">
               <span>Foundational Principles</span>
               <span className="text-[10px] text-cobalt-400 font-mono">[03_PILLARS]</span>
             </h3>
 
-            {profileData.strategicPillars.map((pillar, idx) => (
-              <Card
-                key={pillar.title}
-                hoverEffect
-                glow="cobalt"
-                className="p-6 transition-all duration-300"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-space-900/90 border border-slate-700/60 shrink-0">
-                    {iconMap[pillar.icon] || <Sparkles className="w-5 h-5 text-cobalt-400" />}
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-mono text-slate-500 font-bold">
-                        {`0${idx + 1}`}
-                      </span>
-                      <h4 className="text-base font-display font-bold text-slate-100">
-                        {pillar.title}
-                      </h4>
+            <div className="space-y-4">
+              {profileData.strategicPillars.map((pillar, idx) => (
+                <Card
+                  key={pillar.title}
+                  hoverEffect
+                  glow="cobalt"
+                  className="p-6 transition-all duration-300"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-xl bg-space-900/90 border border-slate-700/60 shrink-0">
+                      {iconMap[pillar.icon] || <Sparkles className="w-5 h-5 text-cobalt-400" />}
                     </div>
-                    <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
-                      {pillar.description}
-                    </p>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-xs font-mono text-slate-500 font-bold">
+                          {`0${idx + 1}`}
+                        </span>
+                        <h4 className="text-base font-display font-bold text-slate-100">
+                          {pillar.title}
+                        </h4>
+                      </div>
+                      <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
+                        {pillar.description}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Card>
-            ))}
+                </Card>
+              ))}
 
-            {/* Quick Context Card */}
-            <div className="p-5 rounded-2xl bg-gradient-to-br from-cobalt-950/60 via-space-900 to-space-850 border border-cobalt-800/40 space-y-2">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-cobalt-400 font-semibold block">
-                Current College Milestone
-              </span>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Currently engaged in 2nd-year curriculum at SSGMCE, Shegaon — pairing academic rigor in algorithms and DBMS with practical full-stack software prototyping.
-              </p>
+              {/* Quick Context Card */}
+              <div className="p-5 rounded-2xl bg-gradient-to-br from-cobalt-950/60 via-space-900 to-space-850 border border-cobalt-800/40 space-y-2">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-cobalt-400 font-semibold block">
+                  Current College Milestone
+                </span>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Currently engaged in 2nd-year curriculum at SSGMCE, Shegaon — pairing academic rigor in algorithms and DBMS with practical full-stack software prototyping.
+                </p>
+              </div>
             </div>
+            </ScrollReveal>
           </div>
         </div>
 
         {/* The Engineering Chessboard & Strategic Systems Matrix */}
-        <StrategicMatrix />
+        <ScrollReveal direction="up" delay={0.2}>
+          <StrategicMatrix />
+        </ScrollReveal>
       </div>
     </section>
   );

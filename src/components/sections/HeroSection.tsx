@@ -122,6 +122,7 @@ export const HeroSection: React.FC = () => {
               <Button
                 variant="primary"
                 size="lg"
+                magnetic
                 onClick={() => scrollToSection('projects')}
                 iconRight={<ArrowUpRight className="w-4 h-4" />}
               >
@@ -131,6 +132,7 @@ export const HeroSection: React.FC = () => {
               <Button
                 variant="secondary"
                 size="lg"
+                magnetic
                 onClick={() => scrollToSection('contact')}
               >
                 Let&apos;s Connect
@@ -139,6 +141,7 @@ export const HeroSection: React.FC = () => {
               <Button
                 variant="ghost"
                 size="md"
+                magnetic
                 onClick={() => scrollToSection('about')}
                 className="hidden sm:inline-flex text-xs font-mono text-slate-400 hover:text-white"
               >

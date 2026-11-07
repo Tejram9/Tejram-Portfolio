@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
+import { ScrollReveal } from '../ui/ScrollReveal';
 import { profileData } from '../../data/profile';
 import { copyToClipboard } from '../../lib/utils';
 import confetti from 'canvas-confetti';
@@ -103,6 +104,7 @@ export const ContactSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left Column: Direct Reachout, Quick Copy & Info */}
           <div className="lg:col-span-5 space-y-6">
+            <ScrollReveal direction="right" delay={0.1}>
             <Card className="p-7" tacticalBorder>
               <h3 className="text-xl font-display font-bold text-slate-100 mb-2">
                 Let&apos;s Start a Conversation
@@ -205,10 +207,12 @@ export const ContactSection: React.FC = () => {
                 </a>
               </div>
             </Card>
+            </ScrollReveal>
           </div>
 
           {/* Right Column: Premium Contact Form */}
           <div className="lg:col-span-7">
+            <ScrollReveal direction="left" delay={0.15}>
             <Card className="p-7 md:p-9" tacticalBorder>
               <div className="flex items-center justify-between mb-6">
                 <div>
@@ -353,6 +357,7 @@ export const ContactSection: React.FC = () => {
                       variant="primary"
                       size="lg"
                       className="w-full"
+                      magnetic
                       disabled={isSubmitting}
                       icon={<Send className="w-4 h-4" />}
                     >
@@ -365,6 +370,7 @@ export const ContactSection: React.FC = () => {
                 </form>
               )}
             </Card>
+            </ScrollReveal>
           </div>
         </div>
       </div>

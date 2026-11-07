@@ -2,6 +2,7 @@ import React from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Card } from '../ui/Card';
 import { Badge } from '../ui/Badge';
+import { ScrollReveal } from '../ui/ScrollReveal';
 import { profileData } from '../../data/profile';
 import {
   GraduationCap,
@@ -34,6 +35,7 @@ export const EducationSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Main Academic Profile Card */}
           <div className="lg:col-span-8">
+            <ScrollReveal direction="right" delay={0.1} className="h-full">
             <Card className="p-7 md:p-10 h-full flex flex-col justify-between" tacticalBorder>
               <div>
                 {/* Header row */}
@@ -113,10 +115,12 @@ export const EducationSection: React.FC = () => {
                 </a>
               </div>
             </Card>
+            </ScrollReveal>
           </div>
 
           {/* Academic Performance & Metric Card */}
           <div className="lg:col-span-4 flex flex-col gap-6">
+            <ScrollReveal direction="left" delay={0.15} className="h-full">
             <Card className="p-7 md:p-9 flex-1 flex flex-col justify-between" glow="cobalt" tacticalBorder>
               <div>
                 <div className="flex items-center justify-between">
@@ -154,6 +158,7 @@ export const EducationSection: React.FC = () => {
                 ))}
               </div>
             </Card>
+            </ScrollReveal>
           </div>
         </div>
       </div>

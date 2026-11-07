@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { SectionHeading } from '../ui/SectionHeading';
+import { ScrollReveal } from '../ui/ScrollReveal';
 import { skillsData, skillsCategories, SkillDetail } from '../../data/skills';
 import {
   Coffee,
@@ -89,12 +91,19 @@ export const SkillsSection: React.FC = () => {
                   setActiveCategory(cat.id);
                   setSelectedSkill(null);
                 }}
-                className={`px-4 py-2 rounded-xl text-xs font-mono tracking-wider transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-cobalt-400 ${
+                className={`relative px-4 py-2 rounded-xl text-xs font-mono tracking-wider transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-cobalt-400 ${
                   isActive
-                    ? 'bg-cobalt-600 text-white font-semibold shadow-[0_0_18px_rgba(37,99,235,0.35)]'
+                    ? 'text-white font-semibold'
                     : 'bg-space-900 hover:bg-space-850 text-slate-400 hover:text-slate-200 border border-slate-800'
                 }`}
               >
+                {isActive && (
+                  <motion.span
+                    layoutId="skills-filter-pill"
+                    transition={{ type: 'spring', stiffness: 380, damping: 28 }}
+                    className="absolute inset-0 rounded-xl bg-cobalt-600 shadow-[0_0_18px_rgba(37,99,235,0.4)] -z-10"
+                  />
+                )}
                 {cat.label}
               </button>
             );
@@ -102,6 +111,7 @@ export const SkillsSection: React.FC = () => {
         </div>
 
         {/* Skills Grid */}
+        <ScrollReveal direction="up" delay={0.1}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
           {filteredSkills.map((skill) => {
             const isSelected = selectedSkill?.name === skill.name;
@@ -162,6 +172,7 @@ export const SkillsSection: React.FC = () => {
             );
           })}
         </div>
+        </ScrollReveal>
 
         {/* Selected Skill Detail Banner */}
         {selectedSkill && (

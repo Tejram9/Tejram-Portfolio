@@ -1,5 +1,7 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { cn } from '../../lib/utils';
+import { useDevicePerformance } from '../../hooks/useDevicePerformance';
 
 interface SectionHeadingProps {
   number?: string;
@@ -22,8 +24,14 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   align = 'left',
   className,
 }) => {
+  const { prefersReducedMotion } = useDevicePerformance();
+
   return (
-    <div
+    <motion.div
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={cn(
         'mb-14 md:mb-20 relative',
         align === 'center' ? 'text-center mx-auto max-w-3xl' : 'max-w-3xl',
@@ -71,6 +79,6 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
           {description}
         </p>
       )}
-    </div>
+    </motion.div>
   );
 };

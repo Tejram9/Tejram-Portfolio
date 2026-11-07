@@ -11,6 +11,9 @@ import { AchievementsSection } from './components/sections/AchievementsSection';
 import { LearningSection } from './components/sections/LearningSection';
 import { ContactSection } from './components/sections/ContactSection';
 import { CommandPalette } from './components/ui/CommandPalette';
+import { CustomCursor } from './components/ui/CustomCursor';
+import { AmbientBackground } from './components/ui/AmbientBackground';
+import { PageLoader } from './components/ui/PageLoader';
 import { useScrollSpy } from './hooks/useScrollSpy';
 
 export function App() {
@@ -45,6 +48,15 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-space-950 text-slate-100 flex flex-col selection:bg-cobalt-600/30 selection:text-white relative">
+      {/* Telemetry Page Mount / Loading Indicator */}
+      <PageLoader />
+
+      {/* Subtle Hardware-Accelerated Ambient Cursor Spotlight */}
+      <AmbientBackground />
+
+      {/* Interactive Desktop Custom Cursor */}
+      <CustomCursor />
+
       {/* Top Navbar with Scroll Progress & Command Palette trigger */}
       <Navbar
         activeSection={activeSection}

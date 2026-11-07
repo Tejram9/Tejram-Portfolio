@@ -17,32 +17,36 @@ export const EducationSection: React.FC = () => {
   const { education } = profileData;
 
   return (
-    <section id="education" className="py-24 relative overflow-hidden bg-space-950/70">
+    <section id="education" className="py-28 relative overflow-hidden bg-space-950 hairline-border-t">
+      {/* Background radial highlight */}
+      <div className="absolute top-1/2 left-1/3 w-[600px] h-[350px] bg-cobalt-600/08 rounded-full blur-[160px] pointer-events-none" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
           number="02 //"
-          eyebrow="Academic Background"
+          eyebrow="Academic Dossier"
           title="Formal"
           highlight="Education."
           description="A rigorous computer science engineering curriculum reinforcing theoretical fundamentals with practical software craftsmanship."
+          coordinateTag="SSGMCE_SGBAU // 2023-2027"
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Main Academic Profile Card */}
           <div className="lg:col-span-8">
-            <Card className="p-7 md:p-9 h-full flex flex-col justify-between" tacticalBorder>
+            <Card className="p-7 md:p-10 h-full flex flex-col justify-between" tacticalBorder>
               <div>
                 {/* Header row */}
                 <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-800/80">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-cobalt-950/90 border border-cobalt-700/60 flex items-center justify-center text-cobalt-300 shadow-[0_0_20px_rgba(37,99,235,0.2)]">
-                      <GraduationCap className="w-6 h-6" />
+                  <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 rounded-2xl bg-cobalt-950/90 border border-cobalt-700/60 flex items-center justify-center text-cobalt-300 shadow-[0_0_24px_rgba(37,99,235,0.25)] shrink-0">
+                      <GraduationCap className="w-7 h-7" />
                     </div>
                     <div>
-                      <h3 className="text-xl md:text-2xl font-display font-bold text-slate-100">
+                      <h3 className="text-xl sm:text-2xl font-display font-extrabold text-slate-100 tracking-tight">
                         {education.degree}
                       </h3>
-                      <p className="text-sm font-mono text-cobalt-400 font-semibold">
+                      <p className="text-sm font-mono text-cobalt-400 font-semibold mt-0.5">
                         {education.major}
                       </p>
                     </div>
@@ -58,10 +62,10 @@ export const EducationSection: React.FC = () => {
                   <div className="flex items-start gap-3">
                     <Building2 className="w-5 h-5 text-slate-400 shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="text-base font-semibold text-slate-100">
+                      <h4 className="text-base sm:text-lg font-semibold text-slate-100">
                         {education.institution}
                       </h4>
-                      <p className="text-xs text-slate-400 font-mono mt-0.5">
+                      <p className="text-xs sm:text-sm text-slate-400 font-mono mt-0.5">
                         Affiliated with {education.university} • {education.location}
                       </p>
                     </div>
@@ -69,13 +73,13 @@ export const EducationSection: React.FC = () => {
 
                   <div className="flex items-center gap-3 text-xs text-slate-400 font-mono pl-8">
                     <Calendar className="w-3.5 h-3.5 text-cobalt-400" />
-                    <span>Expected Graduation: Class of 2027</span>
+                    <span>Academic Term: 2023 &ndash; 2027 • Second Year Active</span>
                   </div>
                 </div>
 
                 {/* Core Academic Subjects */}
-                <div className="pt-4 border-t border-slate-800/80">
-                  <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">
+                <div className="pt-5 border-t border-slate-800/80">
+                  <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-400 mb-3.5 font-semibold">
                     <BookOpen className="w-3.5 h-3.5 text-cobalt-400" />
                     <span>Foundational Coursework &amp; Laboratories</span>
                   </div>
@@ -83,7 +87,7 @@ export const EducationSection: React.FC = () => {
                     {education.coreSubjects.map((subject) => (
                       <span
                         key={subject}
-                        className="text-xs font-mono px-3 py-1.5 rounded-lg bg-space-800 text-slate-200 border border-slate-700/60"
+                        className="text-xs font-mono px-3.5 py-1.5 rounded-lg bg-space-900 text-slate-200 border border-slate-700/60 hover:border-cobalt-500/50 transition-colors"
                       >
                         {subject}
                       </span>
@@ -94,18 +98,18 @@ export const EducationSection: React.FC = () => {
 
               {/* Verified Status Banner */}
               <div className="mt-8 pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-slate-400">
-                <span className="flex items-center gap-1.5 text-emerald-400">
-                  <CheckCircle className="w-3.5 h-3.5" />
+                <span className="flex items-center gap-2 text-emerald-400 font-semibold">
+                  <CheckCircle className="w-4 h-4" />
                   <span>Second Year CSE In Good Academic Standing</span>
                 </span>
                 <a
                   href={profileData.socialLinks.collegeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-cobalt-400 hover:text-cobalt-300 transition-colors"
+                  className="flex items-center gap-1.5 text-cobalt-400 hover:text-cobalt-300 transition-colors"
                 >
                   <span>College Portal</span>
-                  <ExternalLink className="w-3 h-3" />
+                  <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
             </Card>
@@ -113,37 +117,37 @@ export const EducationSection: React.FC = () => {
 
           {/* Academic Performance & Metric Card */}
           <div className="lg:col-span-4 flex flex-col gap-6">
-            <Card className="p-7 flex-1 flex flex-col justify-between" glow="cobalt" tacticalBorder>
+            <Card className="p-7 md:p-9 flex-1 flex flex-col justify-between" glow="cobalt" tacticalBorder>
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
+                  <span className="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold">
                     Cumulative GPA
                   </span>
-                  <div className="p-2 rounded-lg bg-emerald-950/80 border border-emerald-800/60 text-emerald-400">
-                    <Award className="w-4 h-4" />
+                  <div className="p-2.5 rounded-xl bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 shadow-sm">
+                    <Award className="w-5 h-5" />
                   </div>
                 </div>
 
                 {/* Big CGPA metric */}
                 <div className="my-6">
-                  <div className="text-5xl md:text-6xl font-display font-extrabold text-slate-50 tracking-tight">
+                  <div className="text-6xl sm:text-7xl font-display font-extrabold text-slate-50 tracking-[-0.04em]">
                     {education.cgpa}
                   </div>
-                  <div className="text-xs font-mono text-emerald-400 mt-2 flex items-center gap-1.5">
+                  <div className="text-xs font-mono text-emerald-400 mt-2 flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>SGBAU Scaled Performance</span>
+                    <span>SGBAU Scaled Performance Standard</span>
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  {education.cgpaNote} — consistently maintained while building production-ready projects and participating in technical exhibitions.
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  {education.cgpaNote} &mdash; maintained with rigor while building production-deployed full-stack systems and participating in technical hackathons.
                 </p>
               </div>
 
               {/* Highlights List */}
-              <div className="pt-6 border-t border-slate-800/80 space-y-2">
+              <div className="pt-6 border-t border-slate-800/80 space-y-2.5">
                 {education.highlights.map((highlight, idx) => (
-                  <div key={idx} className="flex items-start gap-2 text-xs text-slate-300">
+                  <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
                     <div className="w-1.5 h-1.5 rounded-full bg-cobalt-400 mt-1.5 shrink-0" />
                     <span>{highlight}</span>
                   </div>
@@ -156,4 +160,3 @@ export const EducationSection: React.FC = () => {
     </section>
   );
 };
-

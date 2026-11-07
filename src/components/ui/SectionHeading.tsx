@@ -7,6 +7,7 @@ interface SectionHeadingProps {
   title: string;
   highlight?: string;
   description?: string;
+  coordinateTag?: string;
   align?: 'left' | 'center';
   className?: string;
 }
@@ -17,48 +18,59 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   title,
   highlight,
   description,
+  coordinateTag,
   align = 'left',
   className,
 }) => {
   return (
     <div
       className={cn(
-        'mb-12 md:mb-16',
-        align === 'center' ? 'text-center mx-auto max-w-3xl' : 'max-w-2xl',
+        'mb-14 md:mb-20 relative',
+        align === 'center' ? 'text-center mx-auto max-w-3xl' : 'max-w-3xl',
         className
       )}
     >
-      {/* Eyebrow & Index tag */}
+      {/* Top Meta Line: Index, Eyebrow & Coordinate */}
       <div
         className={cn(
-          'flex items-center gap-3 font-mono text-xs md:text-sm tracking-wider uppercase mb-3 text-cobalt-400',
-          align === 'center' && 'justify-center'
+          'flex flex-wrap items-center gap-3 font-mono text-[11px] md:text-xs tracking-wider uppercase mb-3 text-cobalt-400',
+          align === 'center' ? 'justify-center' : 'justify-start'
         )}
       >
         {number && (
           <span className="text-slate-500 font-semibold">{number}</span>
         )}
         <span className="inline-block w-6 h-[1px] bg-cobalt-500/50" />
-        <span className="font-medium tracking-widest">{eyebrow}</span>
+        <span className="font-semibold tracking-widest text-slate-300">{eyebrow}</span>
+        {coordinateTag && (
+          <>
+            <span className="text-slate-600 hidden sm:inline">•</span>
+            <span className="text-slate-500 hidden sm:inline text-[10px]">
+              {coordinateTag}
+            </span>
+          </>
+        )}
       </div>
 
-      {/* Main Title */}
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-slate-50 tracking-tight leading-[1.15]">
+      {/* Main Editorial Headline */}
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-slate-50 tracking-[-0.03em] leading-[1.08]">
         {title}{' '}
         {highlight && (
-          <span className="bg-gradient-to-r from-cobalt-400 via-cyber-cyan to-cobalt-300 bg-clip-text text-transparent">
+          <span className="italic font-display bg-gradient-to-r from-cobalt-300 via-cyber-cyan to-cobalt-400 bg-clip-text text-transparent font-normal">
             {highlight}
           </span>
         )}
       </h2>
 
-      {/* Description */}
+      {/* Editorial Hairline Rule */}
+      <div className={cn('h-[1px] w-20 bg-gradient-to-r from-cobalt-500/60 to-transparent mt-4 mb-3', align === 'center' && 'mx-auto')} />
+
+      {/* Supporting Narrative Description */}
       {description && (
-        <p className="mt-4 text-base md:text-lg text-slate-400 font-normal leading-relaxed">
+        <p className="text-sm sm:text-base md:text-lg text-slate-400 font-normal leading-relaxed max-w-2xl">
           {description}
         </p>
       )}
     </div>
   );
 };
-

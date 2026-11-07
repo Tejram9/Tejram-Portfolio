@@ -56,12 +56,13 @@ export const ProjectsSection: React.FC = () => {
           </div>
         </div>
 
-        {/* 2x2 Grid of Major Projects */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-          {projectsData.map((project) => (
+        {/* 2x2 Editorial Grid of Major Projects */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+          {projectsData.map((project, idx) => (
             <ProjectCard
               key={project.id}
               project={project}
+              index={idx}
               onOpenModal={handleOpenModal}
             />
           ))}

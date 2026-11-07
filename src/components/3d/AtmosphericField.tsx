@@ -71,3 +71,4 @@ export const AtmosphericField: React.FC<AtmosphericFieldProps> = ({ count = 90 }
     </points>
   );
 };
+

@@ -22,30 +22,30 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    'relative inline-flex items-center justify-center font-medium transition-all duration-200 select-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-cobalt-500/50 focus:ring-offset-2 focus:ring-offset-space-950 disabled:opacity-50 disabled:pointer-events-none rounded-xl active:scale-[0.98]';
+    'relative inline-flex items-center justify-center font-medium transition-all duration-200 select-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-cobalt-400 focus:ring-offset-2 focus:ring-offset-space-950 disabled:opacity-50 disabled:pointer-events-none rounded-xl active:scale-[0.98] overflow-hidden';
 
   const variantStyles = {
     primary:
-      'bg-gradient-to-r from-cobalt-600 via-cobalt-500 to-cyber-cyan text-white shadow-[0_0_20px_rgba(37,99,235,0.35)] hover:shadow-[0_0_28px_rgba(56,189,248,0.45)] hover:brightness-110 border border-cobalt-400/30',
+      'bg-gradient-to-r from-cobalt-600 via-cobalt-500 to-cobalt-600 text-white shadow-[0_0_24px_rgba(37,99,235,0.35)] hover:shadow-[0_0_32px_rgba(56,189,248,0.45)] hover:brightness-110 border border-cobalt-400/40',
     secondary:
-      'bg-space-800/80 hover:bg-space-750 text-slate-100 border border-slate-700/60 hover:border-cobalt-500/50 backdrop-blur-md shadow-sm',
+      'bg-space-850/90 hover:bg-space-800 text-slate-100 border border-slate-700/80 hover:border-cobalt-500/50 backdrop-blur-md shadow-sm',
     outline:
-      'bg-transparent hover:bg-cobalt-950/40 text-cobalt-300 hover:text-white border border-cobalt-500/40 hover:border-cobalt-400',
+      'bg-transparent hover:bg-cobalt-950/40 text-cobalt-300 hover:text-white border border-cobalt-500/50 hover:border-cobalt-400',
     ghost:
-      'bg-transparent hover:bg-space-800/60 text-slate-300 hover:text-white border border-transparent',
+      'bg-transparent hover:bg-space-850/70 text-slate-300 hover:text-white border border-transparent',
   };
 
   const sizeStyles = {
-    sm: 'text-xs md:text-sm px-3.5 py-1.5 gap-2',
-    md: 'text-sm md:text-base px-5 py-2.5 gap-2.5',
-    lg: 'text-base md:text-lg px-7 py-3.5 gap-3 font-semibold',
+    sm: 'text-xs px-3.5 py-1.5 gap-2',
+    md: 'text-xs md:text-sm px-5 py-2.5 gap-2.5',
+    lg: 'text-sm md:text-base px-6 py-3.5 gap-3 font-semibold',
   };
 
   const content = (
     <>
-      {icon && <span className="transition-transform duration-200 group-hover:scale-110">{icon}</span>}
-      <span>{children}</span>
-      {iconRight && <span className="transition-transform duration-200 group-hover:translate-x-0.5">{iconRight}</span>}
+      {icon && <span className="transition-transform duration-200 group-hover:scale-110 shrink-0">{icon}</span>}
+      <span className="tracking-wide">{children}</span>
+      {iconRight && <span className="transition-transform duration-200 group-hover:translate-x-1 shrink-0">{iconRight}</span>}
     </>
   );
 
@@ -71,4 +71,3 @@ export const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
-

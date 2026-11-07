@@ -64,7 +64,10 @@ export const SkillsSection: React.FC = () => {
       : skillsData.filter((s) => s.category === activeCategory);
 
   return (
-    <section id="skills" className="py-24 relative overflow-hidden bg-space-900/60">
+    <section id="skills" className="py-28 relative overflow-hidden bg-space-950/60 hairline-border-t">
+      {/* Background radial glow */}
+      <div className="absolute top-1/2 left-1/4 w-[500px] h-[350px] bg-cobalt-600/06 rounded-full blur-[150px] pointer-events-none" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
           number="03 //"
@@ -72,10 +75,11 @@ export const SkillsSection: React.FC = () => {
           title="Skills &"
           highlight="Technologies."
           description="A curated toolkit organized by practical application. Differentiating project-tested technologies from emerging areas of continuous learning."
+          coordinateTag="STACK // 2026_TOOLKIT"
         />
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-slate-800/80">
+        <div className="flex flex-wrap items-center gap-2 mb-12 pb-4 border-b border-slate-800/80">
           {skillsCategories.map((cat) => {
             const isActive = activeCategory === cat.id;
             return (
@@ -85,10 +89,10 @@ export const SkillsSection: React.FC = () => {
                   setActiveCategory(cat.id);
                   setSelectedSkill(null);
                 }}
-                className={`px-4 py-2 rounded-xl text-xs font-mono tracking-wider transition-all duration-200 focus:outline-none ${
+                className={`px-4 py-2 rounded-xl text-xs font-mono tracking-wider transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-cobalt-400 ${
                   isActive
-                    ? 'bg-cobalt-600 text-white font-semibold shadow-[0_0_15px_rgba(37,99,235,0.35)]'
-                    : 'bg-space-850 hover:bg-space-800 text-slate-400 hover:text-slate-200 border border-slate-800'
+                    ? 'bg-cobalt-600 text-white font-semibold shadow-[0_0_18px_rgba(37,99,235,0.35)]'
+                    : 'bg-space-900 hover:bg-space-850 text-slate-400 hover:text-slate-200 border border-slate-800'
                 }`}
               >
                 {cat.label}
@@ -98,7 +102,7 @@ export const SkillsSection: React.FC = () => {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
           {filteredSkills.map((skill) => {
             const isSelected = selectedSkill?.name === skill.name;
             return (
@@ -115,15 +119,15 @@ export const SkillsSection: React.FC = () => {
                     setSelectedSkill(isSelected ? null : skill);
                   }
                 }}
-                className={`p-4 rounded-xl transition-all duration-200 cursor-pointer border flex flex-col justify-between focus:outline-none focus:ring-2 focus:ring-cobalt-400 ${
+                className={`p-5 rounded-2xl transition-all duration-200 cursor-pointer border flex flex-col justify-between focus:outline-none focus:ring-2 focus:ring-cobalt-400 ${
                   isSelected
-                    ? 'bg-space-800 border-cobalt-500 shadow-[0_0_20px_rgba(37,99,235,0.25)]'
-                    : 'bg-space-850/80 border-slate-800/80 hover:border-slate-700 hover:bg-space-800/50'
+                    ? 'bg-space-850 border-cobalt-500 shadow-[0_0_24px_rgba(37,99,235,0.28)]'
+                    : 'glass-card hover:bg-space-850/80'
                 }`}
               >
                 <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="p-2.5 rounded-lg bg-space-900 border border-slate-700/60 text-cobalt-400 group-hover:text-cyber-cyan transition-colors">
+                  <div className="flex items-center justify-between mb-3.5">
+                    <div className="p-2.5 rounded-xl bg-space-900 border border-slate-700/60 text-cobalt-400 transition-colors">
                       {iconMap[skill.icon] || <Code2 className="w-5 h-5 text-cobalt-400" />}
                     </div>
 
@@ -143,7 +147,7 @@ export const SkillsSection: React.FC = () => {
 
                 {/* Used In Project Chips */}
                 {skill.usedInProjects && skill.usedInProjects.length > 0 && (
-                  <div className="pt-3 mt-3 border-t border-slate-800/80 flex flex-wrap gap-1">
+                  <div className="pt-3 mt-4 border-t border-slate-800/80 flex flex-wrap gap-1">
                     {skill.usedInProjects.map((proj) => (
                       <span
                         key={proj}
@@ -161,22 +165,22 @@ export const SkillsSection: React.FC = () => {
 
         {/* Selected Skill Detail Banner */}
         {selectedSkill && (
-          <div className="mt-8 p-6 rounded-2xl bg-space-850 border border-cobalt-500/40 shadow-xl animate-in fade-in duration-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="mt-8 p-6 rounded-2xl bg-space-900 border border-cobalt-500/50 shadow-2xl animate-in fade-in duration-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-mono uppercase text-cobalt-400 font-semibold">
                   Selected Specification
                 </span>
                 <span className="text-slate-500">•</span>
-                <span className="text-xs font-mono text-slate-300">{selectedSkill.name}</span>
+                <span className="text-xs font-mono text-slate-200 font-bold">{selectedSkill.name}</span>
               </div>
-              <p className="text-sm text-slate-200 max-w-3xl">
+              <p className="text-xs sm:text-sm text-slate-200 max-w-3xl leading-relaxed">
                 {selectedSkill.description}
               </p>
             </div>
 
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-xs font-mono px-3 py-1.5 rounded-lg bg-cobalt-950 border border-cobalt-800 text-cobalt-300">
+              <span className="text-xs font-mono px-3 py-1.5 rounded-lg bg-cobalt-950 border border-cobalt-800 text-cobalt-300 font-semibold">
                 {selectedSkill.status}
               </span>
               <button

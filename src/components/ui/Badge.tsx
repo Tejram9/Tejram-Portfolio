@@ -3,7 +3,7 @@ import { cn } from '../../lib/utils';
 
 interface BadgeProps {
   children: React.ReactNode;
-  variant?: 'cobalt' | 'cyan' | 'emerald' | 'violet' | 'amber' | 'slate';
+  variant?: 'purple' | 'cyan' | 'orange' | 'emerald' | 'violet' | 'amber' | 'cobalt' | 'slate';
   size?: 'sm' | 'md';
   className?: string;
   icon?: React.ReactNode;
@@ -12,32 +12,36 @@ interface BadgeProps {
 
 export const Badge: React.FC<BadgeProps> = ({
   children,
-  variant = 'amber',
+  variant = 'purple',
   size = 'md',
   className,
   icon,
   dot = false,
 }) => {
   const variantStyles = {
-    cobalt: 'bg-amber-950/70 text-amber-300 border-amber-800/60 shadow-[0_0_12px_rgba(245,158,11,0.18)]',
-    cyan: 'bg-amber-950/80 text-amber-200 border-amber-700/60 shadow-[0_0_12px_rgba(251,191,36,0.18)]',
-    emerald: 'bg-emerald-950/60 text-emerald-300 border-emerald-800/50 shadow-[0_0_12px_rgba(16,185,129,0.15)]',
-    violet: 'bg-violet-950/60 text-violet-300 border-violet-800/50 shadow-[0_0_12px_rgba(139,92,246,0.15)]',
-    amber: 'bg-amber-950/80 text-amber-300 border-amber-700/70 shadow-[0_0_14px_rgba(245,158,11,0.22)]',
+    purple: 'bg-purple-950/70 text-purple-200 border-purple-700/60 shadow-[0_0_14px_rgba(168,85,247,0.3)]',
+    violet: 'bg-purple-950/70 text-purple-200 border-purple-700/60 shadow-[0_0_14px_rgba(168,85,247,0.3)]',
+    cyan: 'bg-sky-950/70 text-sky-200 border-sky-600/50 shadow-[0_0_14px_rgba(56,189,248,0.25)]',
+    cobalt: 'bg-purple-950/70 text-purple-200 border-purple-700/60 shadow-[0_0_14px_rgba(168,85,247,0.3)]',
+    orange: 'bg-orange-950/70 text-orange-200 border-orange-600/60 shadow-[0_0_14px_rgba(249,115,22,0.3)]',
+    amber: 'bg-orange-950/70 text-orange-200 border-orange-600/60 shadow-[0_0_14px_rgba(249,115,22,0.3)]',
+    emerald: 'bg-emerald-950/60 text-emerald-300 border-emerald-700/50 shadow-[0_0_12px_rgba(16,185,129,0.2)]',
     slate: 'bg-space-850/90 text-slate-300 border-slate-700/60',
   };
 
   const sizeStyles = {
     sm: 'text-xs px-2.5 py-0.5 gap-1.5',
-    md: 'text-xs md:text-sm px-3 py-1 gap-2',
+    md: 'text-xs md:text-sm px-3.5 py-1 gap-2',
   };
 
   const dotColors = {
-    cobalt: 'bg-amber-400',
-    cyan: 'bg-amber-300',
+    purple: 'bg-purple-400',
+    violet: 'bg-purple-400',
+    cyan: 'bg-sky-400',
+    cobalt: 'bg-purple-400',
+    orange: 'bg-orange-400',
+    amber: 'bg-orange-400',
     emerald: 'bg-emerald-400',
-    violet: 'bg-violet-400',
-    amber: 'bg-amber-400',
     slate: 'bg-slate-400',
   };
 

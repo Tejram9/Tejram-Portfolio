@@ -49,7 +49,7 @@ export const CrystallineCore: React.FC<CrystallineCoreProps> = ({
 
     if (coreLightRef.current) {
       // Subtle breathing pulse on the core light
-      coreLightRef.current.intensity = 1.4 + Math.sin(t * 2.5) * 0.4;
+      coreLightRef.current.intensity = 1.6 + Math.sin(t * 2.8) * 0.45;
     }
   });
 
@@ -57,60 +57,61 @@ export const CrystallineCore: React.FC<CrystallineCoreProps> = ({
 
   return (
     <group>
-      {/* Dynamic Point Light from inside the core - Luminous Solar Amber */}
+      {/* Dynamic Point Light from inside the core - Vibrant Electric Purple */}
       <pointLight
         ref={coreLightRef}
         position={[0, 0, 0]}
-        color="#fbbf24"
-        distance={4.5}
-        intensity={1.8}
+        color="#a855f7"
+        distance={5.0}
+        intensity={2.0}
       />
 
       <Float speed={autoRotate ? 2.2 : 0} rotationIntensity={0.4} floatIntensity={0.6}>
-        {/* Core Amber Glass Prism (Icosahedron) */}
+        {/* Core Electric Purple Glass Prism (Icosahedron) */}
         <mesh ref={coreRef}>
           <icosahedronGeometry args={[coreSize, 1]} />
           <meshPhysicalMaterial
-            color="#f59e0b"
-            emissive="#b45309"
-            emissiveIntensity={0.5}
-            roughness={0.12}
-            metalness={0.25}
-            transmission={wireframeMode ? 0.1 : 0.82}
-            thickness={1.4}
-            ior={1.48}
+            color="#9333ea"
+            emissive="#581c87"
+            emissiveIntensity={0.65}
+            roughness={0.1}
+            metalness={0.2}
+            transmission={wireframeMode ? 0.1 : 0.84}
+            thickness={1.5}
+            ior={1.55}
             specularIntensity={1.0}
-            specularColor="#fef08a"
+            specularColor="#38bdf8"
             transparent
-            opacity={wireframeMode ? 0.2 : 0.9}
+            opacity={wireframeMode ? 0.25 : 0.92}
             wireframe={wireframeMode}
           />
         </mesh>
 
-        {/* Outer Precision Engineering Framework (Geometric Brass/Gold Cage) */}
+        {/* Outer Precision Engineering Framework (Geometric Electric Cyan Cage) */}
         <mesh ref={outerCageRef}>
           <icosahedronGeometry args={[coreSize * 1.15, 1]} />
           <meshStandardMaterial
-            color="#fcd34d"
-            emissive="#d97706"
-            emissiveIntensity={0.35}
-            roughness={0.25}
-            metalness={0.88}
+            color="#38bdf8"
+            emissive="#0369a1"
+            emissiveIntensity={0.45}
+            roughness={0.2}
+            metalness={0.9}
             wireframe
             transparent
-            opacity={wireframeMode ? 0.95 : 0.55}
+            opacity={0.85}
           />
         </mesh>
 
-        {/* Inner Crystalline Spark / Brilliant Solar Octahedron Core */}
+        {/* Inner Glowing Nuclear Lattice - Selective Solar Orange */}
         <mesh ref={innerOctaRef}>
           <octahedronGeometry args={[coreSize * 0.45, 0]} />
           <meshStandardMaterial
-            color="#fef08a"
-            emissive="#fbbf24"
-            emissiveIntensity={1.9}
-            roughness={0.1}
-            metalness={0.92}
+            color="#f97316"
+            emissive="#ea580c"
+            emissiveIntensity={1.2}
+            roughness={0.2}
+            metalness={0.6}
+            wireframe={wireframeMode}
           />
         </mesh>
       </Float>

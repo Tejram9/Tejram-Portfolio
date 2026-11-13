@@ -6,7 +6,7 @@ import { currentlyLearningData } from '../../data/skills';
 
 export const LearningSection: React.FC = () => {
   return (
-    <section id="learning" className="py-28 relative overflow-hidden bg-space-950/70 hairline-border-t">
+    <section id="learning" className="py-28 relative overflow-hidden bg-space-950 hairline-border-t">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
           number="07 //"
@@ -28,20 +28,20 @@ export const LearningSection: React.FC = () => {
               <Card
                 className="p-6 md:p-7 flex flex-col justify-between h-full"
                 hoverEffect
-                glow="cobalt"
+                glow="purple"
                 tacticalBorder
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-mono text-slate-500 font-bold">
+                    <span className="text-xs font-mono text-purple-400 font-bold">
                       {`HORIZON 0${idx + 1}`}
                     </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cobalt-950/80 border border-cobalt-800/60 text-cobalt-300 font-medium">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950/80 border border-purple-800/60 text-purple-300 font-medium">
                       {item.stage}
                     </span>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-display font-bold text-slate-100 mb-2">
+                  <h3 className="text-base sm:text-lg font-display font-bold text-white mb-2">
                     {item.title}
                   </h3>
 
@@ -50,11 +50,11 @@ export const LearningSection: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="pt-4 mt-5 border-t border-slate-800/80 flex flex-wrap gap-1.5">
+                <div className="pt-4 mt-5 border-t border-space-750 flex flex-wrap gap-1.5">
                   {item.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-900 text-slate-300 border border-slate-700/60"
+                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-900 text-purple-300 border border-purple-900/40"
                     >
                       #{tag}
                     </span>

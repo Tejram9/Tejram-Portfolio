@@ -62,7 +62,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Navigation',
         title: 'Home // Top',
         subtitle: 'Hero introduction & 3D kinetic core',
-        icon: <Compass className="w-4 h-4 text-amber-400" />,
+        icon: <Compass className="w-4 h-4 text-purple-400" />,
         action: () => {
           scrollToSection('hero');
           onClose();
@@ -73,7 +73,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Navigation',
         title: 'Beyond the Code // Philosophy',
         subtitle: 'Student identity & strategic systems thinking',
-        icon: <Sparkles className="w-4 h-4 text-amber-400" />,
+        icon: <Sparkles className="w-4 h-4 text-purple-400" />,
         action: () => {
           scrollToSection('about');
           onClose();
@@ -84,7 +84,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Navigation',
         title: 'Education // SSGMCE Profile',
         subtitle: 'SGBAU Computer Science Engineering (8.63 CGPA)',
-        icon: <GraduationCap className="w-4 h-4 text-amber-400" />,
+        icon: <GraduationCap className="w-4 h-4 text-electric-400" />,
         action: () => {
           scrollToSection('education');
           onClose();
@@ -95,7 +95,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Navigation',
         title: 'Tech Stack & Skills',
         subtitle: 'Java, Spring Boot, React, TypeScript, Databases',
-        icon: <Layers className="w-4 h-4 text-amber-400" />,
+        icon: <Layers className="w-4 h-4 text-purple-400" />,
         action: () => {
           scrollToSection('skills');
           onClose();
@@ -117,7 +117,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Navigation',
         title: 'Development Journey',
         subtitle: 'Milestones timeline from SSGMCE to present',
-        icon: <Code2 className="w-4 h-4 text-amber-400" />,
+        icon: <Code2 className="w-4 h-4 text-purple-400" />,
         action: () => {
           scrollToSection('journey');
           onClose();
@@ -128,7 +128,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Navigation',
         title: 'Achievements & Community',
         subtitle: 'Hackathon 4th place & Navonmesh expo',
-        icon: <Trophy className="w-4 h-4 text-amber-400" />,
+        icon: <Trophy className="w-4 h-4 text-accent-orange" />,
         action: () => {
           scrollToSection('achievements');
           onClose();
@@ -139,7 +139,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Navigation',
         title: 'Contact & Collaboration',
         subtitle: 'Direct email dispatch and message form',
-        icon: <Mail className="w-4 h-4 text-rose-400" />,
+        icon: <Mail className="w-4 h-4 text-electric-400" />,
         action: () => {
           scrollToSection('contact');
           onClose();
@@ -152,7 +152,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       category: 'Projects',
       title: p.title,
       subtitle: `${p.tagline} • ${p.technologies.slice(0, 3).join(', ')}`,
-      icon: <FolderGit2 className="w-4 h-4 text-amber-400" />,
+      icon: <FolderGit2 className="w-4 h-4 text-purple-400" />,
       action: () => {
         scrollToSection('projects');
         setTimeout(() => {
@@ -248,7 +248,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-space-950/80 backdrop-blur-md"
+            className="fixed inset-0 bg-space-950/85 backdrop-blur-md"
           />
 
           {/* Palette Box */}
@@ -257,11 +257,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
-            className="relative w-full max-w-xl rounded-2xl bg-space-900 border border-slate-700/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] overflow-hidden z-10"
+            className="relative w-full max-w-xl rounded-2xl bg-space-900 border border-space-750 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] overflow-hidden z-10"
           >
             {/* Search Input Bar */}
-            <div className="flex items-center gap-3 px-4 py-3.5 border-b border-slate-800 bg-space-850/70">
-              <Search className="w-5 h-5 text-amber-400 shrink-0" />
+            <div className="flex items-center gap-3 px-4 py-3.5 border-b border-space-750 bg-space-850/80">
+              <Search className="w-5 h-5 text-purple-400 shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
@@ -281,7 +281,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   <X className="w-4 h-4" />
                 </button>
               )}
-              <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono text-slate-400 bg-space-800 border border-slate-700 rounded">
+              <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono text-purple-300 bg-space-800 border border-space-750 rounded">
                 ESC
               </kbd>
             </div>
@@ -302,16 +302,16 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                       onMouseEnter={() => setSelectedIndex(idx)}
                       className={`flex items-center justify-between p-3 rounded-xl cursor-pointer transition-colors ${
                         isSelected
-                          ? 'bg-amber-500/20 border border-amber-400/40 text-slate-100'
-                          : 'hover:bg-space-800/60 text-slate-300 border border-transparent'
+                          ? 'bg-purple-600/20 border border-purple-500/40 text-slate-100'
+                          : 'hover:bg-space-850/60 text-slate-300 border border-transparent'
                       }`}
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <div
                           className={`p-2 rounded-lg shrink-0 ${
                             isSelected
-                              ? 'bg-amber-950 text-amber-300 border border-amber-800'
-                              : 'bg-space-850 text-slate-400 border border-slate-800'
+                              ? 'bg-purple-950 text-purple-300 border border-purple-800'
+                              : 'bg-space-850 text-slate-400 border border-space-750'
                           }`}
                         >
                           {item.icon}
@@ -319,7 +319,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                         <div className="min-w-0">
                           <div className="text-sm font-medium truncate flex items-center gap-2">
                             <span>{item.title}</span>
-                            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-space-800 text-slate-400">
+                            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-space-800 text-purple-300 border border-purple-900/40">
                               {item.category}
                             </span>
                           </div>
@@ -341,25 +341,25 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             </div>
 
             {/* Footer with Keyboard Hints */}
-            <div className="px-4 py-2.5 bg-space-950/80 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+            <div className="px-4 py-2.5 bg-space-950/80 border-t border-space-750 flex items-center justify-between text-[11px] font-mono text-slate-400">
               <div className="flex items-center gap-3">
                 <span className="flex items-center gap-1">
-                  <kbd className="px-1 py-0.5 bg-space-850 border border-slate-700 rounded text-[10px]">
+                  <kbd className="px-1 py-0.5 bg-space-850 border border-space-750 rounded text-[10px]">
                     &uarr;
                   </kbd>
-                  <kbd className="px-1 py-0.5 bg-space-850 border border-slate-700 rounded text-[10px]">
+                  <kbd className="px-1 py-0.5 bg-space-850 border border-space-750 rounded text-[10px]">
                     &darr;
                   </kbd>{' '}
                   Navigate
                 </span>
                 <span className="flex items-center gap-1">
-                  <kbd className="px-1.5 py-0.5 bg-space-850 border border-slate-700 rounded text-[10px]">
+                  <kbd className="px-1.5 py-0.5 bg-space-850 border border-space-750 rounded text-[10px]">
                     &crarr;
                   </kbd>{' '}
                   Select
                 </span>
               </div>
-              <span className="text-amber-400 font-semibold">Tejram Dudhapachare // SSGMCE</span>
+              <span className="text-purple-400 font-semibold">TEJRAM // SSGMCE 2027</span>
             </div>
           </motion.div>
         </div>

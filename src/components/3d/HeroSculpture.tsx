@@ -64,10 +64,10 @@ function SceneCoordinator({ isMobile, wireframeMode, autoRotate }: SceneContaine
       {/* 4. Atmospheric Cosmic Particle Field */}
       <AtmosphericField count={isMobile ? 55 : 100} />
 
-      {/* Tactical Floor Horizon Ring */}
+      {/* Tactical Floor Horizon Ring in Electric Purple / Cyan */}
       <mesh position={[0, isMobile ? -2.3 : -2.6, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[1.0, 1.025, 48]} />
-        <meshBasicMaterial color="#fbbf24" transparent opacity={0.3} />
+        <meshBasicMaterial color="#a855f7" transparent opacity={0.35} />
       </mesh>
     </group>
   );
@@ -97,20 +97,20 @@ export const HeroSculpture: React.FC<HeroSculptureProps> = ({
         }}
       >
         <Suspense fallback={null}>
-          {/* Studio Lighting Setup for High-Contrast Editorial Amber & Gold Brass */}
-          <ambientLight intensity={0.65} color="#1c1917" />
+          {/* Studio Lighting Setup for High-Contrast Creative Studio Aesthetics */}
+          <ambientLight intensity={0.55} color="#0c0d18" />
           
-          {/* Solar Gold Key Light */}
-          <directionalLight position={[6, 7, 5]} intensity={1.7} color="#fbbf24" />
+          {/* Vibrant Purple Key Light */}
+          <directionalLight position={[6, 7, 5]} intensity={1.9} color="#c084fc" />
           
-          {/* Champagne Rim Fill */}
-          <directionalLight position={[-6, -4, -4]} intensity={1.4} color="#fde68a" />
+          {/* Electric Cyan Rim Fill */}
+          <directionalLight position={[-6, -4, -4]} intensity={1.6} color="#38bdf8" />
           
-          {/* Warm Bronze Depth Backlight */}
-          <pointLight position={[0, -3, -3.5]} intensity={1.9} color="#d97706" distance={9} />
+          {/* Selective Solar Orange Depth Backlight */}
+          <pointLight position={[0, -3, -3.5]} intensity={2.2} color="#f97316" distance={9} />
           
-          {/* Diamond Champagne Specular Accent for Visual Glint */}
-          <pointLight position={[3, -2, 3]} intensity={1.0} color="#fffbeb" distance={6} />
+          {/* White Specular Accent for Visual Glint */}
+          <pointLight position={[3, -2, 3]} intensity={1.0} color="#ffffff" distance={6} />
 
           {/* Master 3D Kinetic System */}
           <SceneCoordinator

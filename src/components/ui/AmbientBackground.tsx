@@ -40,19 +40,19 @@ export const AmbientBackground: React.FC = () => {
   if (isMobile || prefersReducedMotion) {
     return (
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-        <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] bg-amber-600/[0.03] rounded-full blur-[160px]" />
+        <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] bg-purple-600/[0.04] rounded-full blur-[160px]" />
       </div>
     );
   }
 
   return (
     <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden" aria-hidden="true">
-      {/* Interactive Cursor Spotlight Glow - Luxury Warm Amber Sheen */}
+      {/* Interactive Cursor Spotlight Glow - Vibrant Purple & Electric Blue */}
       <div
         ref={spotlightRef}
         className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full opacity-40 blur-[140px]"
         style={{
-          background: 'radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, rgba(251, 191, 36, 0.02) 45%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, rgba(56, 189, 248, 0.05) 45%, transparent 70%)',
           willChange: 'transform',
         }}
       />

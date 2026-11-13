@@ -17,15 +17,19 @@ import {
 
 export const AboutSection: React.FC = () => {
   const iconMap: Record<string, React.ReactNode> = {
-    Layers: <Layers className="w-5 h-5 text-amber-400" />,
-    Compass: <Compass className="w-5 h-5 text-amber-300" />,
-    GitBranch: <GitBranch className="w-5 h-5 text-amber-500" />,
+    Layers: <Layers className="w-5 h-5 text-purple-400" />,
+    Compass: <Compass className="w-5 h-5 text-electric-400" />,
+    GitBranch: <GitBranch className="w-5 h-5 text-accent-orange" />,
   };
 
   return (
-    <section id="about" className="py-28 relative overflow-hidden bg-space-950/60 hairline-border-t">
+    <section id="about" className="py-28 relative overflow-hidden bg-space-950 hairline-border-t">
+      {/* Background Ambience Glow */}
+      <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-purple-600/08 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute bottom-1/3 left-1/5 w-[420px] h-[420px] bg-electric-500/06 rounded-full blur-[160px] pointer-events-none" />
+
       {/* Strategic grid background */}
-      <div className="absolute inset-0 bg-grid-architectural opacity-25 pointer-events-none" />
+      <div className="absolute inset-0 bg-grid-architectural opacity-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
@@ -37,15 +41,16 @@ export const AboutSection: React.FC = () => {
           coordinateTag="SSGMCE // CLASS_OF_2027"
         />
 
-        {/* Editorial Pull-Quote Callout */}
+        {/* Editorial Pull-Quote Callout with Purple Specular Framing */}
         <ScrollReveal direction="up" delay={0.05}>
-          <div className="mb-14 p-6 sm:p-8 rounded-2xl glass-studio border-l-4 border-amber-500 relative corner-crosshairs">
-            <Quote className="w-8 h-8 text-amber-500/30 absolute top-5 right-6" />
-            <p className="text-base sm:text-lg md:text-xl font-display font-medium text-slate-200 italic leading-relaxed max-w-4xl">
+          <div className="mb-14 p-6 sm:p-8 rounded-2xl glass-studio border-l-4 border-l-purple-500 relative corner-crosshairs shadow-xl">
+            <Quote className="w-8 h-8 text-purple-500/30 absolute top-5 right-6" />
+            <p className="text-base sm:text-lg md:text-xl font-display font-medium text-slate-100 italic leading-relaxed max-w-4xl">
               &quot;Software development is an interplay of strategy, clean data models, resilient APIs, and purposeful user experiences — much like a game of chess where every architectural move sets the stage for future growth.&quot;
             </p>
-            <div className="mt-3 text-xs font-mono text-amber-400 uppercase tracking-widest font-semibold">
-              &mdash; Tejram Kisan Dudhapachare • Second-Year CSE Student @ SSGMCE
+            <div className="mt-3 text-xs font-mono text-purple-300 uppercase tracking-widest font-semibold flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-electric-400" />
+              <span>Tejram Kisan Dudhapachare &bull; Second-Year CSE Student @ SSGMCE (SGBAU)</span>
             </div>
           </div>
         </ScrollReveal>
@@ -55,8 +60,8 @@ export const AboutSection: React.FC = () => {
           <div className="lg:col-span-7 space-y-6">
             <ScrollReveal direction="right" delay={0.1}>
             <Card className="p-7 md:p-9" tacticalBorder>
-              <div className="flex items-center gap-2 text-xs font-mono text-amber-400 uppercase tracking-widest mb-4">
-                <Terminal className="w-4 h-4" />
+              <div className="flex items-center gap-2 text-xs font-mono text-purple-400 uppercase tracking-widest mb-4 font-semibold">
+                <Terminal className="w-4 h-4 text-electric-400" />
                 <span>Engineering Mindset // SSGMCE Class of 2027</span>
               </div>
 
@@ -67,7 +72,7 @@ export const AboutSection: React.FC = () => {
               </div>
 
               {/* Core Tenets Checklist */}
-              <div className="mt-8 pt-6 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="mt-8 pt-6 border-t border-space-750 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
                   'Learning by building real, production-ready platforms',
                   'Enterprise Java & Spring Boot backend enthusiasm',
@@ -77,7 +82,7 @@ export const AboutSection: React.FC = () => {
                   'Collaborative team execution (TrackX & hackathons)',
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-2.5 text-xs text-slate-300">
-                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -85,14 +90,14 @@ export const AboutSection: React.FC = () => {
             </Card>
 
             {/* Strategic Chess & Systems Motif Callout */}
-            <div className="p-5 rounded-2xl bg-space-900/80 border border-slate-800/80 flex items-start gap-4">
-              <div className="p-2.5 rounded-xl bg-amber-950/60 border border-amber-800/60 text-amber-300 shrink-0 mt-0.5">
-                <Cpu className="w-5 h-5" />
+            <div className="p-5 rounded-2xl bg-space-900/90 border border-space-750 flex items-start gap-4">
+              <div className="p-2.5 rounded-xl bg-purple-950/80 border border-purple-800/60 text-purple-300 shrink-0 mt-0.5">
+                <Cpu className="w-5 h-5 text-electric-400" />
               </div>
               <div className="space-y-1">
                 <h4 className="text-sm font-display font-semibold text-slate-100 flex items-center gap-2">
                   <span>The Strategic Interplay</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-850 text-slate-400">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-850 text-purple-300 border border-purple-900/50">
                     Tactical Paradigm
                   </span>
                 </h4>
@@ -109,7 +114,7 @@ export const AboutSection: React.FC = () => {
             <ScrollReveal direction="left" delay={0.15}>
             <h3 className="text-xs font-mono uppercase tracking-widest text-slate-400 mb-2 font-semibold flex items-center justify-between">
               <span>Foundational Principles</span>
-              <span className="text-[10px] text-amber-400 font-mono">[03_PILLARS]</span>
+              <span className="text-[10px] text-purple-400 font-mono">[03_PILLARS]</span>
             </h3>
 
             <div className="space-y-4">
@@ -117,16 +122,16 @@ export const AboutSection: React.FC = () => {
                 <Card
                   key={pillar.title}
                   hoverEffect
-                  glow="cobalt"
+                  glow="purple"
                   className="p-6 transition-all duration-300"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-space-900/90 border border-slate-700/60 shrink-0">
-                      {iconMap[pillar.icon] || <Sparkles className="w-5 h-5 text-amber-400" />}
+                    <div className="p-3 rounded-xl bg-space-900/90 border border-space-750 shrink-0">
+                      {iconMap[pillar.icon] || <Sparkles className="w-5 h-5 text-purple-400" />}
                     </div>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xs font-mono text-slate-500 font-bold">
+                        <span className="text-xs font-mono text-purple-400 font-bold">
                           {`0${idx + 1}`}
                         </span>
                         <h4 className="text-base font-display font-bold text-slate-100">
@@ -142,12 +147,13 @@ export const AboutSection: React.FC = () => {
               ))}
 
               {/* Quick Context Card */}
-              <div className="p-5 rounded-2xl bg-gradient-to-br from-amber-950/40 via-space-900 to-space-850 border border-amber-800/40 space-y-2">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 font-semibold block">
+              <div className="p-5 rounded-2xl bg-gradient-to-br from-purple-950/40 via-space-900 to-space-850 border border-purple-800/40 space-y-2">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-purple-300 font-semibold block flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-accent-orange animate-pulse" />
                   Current College Milestone
                 </span>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Currently engaged in 2nd-year curriculum at SSGMCE, Shegaon — pairing academic rigor in algorithms and DBMS with practical full-stack software prototyping.
+                  Currently engaged in 2nd-year curriculum at SSGMCE, Shegaon &mdash; pairing academic rigor in algorithms and DBMS with practical full-stack software prototyping.
                 </p>
               </div>
             </div>

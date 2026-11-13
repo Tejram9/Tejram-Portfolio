@@ -13,12 +13,18 @@
 
   body {
     @apply bg-space-950 text-slate-100 font-sans antialiased overflow-x-hidden;
-    background-color: #08090d;
+    background-color: #030305;
     background-image: 
-      radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.07) 0%, transparent 45%),
-      radial-gradient(circle at 100% 50%, rgba(251, 191, 36, 0.03) 0%, transparent 40%),
-      radial-gradient(circle at 0% 100%, rgba(217, 119, 6, 0.04) 0%, transparent 50%);
+      radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.09) 0%, transparent 45%),
+      radial-gradient(circle at 90% 25%, rgba(56, 189, 248, 0.05) 0%, transparent 35%),
+      radial-gradient(circle at 10% 60%, rgba(249, 115, 22, 0.04) 0%, transparent 40%),
+      radial-gradient(circle at 50% 100%, rgba(147, 51, 234, 0.06) 0%, transparent 50%);
     background-attachment: fixed;
+  }
+
+  ::selection {
+    background-color: rgba(168, 85, 247, 0.35);
+    color: #f5f3ff;
   }
 }
 
@@ -27,46 +33,46 @@
   width: 5px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #08090d;
+  background: #030305;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #1f242e;
+  background: #1b1c2b;
   border-radius: 4px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #f59e0b;
+  background: #a855f7;
 }
 
 /* Studio Editorial Utilities */
 .hairline-border {
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .hairline-border-b {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .hairline-border-t {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .glass-studio {
-  background: rgba(14, 17, 24, 0.75);
+  background: rgba(10, 11, 18, 0.72);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-}
-
-.glass-card {
-  background: linear-gradient(135deg, rgba(19, 22, 30, 0.88) 0%, rgba(13, 15, 20, 0.78) 100%);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.glass-card {
+  background: linear-gradient(135deg, rgba(14, 15, 25, 0.82) 0%, rgba(7, 8, 14, 0.88) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
 .glass-card:hover {
-  border-color: rgba(251, 191, 36, 0.35);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 25px rgba(245, 158, 11, 0.12);
+  border-color: rgba(168, 85, 247, 0.35);
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.85), 0 0 30px rgba(168, 85, 247, 0.15);
 }
 
 /* Editorial crosshair corner marks */
@@ -79,7 +85,7 @@
   position: absolute;
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
-  color: rgba(251, 191, 36, 0.45);
+  color: rgba(192, 132, 252, 0.45);
   line-height: 1;
   pointer-events: none;
 }
@@ -92,29 +98,21 @@
   right: 8px;
 }
 
-/* Subtle architectural dot grid */
+/* Architectural subtle grid */
 .bg-grid-architectural {
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
-  background-size: 24px 24px;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-size: 28px 28px;
 }
 
-/* Subtle amber dot grid */
-.bg-grid-amber {
-  background-image: radial-gradient(circle at 1px 1px, rgba(251, 191, 36, 0.07) 1px, transparent 0);
-  background-size: 24px 24px;
+/* Neon glow utility classes */
+.glow-purple {
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.35);
 }
 
-/* Accessibility: Prefers reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    animation-delay: -1ms !important;
-    animation-duration: 1ms !important;
-    animation-iteration-count: 1 !important;
-    background-attachment: initial !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0s !important;
-    transition-delay: 0s !important;
-  }
+.glow-electric {
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
+}
+
+.glow-orange {
+  box-shadow: 0 0 25px rgba(249, 115, 22, 0.3);
 }

@@ -13,11 +13,11 @@ export const AtmosphericField: React.FC<AtmosphericFieldProps> = ({ count = 90 }
     const pos = new Float32Array(count * 3);
     const col = new Float32Array(count * 3);
 
-    // Warm Solar Amber & Champagne Stardust Colors
-    const c1 = new THREE.Color('#fbbf24');
-    const c2 = new THREE.Color('#f59e0b');
-    const c3 = new THREE.Color('#fde68a');
-    const cWhite = new THREE.Color('#fffbeb');
+    // Vibrant Purple, Electric Blue & Solar Orange Stardust Colors
+    const c1 = new THREE.Color('#c084fc');
+    const c2 = new THREE.Color('#38bdf8');
+    const c3 = new THREE.Color('#f97316');
+    const cWhite = new THREE.Color('#f8fafc');
 
     for (let i = 0; i < count; i++) {
       const radius = 2.2 + Math.random() * 3.2;
@@ -29,7 +29,7 @@ export const AtmosphericField: React.FC<AtmosphericFieldProps> = ({ count = 90 }
       pos[i * 3 + 2] = radius * Math.cos(phi);
 
       const r = Math.random();
-      const chosen = r < 0.35 ? c1 : r < 0.65 ? c2 : r < 0.85 ? c3 : cWhite;
+      const chosen = r < 0.4 ? c1 : r < 0.75 ? c2 : r < 0.9 ? c3 : cWhite;
       col[i * 3] = chosen.r;
       col[i * 3 + 1] = chosen.g;
       col[i * 3 + 2] = chosen.b;
@@ -65,7 +65,7 @@ export const AtmosphericField: React.FC<AtmosphericFieldProps> = ({ count = 90 }
         size={0.045}
         vertexColors
         transparent
-        opacity={0.8}
+        opacity={0.85}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
       />

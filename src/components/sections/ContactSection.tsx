@@ -88,9 +88,10 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden bg-space-950">
+    <section id="contact" className="py-24 relative overflow-hidden bg-space-950 hairline-border-t">
       {/* Background radial glow */}
-      <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-cobalt-600/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute bottom-1/3 left-1/4 w-[450px] h-[450px] bg-electric-500/08 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
@@ -99,14 +100,15 @@ export const ContactSection: React.FC = () => {
           title="Have an idea?"
           highlight="Let's build something meaningful."
           description="Whether you're interested in collaborating on full-stack projects, discussing backend systems, or offering an internship opportunity, my inbox is open."
+          coordinateTag="DISPATCH // SHEGAON_MH"
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left Column: Direct Reachout, Quick Copy & Info */}
           <div className="lg:col-span-5 space-y-6">
             <ScrollReveal direction="right" delay={0.1}>
-            <Card className="p-7" tacticalBorder>
-              <h3 className="text-xl font-display font-bold text-slate-100 mb-2">
+            <Card className="p-7" glow="purple" tacticalBorder>
+              <h3 className="text-xl font-display font-bold text-white mb-2">
                 Let&apos;s Start a Conversation
               </h3>
               <p className="text-sm text-slate-300 leading-relaxed mb-6">
@@ -114,19 +116,19 @@ export const ContactSection: React.FC = () => {
               </p>
 
               {/* Email Copy Card */}
-              <div className="p-4 rounded-xl bg-space-900 border border-slate-800 space-y-2">
+              <div className="p-4 rounded-xl bg-space-900 border border-space-750 space-y-2">
                 <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 block">
                   Direct Email Address
                 </span>
 
                 <div className="flex items-center justify-between gap-3">
-                  <span className="text-sm font-mono text-cobalt-300 truncate">
+                  <span className="text-sm font-mono text-purple-300 truncate">
                     {profileData.socialLinks.email}
                   </span>
 
                   <button
                     onClick={handleCopyEmail}
-                    className="p-2 rounded-lg bg-space-800 hover:bg-space-750 text-slate-300 hover:text-white border border-slate-700/60 transition-all flex items-center gap-1.5 text-xs font-mono shrink-0 focus:outline-none focus:ring-2 focus:ring-cobalt-500"
+                    className="p-2 rounded-lg bg-space-800 hover:bg-space-750 text-slate-300 hover:text-white border border-space-750 transition-all flex items-center gap-1.5 text-xs font-mono shrink-0 focus:outline-none focus:ring-2 focus:ring-purple-500"
                     title="Copy email to clipboard"
                     aria-label="Copy email address"
                   >
@@ -146,14 +148,14 @@ export const ContactSection: React.FC = () => {
               </div>
 
               {/* Quick Info Points */}
-              <div className="mt-6 space-y-3 pt-6 border-t border-slate-800/80 text-xs font-mono text-slate-400">
+              <div className="mt-6 space-y-3 pt-6 border-t border-space-750 text-xs font-mono text-slate-400">
                 <div className="flex items-center gap-3">
-                  <MapPin className="w-4 h-4 text-cobalt-400" />
+                  <MapPin className="w-4 h-4 text-purple-400" />
                   <span>{profileData.location}</span>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <Sparkles className="w-4 h-4 text-amber-400" />
+                  <Sparkles className="w-4 h-4 text-electric-400" />
                   <span>2nd Year CSE @ SSGMCE Shegaon</span>
                 </div>
               </div>
@@ -170,18 +172,18 @@ export const ContactSection: React.FC = () => {
                   href={profileData.socialLinks.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-xl bg-space-900 hover:bg-space-800 border border-slate-800 hover:border-slate-700 text-slate-200 transition-all group focus:outline-none focus:ring-2 focus:ring-cobalt-500"
+                  className="flex items-center justify-between p-3 rounded-xl bg-space-900 hover:bg-space-850 border border-space-750 hover:border-purple-500/50 text-slate-200 transition-all group focus:outline-none focus:ring-2 focus:ring-purple-500"
                 >
                   <div className="flex items-center gap-3">
-                    <Github className="w-5 h-5 text-cobalt-400" />
+                    <Github className="w-5 h-5 text-purple-400" />
                     <div>
                       <span className="text-sm font-medium block">GitHub</span>
                       <span className="text-[11px] font-mono text-slate-400">
-                        @Tejram9 • Repositories &amp; Contributions
+                        @Tejram9 &bull; Repositories &amp; Contributions
                       </span>
                     </div>
                   </div>
-                  <span className="text-xs font-mono text-cobalt-400 group-hover:translate-x-0.5 transition-transform">
+                  <span className="text-xs font-mono text-purple-400 group-hover:translate-x-0.5 transition-transform">
                     &rarr;
                   </span>
                 </a>
@@ -190,10 +192,10 @@ export const ContactSection: React.FC = () => {
                   href={profileData.socialLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-xl bg-space-900 hover:bg-space-800 border border-slate-800 hover:border-slate-700 text-slate-200 transition-all group focus:outline-none focus:ring-2 focus:ring-cobalt-500"
+                  className="flex items-center justify-between p-3 rounded-xl bg-space-900 hover:bg-space-850 border border-space-750 hover:border-purple-500/50 text-slate-200 transition-all group focus:outline-none focus:ring-2 focus:ring-purple-500"
                 >
                   <div className="flex items-center gap-3">
-                    <Linkedin className="w-5 h-5 text-cobalt-400" />
+                    <Linkedin className="w-5 h-5 text-purple-400" />
                     <div>
                       <span className="text-sm font-medium block">LinkedIn</span>
                       <span className="text-[11px] font-mono text-slate-400">
@@ -201,7 +203,7 @@ export const ContactSection: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                  <span className="text-xs font-mono text-cobalt-400 group-hover:translate-x-0.5 transition-transform">
+                  <span className="text-xs font-mono text-purple-400 group-hover:translate-x-0.5 transition-transform">
                     &rarr;
                   </span>
                 </a>
@@ -213,70 +215,60 @@ export const ContactSection: React.FC = () => {
           {/* Right Column: Premium Contact Form */}
           <div className="lg:col-span-7">
             <ScrollReveal direction="left" delay={0.15}>
-            <Card className="p-7 md:p-9" tacticalBorder>
+            <Card className="p-7 md:p-9" glow="purple" tacticalBorder>
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h3 className="text-xl font-display font-bold text-slate-100">
+                  <h3 className="text-xl font-display font-bold text-white">
                     Send a Message
                   </h3>
-                  <p className="text-xs text-slate-400 mt-1 font-mono">
-                    Direct communication dispatch
+                  <p className="text-xs text-slate-400 font-mono mt-0.5">
+                    Opens formatted in your mail client or copy draft directly
                   </p>
                 </div>
-                <div className="p-2.5 rounded-xl bg-space-900 border border-slate-800 text-cobalt-400">
+                <div className="p-2.5 rounded-xl bg-purple-950/80 border border-purple-800/60 text-purple-300">
                   <MessageSquare className="w-5 h-5" />
                 </div>
               </div>
 
               {submitStatus === 'success' ? (
-                <div className="p-6 rounded-xl bg-emerald-950/40 border border-emerald-800/60 text-center space-y-4">
-                  <div className="w-12 h-12 rounded-full bg-emerald-900/60 border border-emerald-700/60 flex items-center justify-center mx-auto text-emerald-400">
-                    <MailCheck className="w-6 h-6" />
+                <div className="py-8 text-center space-y-4 animate-in fade-in duration-300">
+                  <div className="w-14 h-14 rounded-full bg-emerald-950/80 border border-emerald-800 text-emerald-400 flex items-center justify-center mx-auto">
+                    <MailCheck className="w-7 h-7" />
                   </div>
-                  <h4 className="text-lg font-bold text-emerald-200">
-                    Message Formatted &amp; Ready!
+                  <h4 className="text-lg font-display font-bold text-white">
+                    Message Formatted &amp; Dispatched
                   </h4>
                   <p className="text-xs text-slate-300 max-w-md mx-auto leading-relaxed">
-                    Your email client should have opened with the message ready to send. If your browser blocked the email client or you use webmail (Gmail/Outlook), choose an option below:
+                    Your email client should have opened with this message pre-filled. If it didn&apos;t open automatically, use the buttons below:
                   </p>
 
-                  <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                  <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
                     {generatedMailto && (
-                      <a
+                      <Button
+                        variant="primary"
+                        size="sm"
                         href={generatedMailto}
-                        className="px-4 py-2 rounded-xl bg-cobalt-600 hover:bg-cobalt-500 text-white text-xs font-semibold shadow-md flex items-center gap-2 transition-all"
+                        icon={<ExternalLink className="w-3.5 h-3.5" />}
                       >
-                        <ExternalLink className="w-3.5 h-3.5" />
-                        <span>Open in Email App</span>
-                      </a>
+                        Open Mail Client Again
+                      </Button>
                     )}
 
-                    <button
+                    <Button
+                      variant="secondary"
+                      size="sm"
                       onClick={handleCopyDraft}
-                      className="px-4 py-2 rounded-xl bg-space-850 hover:bg-space-800 text-slate-200 border border-slate-700 text-xs font-mono flex items-center gap-2 transition-all"
+                      icon={copiedDraft ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                     >
-                      {copiedDraft ? (
-                        <>
-                          <Check className="w-3.5 h-3.5 text-emerald-400" />
-                          <span className="text-emerald-400">Draft Copied!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-3.5 h-3.5 text-slate-400" />
-                          <span>Copy Message Text</span>
-                        </>
-                      )}
-                    </button>
+                      {copiedDraft ? 'Copied Draft to Clipboard!' : 'Copy Draft Message'}
+                    </Button>
 
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => {
-                        setSubmitStatus('idle');
-                        setFormData({ name: '', email: '', subject: '', message: '' });
-                      }}
+                      onClick={() => setSubmitStatus('idle')}
                     >
-                      Reset Form
+                      Write Another Note
                     </Button>
                   </div>
                 </div>
@@ -289,14 +281,14 @@ export const ContactSection: React.FC = () => {
                       </label>
                       <input
                         id="contact-name"
-                        type="text"
                         required
+                        type="text"
                         value={formData.name}
                         onChange={(e) =>
                           setFormData({ ...formData, name: e.target.value })
                         }
-                        placeholder="e.g. Aditi Sharma"
-                        className="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 text-slate-100 text-sm placeholder:text-slate-500 outline-none transition-all"
+                        placeholder="e.g. Alex Johnson"
+                        className="w-full px-4 py-3 rounded-xl bg-space-900 border border-space-750 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white text-sm placeholder:text-slate-500 outline-none transition-all"
                       />
                     </div>
 
@@ -306,14 +298,14 @@ export const ContactSection: React.FC = () => {
                       </label>
                       <input
                         id="contact-email"
-                        type="email"
                         required
+                        type="email"
                         value={formData.email}
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
                         }
-                        placeholder="aditi@example.com"
-                        className="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 text-slate-100 text-sm placeholder:text-slate-500 outline-none transition-all"
+                        placeholder="alex@domain.com"
+                        className="w-full px-4 py-3 rounded-xl bg-space-900 border border-space-750 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white text-sm placeholder:text-slate-500 outline-none transition-all"
                       />
                     </div>
                   </div>
@@ -330,7 +322,7 @@ export const ContactSection: React.FC = () => {
                         setFormData({ ...formData, subject: e.target.value })
                       }
                       placeholder="e.g. Project Collaboration / Internship Inquiry"
-                      className="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 text-slate-100 text-sm placeholder:text-slate-500 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-space-900 border border-space-750 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white text-sm placeholder:text-slate-500 outline-none transition-all"
                     />
                   </div>
 
@@ -347,7 +339,7 @@ export const ContactSection: React.FC = () => {
                         setFormData({ ...formData, message: e.target.value })
                       }
                       placeholder="Share your idea, questions, or opportunity details..."
-                      className="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 text-slate-100 text-sm placeholder:text-slate-500 outline-none transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-space-900 border border-space-750 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 text-white text-sm placeholder:text-slate-500 outline-none transition-all resize-none"
                     />
                   </div>
 

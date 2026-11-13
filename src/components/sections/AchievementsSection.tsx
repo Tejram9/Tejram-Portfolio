@@ -14,7 +14,8 @@ export const AchievementsSection: React.FC = () => {
   return (
     <section id="achievements" className="py-28 relative overflow-hidden bg-space-950 hairline-border-t">
       {/* Background glow */}
-      <div className="absolute top-1/3 right-1/4 w-[600px] h-[350px] bg-cobalt-600/06 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-[600px] h-[350px] bg-purple-600/08 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/4 w-[450px] h-[350px] bg-electric-500/06 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
@@ -37,23 +38,23 @@ export const AchievementsSection: React.FC = () => {
             >
               <Card
                 className="p-7 md:p-9 flex flex-col justify-between h-full"
-                glow="cobalt"
+                glow="purple"
                 tacticalBorder
               >
                 <div>
                   <div className="flex items-center justify-between gap-3 mb-4">
-                    <Badge variant="amber" size="md" icon={<Trophy className="w-3.5 h-3.5" />}>
+                    <Badge variant={idx === 0 ? 'purple' : 'cyan'} size="md" icon={<Trophy className="w-3.5 h-3.5" />}>
                       {item.badge}
                     </Badge>
-                    <span className="text-xs font-mono text-slate-400">
+                    <span className="text-xs font-mono text-purple-300">
                       {item.dateOrYear}
                     </span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-slate-100 tracking-tight">
+                  <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-white tracking-tight">
                     {item.title}
                   </h3>
-                  <p className="text-xs font-mono text-amber-400 mt-1 font-semibold">
+                  <p className="text-xs font-mono text-purple-400 mt-1 font-semibold">
                     {item.organizationOrEvent}
                   </p>
 
@@ -62,7 +63,7 @@ export const AchievementsSection: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-5 border-t border-slate-800/80 text-xs text-slate-400 leading-relaxed font-mono">
+                <div className="mt-6 pt-5 border-t border-space-750 text-xs text-slate-400 leading-relaxed font-mono">
                   {item.description}
                 </div>
               </Card>
@@ -75,7 +76,7 @@ export const AchievementsSection: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
             <div>
               <h3 className="text-xl font-display font-bold text-slate-100 flex items-center gap-2.5">
-                <Users className="w-5 h-5 text-amber-400" />
+                <Users className="w-5 h-5 text-purple-400" />
                 <span>Student Community &amp; Technical Advisory</span>
               </h3>
               <p className="text-xs text-slate-400 font-mono mt-1">
@@ -83,8 +84,8 @@ export const AchievementsSection: React.FC = () => {
               </p>
             </div>
 
-            <span className="text-[11px] font-mono px-3 py-1 rounded-full bg-space-900 text-slate-400 border border-slate-800 self-start sm:self-auto">
-              Editable Registry
+            <span className="text-[11px] font-mono px-3 py-1 rounded-full bg-space-900 text-purple-300 border border-space-750 self-start sm:self-auto">
+              Campus Registry
             </span>
           </div>
 
@@ -94,13 +95,13 @@ export const AchievementsSection: React.FC = () => {
                 <Card className="p-6 h-full flex flex-col justify-between" hoverEffect tacticalBorder>
                   <div>
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs font-mono font-semibold text-amber-400">
+                      <span className="text-xs font-mono font-semibold text-purple-400">
                         {role.title}
                       </span>
-                      <ShieldCheck className="w-4 h-4 text-amber-400" />
+                      <ShieldCheck className="w-4 h-4 text-electric-400" />
                     </div>
 
-                    <h4 className="text-base font-semibold text-slate-100 font-display">
+                    <h4 className="text-base font-semibold text-white font-display">
                       {role.organization}
                     </h4>
 
@@ -109,7 +110,7 @@ export const AchievementsSection: React.FC = () => {
                     </p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-slate-800/80 text-[10px] font-mono text-slate-500">
+                  <div className="mt-4 pt-3 border-t border-space-750 text-[10px] font-mono text-slate-500">
                     {role.statusNote}
                   </div>
                 </Card>

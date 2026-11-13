@@ -20,9 +20,10 @@ export const JourneySection: React.FC = () => {
     : journeyMilestones.filter((m) => m.category === activeCategory);
 
   return (
-    <section id="journey" className="py-28 relative overflow-hidden bg-space-950/70 hairline-border-t">
+    <section id="journey" className="py-28 relative overflow-hidden bg-space-950 hairline-border-t">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-cobalt-600/06 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-purple-600/08 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-electric-500/06 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
@@ -42,15 +43,15 @@ export const JourneySection: React.FC = () => {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`relative px-4 py-2 rounded-xl text-xs font-mono tracking-wider transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cobalt-400 ${
-                  isActive ? 'text-white font-bold' : 'text-slate-400 hover:text-slate-200 bg-space-900/60 border border-slate-800'
+                className={`relative px-4 py-2 rounded-xl text-xs font-mono tracking-wider transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400 ${
+                  isActive ? 'text-white font-bold' : 'text-slate-400 hover:text-slate-200 bg-space-900 border border-space-750'
                 }`}
               >
                 {isActive && (
                   <motion.span
                     layoutId="journey-filter-pill"
                     transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 border border-amber-400/60 shadow-[0_0_16px_rgba(245,158,11,0.4)] -z-10"
+                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-600 to-electric-500 border border-purple-400/50 shadow-[0_0_20px_rgba(168,85,247,0.45)] -z-10"
                   />
                 )}
                 {cat}
@@ -61,7 +62,7 @@ export const JourneySection: React.FC = () => {
 
         <div className="relative mt-8">
           {/* Vertical Timeline spine line */}
-          <div className="hidden md:block absolute left-1/2 top-4 bottom-4 w-[2px] bg-gradient-to-b from-amber-500/70 via-amber-400/50 to-slate-800 -translate-x-1/2" />
+          <div className="hidden md:block absolute left-1/2 top-4 bottom-4 w-[2px] bg-gradient-to-b from-purple-500 via-electric-400 to-accent-orange -translate-x-1/2 shadow-[0_0_12px_rgba(168,85,247,0.4)]" />
 
           <AnimatePresence mode="wait">
             <motion.div
@@ -93,10 +94,10 @@ export const JourneySection: React.FC = () => {
                         <Card
                           className={`p-6 md:p-8 transition-all duration-300 ${
                             isHovered
-                              ? 'border-amber-400/80 shadow-[0_10px_35px_-10px_rgba(245,158,11,0.4)] scale-[1.01]'
+                              ? 'border-purple-400/80 shadow-[0_10px_35px_-10px_rgba(168,85,247,0.4)] scale-[1.01]'
                               : ''
                           }`}
-                          glow={isHovered ? 'amber' : milestone.status === 'Continuous' ? 'amber' : 'cobalt'}
+                          glow={isHovered ? 'purple' : 'none'}
                           tacticalBorder
                         >
                           <div
@@ -104,20 +105,20 @@ export const JourneySection: React.FC = () => {
                               isEven ? 'md:justify-end' : 'justify-start'
                             }`}
                           >
-                            <Calendar className="w-3.5 h-3.5 text-amber-400" />
-                            <span className="text-amber-300 font-semibold">
+                            <Calendar className="w-3.5 h-3.5 text-purple-400" />
+                            <span className="text-purple-300 font-semibold">
                               {milestone.period}
                             </span>
-                            <span className="text-slate-600">•</span>
+                            <span className="text-slate-600">&bull;</span>
                             <span className="text-slate-400 font-medium">{milestone.category}</span>
                             {milestone.status === 'Continuous' && (
-                              <span className="ml-1 px-2 py-0.5 rounded bg-amber-950/80 border border-amber-800 text-[9px] font-mono text-amber-300">
+                              <span className="ml-1 px-2 py-0.5 rounded bg-purple-950/80 border border-purple-800 text-[9px] font-mono text-purple-300">
                                 In Progress
                               </span>
                             )}
                           </div>
 
-                          <h3 className="text-lg sm:text-xl font-display font-bold text-slate-100 flex items-center gap-2">
+                          <h3 className="text-lg sm:text-xl font-display font-bold text-white flex items-center gap-2">
                             {milestone.title}
                           </h3>
 
@@ -125,7 +126,7 @@ export const JourneySection: React.FC = () => {
                             {milestone.description}
                           </p>
 
-                          <div className="mt-5 pt-4 border-t border-slate-800/80 space-y-2">
+                          <div className="mt-5 pt-4 border-t border-space-750 space-y-2">
                             {milestone.keyLearnings.map((learn, i) => (
                               <div
                                 key={i}
@@ -133,7 +134,7 @@ export const JourneySection: React.FC = () => {
                                   isEven ? 'md:flex-row-reverse md:text-right' : 'text-left'
                                 }`}
                               >
-                                <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                                <CheckCircle2 className="w-3.5 h-3.5 text-purple-400 shrink-0 mt-0.5" />
                                 <span className="leading-relaxed">{learn}</span>
                               </div>
                             ))}
@@ -147,8 +148,8 @@ export const JourneySection: React.FC = () => {
                       <div
                         className={`w-12 h-12 rounded-full bg-space-950 border-2 transition-all duration-300 flex items-center justify-center text-xs font-mono font-bold z-10 ${
                           isHovered
-                            ? 'border-amber-400 text-amber-300 scale-125 shadow-[0_0_24px_rgba(251,191,36,0.6)]'
-                            : 'border-amber-600 text-amber-400 shadow-[0_0_18px_rgba(245,158,11,0.35)]'
+                            ? 'border-purple-400 text-purple-300 scale-125 shadow-[0_0_24px_rgba(168,85,247,0.7)]'
+                            : 'border-space-750 text-slate-400 shadow-[0_0_18px_rgba(0,0,0,0.6)]'
                         }`}
                       >
                         0{idx + 1}
@@ -158,7 +159,7 @@ export const JourneySection: React.FC = () => {
                     {/* Empty Spacer Column on Opposite Side */}
                     <div
                       className={`hidden md:block md:col-span-5 ${
-                        isEven ? 'order-last' : 'order-first'
+                        isEven ? 'md:order-last' : ''
                       }`}
                     />
                   </div>

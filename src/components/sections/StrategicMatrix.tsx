@@ -71,11 +71,11 @@ export const StrategicMatrix: React.FC = () => {
   const [activeMove, setActiveMove] = useState<TacticalMove>(tacticalMoves[0]);
 
   return (
-    <div className="mt-12 pt-10 border-t border-slate-800/80">
+    <div className="mt-12 pt-10 border-t border-space-750">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <div className="flex items-center gap-2 text-xs font-mono text-cobalt-400 uppercase tracking-widest mb-1.5">
-            <Cpu className="w-4 h-4" />
+          <div className="flex items-center gap-2 text-xs font-mono text-purple-400 uppercase tracking-widest mb-1.5">
+            <Cpu className="w-4 h-4 text-electric-400" />
             <span>Strategic Systems Motif // Tactical Architecture</span>
           </div>
           <h3 className="text-xl md:text-2xl font-display font-bold text-slate-100">
@@ -86,7 +86,7 @@ export const StrategicMatrix: React.FC = () => {
           </p>
         </div>
 
-        <Badge variant="amber" size="md">
+        <Badge variant="purple" size="md">
           Tactical Matrix
         </Badge>
       </div>
@@ -107,16 +107,16 @@ export const StrategicMatrix: React.FC = () => {
                 onClick={() => setActiveMove(move)}
                 className={`p-3.5 rounded-xl text-left transition-all border flex items-center justify-between group ${
                   isSelected
-                    ? 'bg-space-800 border-amber-500 shadow-[0_0_18px_rgba(245,158,11,0.25)]'
-                    : 'bg-space-850/80 border-slate-800 hover:border-slate-700 hover:bg-space-800/50'
+                    ? 'bg-space-800 border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.35)]'
+                    : 'bg-space-850/80 border-space-750 hover:border-purple-500/40 hover:bg-space-800/60'
                 }`}
               >
                 <div className="flex items-center gap-3">
                   <div
                     className={`w-9 h-9 rounded-lg font-mono font-bold text-xs flex items-center justify-center border transition-colors ${
                       isSelected
-                        ? 'bg-amber-500 text-slate-950 font-semibold border-amber-300 shadow-sm'
-                        : 'bg-space-900 text-slate-400 border-slate-700/80 group-hover:text-amber-300'
+                        ? 'bg-gradient-to-br from-purple-600 to-electric-500 text-white border-purple-300 shadow-md'
+                        : 'bg-space-900 text-slate-400 border-space-750 group-hover:text-purple-300'
                     }`}
                   >
                     {move.coord}
@@ -125,7 +125,7 @@ export const StrategicMatrix: React.FC = () => {
                     <h4 className="text-xs md:text-sm font-semibold text-slate-200">
                       {move.name}
                     </h4>
-                    <span className="text-[10px] font-mono text-slate-400">
+                    <span className="text-[10px] font-mono text-purple-300/80">
                       Phase: {move.phase}
                     </span>
                   </div>
@@ -134,7 +134,7 @@ export const StrategicMatrix: React.FC = () => {
                 <ArrowRight
                   className={`w-4 h-4 transition-transform ${
                     isSelected
-                      ? 'text-amber-400 translate-x-1'
+                      ? 'text-purple-400 translate-x-1'
                       : 'text-slate-600 group-hover:text-slate-400'
                   }`}
                 />
@@ -145,19 +145,19 @@ export const StrategicMatrix: React.FC = () => {
 
         {/* Right: Selected Tactical Spec Card */}
         <div className="lg:col-span-7">
-          <Card className="p-6 md:p-8 h-full flex flex-col justify-between" glow="cobalt" tacticalBorder>
+          <Card className="p-6 md:p-8 h-full flex flex-col justify-between" glow="purple" tacticalBorder>
             <div>
-              <div className="flex items-center justify-between gap-3 pb-4 border-b border-slate-800/80">
+              <div className="flex items-center justify-between gap-3 pb-4 border-b border-space-750">
                 <div className="flex items-center gap-2.5">
-                  <span className="px-2.5 py-1 rounded-md bg-amber-950/60 border border-amber-800/80 text-amber-300 font-mono text-xs font-bold">
+                  <span className="px-2.5 py-1 rounded-md bg-purple-950/80 border border-purple-800/80 text-purple-200 font-mono text-xs font-bold shadow-sm">
                     SQ {activeMove.coord}
                   </span>
-                  <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+                  <span className="text-xs font-mono text-electric-400 uppercase tracking-wider">
                     {activeMove.phase} Phase
                   </span>
                 </div>
 
-                <span className="text-xs font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2.5 py-0.5 rounded-full">
+                <span className="text-xs font-mono text-emerald-300 bg-emerald-950/60 border border-emerald-800/40 px-2.5 py-0.5 rounded-full">
                   Applied in {activeMove.appliedIn}
                 </span>
               </div>
@@ -167,10 +167,10 @@ export const StrategicMatrix: React.FC = () => {
               </h4>
 
               {/* Chess Analogy Callout */}
-              <div className="mt-3 p-3.5 rounded-xl bg-space-900/90 border border-slate-800/90 flex items-start gap-3">
-                <Sparkles className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+              <div className="mt-3 p-3.5 rounded-xl bg-space-900/90 border border-space-750 flex items-start gap-3">
+                <Sparkles className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
                 <div className="text-xs leading-relaxed">
-                  <span className="font-mono text-amber-400 font-semibold block mb-0.5">
+                  <span className="font-mono text-purple-300 font-semibold block mb-0.5">
                     CHESS STRATEGIC PRINCIPLE:
                   </span>
                   <span className="text-slate-300 font-sans italic">
@@ -182,10 +182,10 @@ export const StrategicMatrix: React.FC = () => {
               {/* Engineering Implementation */}
               <div className="mt-4 space-y-2">
                 <span className="text-xs font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                  <Terminal className="w-3.5 h-3.5 text-amber-400" />
+                  <Terminal className="w-3.5 h-3.5 text-purple-400" />
                   <span>Engineering Execution</span>
                 </span>
-                <p className="text-xs md:text-sm text-slate-300 leading-relaxed pl-5 border-l-2 border-amber-500/40">
+                <p className="text-xs md:text-sm text-slate-300 leading-relaxed pl-5 border-l-2 border-purple-500/50">
                   {activeMove.engineeringImplementation}
                 </p>
               </div>
@@ -193,18 +193,18 @@ export const StrategicMatrix: React.FC = () => {
               {/* Trade-off Analysis */}
               <div className="mt-4 space-y-2">
                 <span className="text-xs font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                  <ShieldAlert className="w-3.5 h-3.5 text-amber-400" />
+                  <ShieldAlert className="w-3.5 h-3.5 text-accent-orange" />
                   <span>System Trade-Off Analysis</span>
                 </span>
-                <p className="text-xs md:text-sm text-slate-300 leading-relaxed pl-5 border-l-2 border-amber-500/40">
+                <p className="text-xs md:text-sm text-slate-300 leading-relaxed pl-5 border-l-2 border-accent-orange/50">
                   {activeMove.tradeOffAnalysis}
                 </p>
               </div>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+            <div className="mt-6 pt-4 border-t border-space-750 flex items-center justify-between text-[11px] font-mono text-slate-400">
               <span>Strategy &rarr; Architecture &rarr; Production</span>
-              <span className="text-amber-400">Tejram Dudhapachare</span>
+              <span className="text-purple-400">Tejram Dudhapachare</span>
             </div>
           </Card>
         </div>

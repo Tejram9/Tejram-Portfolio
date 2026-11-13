@@ -4,8 +4,8 @@ export const FallbackSculpture: React.FC = () => {
   return (
     <div className="w-full h-full flex items-center justify-center relative select-none">
       {/* Background radial glow */}
-      <div className="absolute w-72 h-72 rounded-full bg-amber-600/15 blur-3xl pointer-events-none" />
-      <div className="absolute w-48 h-48 rounded-full bg-amber-400/10 blur-2xl pointer-events-none" />
+      <div className="absolute w-72 h-72 rounded-full bg-purple-600/20 blur-3xl pointer-events-none" />
+      <div className="absolute w-48 h-48 rounded-full bg-electric-500/15 blur-2xl pointer-events-none" />
 
       {/* SVG Kinetic Sculpture */}
       <svg
@@ -16,14 +16,14 @@ export const FallbackSculpture: React.FC = () => {
       >
         <defs>
           <linearGradient id="coreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#fde68a" stopOpacity="0.8" />
-            <stop offset="50%" stopColor="#fbbf24" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#b45309" stopOpacity="0.95" />
+            <stop offset="0%" stopColor="#c084fc" stopOpacity="0.9" />
+            <stop offset="50%" stopColor="#a855f7" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.9" />
           </linearGradient>
           <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.8" />
-            <stop offset="50%" stopColor="#f59e0b" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#d97706" stopOpacity="0.8" />
+            <stop offset="0%" stopColor="#a855f7" stopOpacity="0.8" />
+            <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#f97316" stopOpacity="0.8" />
           </linearGradient>
           <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="6" result="blur" />
@@ -51,73 +51,54 @@ export const FallbackSculpture: React.FC = () => {
           rx="155"
           ry="55"
           transform="rotate(45 200 200)"
-          stroke="#fcd34d"
+          stroke="#38bdf8"
           strokeWidth="1.2"
-          strokeOpacity="0.5"
+          strokeOpacity="0.6"
           strokeDasharray="4 6"
           className="animate-[spin_30s_linear_infinite_reverse]"
         />
 
-        {/* Third Gyro Ring */}
+        {/* Third Orbit Ring in Solar Orange */}
         <ellipse
           cx="200"
           cy="200"
           rx="140"
-          ry="70"
-          transform="rotate(80 200 200)"
-          stroke="#fbbf24"
+          ry="75"
+          transform="rotate(75 200 200)"
+          stroke="#f97316"
           strokeWidth="1"
-          strokeOpacity="0.35"
+          strokeOpacity="0.5"
+          strokeDasharray="3 5"
         />
 
-        {/* Central Icosahedral Geometry Projection */}
-        <g className="animate-pulse-subtle">
-          {/* Main Facets */}
-          <polygon
-            points="200,105 275,160 200,215 125,160"
-            fill="url(#coreGrad)"
-            stroke="#fde68a"
-            strokeWidth="1.5"
-            opacity="0.85"
-            filter="url(#glow)"
-          />
-          <polygon
-            points="200,215 275,160 245,260 200,295"
-            fill="#b45309"
-            stroke="#fcd34d"
-            strokeWidth="1.2"
-            opacity="0.75"
-          />
-          <polygon
-            points="200,215 125,160 155,260 200,295"
-            fill="#92400e"
-            stroke="#fcd34d"
-            strokeWidth="1.2"
-            opacity="0.75"
-          />
-          {/* Top crystalline cap */}
-          <polygon
-            points="200,105 245,140 200,215 155,140"
-            fill="#fbbf24"
-            stroke="#ffffff"
-            strokeWidth="1"
-            opacity="0.4"
-          />
-        </g>
+        {/* Central Faceted Hexagonal Core */}
+        <polygon
+          points="200,120 270,160 270,240 200,280 130,240 130,160"
+          fill="url(#coreGrad)"
+          stroke="#c084fc"
+          strokeWidth="2"
+          filter="url(#glow)"
+          opacity="0.85"
+        />
 
-        {/* Strategic Data Constellation Nodes */}
-        <circle cx="280" cy="140" r="4" fill="#fbbf24" filter="url(#glow)" />
-        <line x1="280" y1="140" x2="275" y2="160" stroke="#fbbf24" strokeWidth="1" strokeDasharray="2 2" />
+        {/* Inner Octahedron Lattice */}
+        <polygon
+          points="200,145 245,200 200,255 155,200"
+          fill="#0a0c16"
+          stroke="#38bdf8"
+          strokeWidth="1.5"
+          opacity="0.9"
+        />
 
-        <circle cx="110" cy="180" r="3.5" fill="#fcd34d" filter="url(#glow)" />
-        <line x1="110" y1="180" x2="125" y2="160" stroke="#fcd34d" strokeWidth="1" strokeDasharray="2 2" />
+        {/* Core Radiating Point */}
+        <circle cx="200" cy="200" r="14" fill="#f97316" filter="url(#glow)" />
+        <circle cx="200" cy="200" r="6" fill="#ffffff" />
 
-        <circle cx="240" cy="275" r="4.5" fill="#fbbf24" filter="url(#glow)" />
-        <circle cx="150" cy="275" r="3.5" fill="#f59e0b" filter="url(#glow)" />
-        <circle cx="200" cy="85" r="4" fill="#fde68a" filter="url(#glow)" />
-
-        {/* Center Node Spark */}
-        <circle cx="200" cy="185" r="3" fill="#ffffff" filter="url(#glow)" />
+        {/* Satellite Vertex Constellation Nodes */}
+        <circle cx="90" cy="180" r="4" fill="#38bdf8" filter="url(#glow)" />
+        <circle cx="310" cy="160" r="4.5" fill="#a855f7" filter="url(#glow)" />
+        <circle cx="280" cy="290" r="3.5" fill="#f97316" filter="url(#glow)" />
+        <circle cx="120" cy="270" r="4" fill="#c084fc" filter="url(#glow)" />
       </svg>
     </div>
   );

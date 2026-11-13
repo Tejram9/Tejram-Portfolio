@@ -49,8 +49,8 @@ export const ResumeButton: React.FC<ResumeButtonProps> = ({
         maxWidth="md"
       >
         <div className="space-y-4 text-slate-300 text-xs sm:text-sm">
-          <div className="p-4 rounded-xl bg-amber-950/60 border border-amber-800/60 flex items-start gap-3">
-            <FileText className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+          <div className="p-4 rounded-xl bg-purple-950/40 border border-purple-500/30 flex items-start gap-3">
+            <FileText className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
             <div>
               <h5 className="font-semibold text-slate-100 font-display text-sm">
                 Authentic Document Policy
@@ -61,13 +61,13 @@ export const ResumeButton: React.FC<ResumeButtonProps> = ({
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-space-900 border border-slate-800 space-y-2">
+          <div className="p-4 rounded-xl bg-space-900 border border-space-700/60 space-y-2">
             <span className="font-mono text-[11px] uppercase tracking-wider text-slate-400 font-semibold block">
               Instructions to Activate Direct Download:
             </span>
             <ol className="list-decimal pl-4 space-y-1.5 text-xs text-slate-300 font-mono">
-              <li>Place your official resume PDF file at: <code className="text-amber-300 bg-space-950 px-1 py-0.5 rounded">public/resume.pdf</code></li>
-              <li>Or set <code className="text-amber-300 bg-space-950 px-1 py-0.5 rounded">socialLinks.resumeUrl = &apos;/resume.pdf&apos;</code> in <code className="text-slate-200">src/data/profile.ts</code></li>
+              <li>Place your official resume PDF file at: <code className="text-electric-300 bg-space-950 px-1.5 py-0.5 rounded border border-space-700">public/resume.pdf</code></li>
+              <li>Or set <code className="text-electric-300 bg-space-950 px-1.5 py-0.5 rounded border border-space-700">socialLinks.resumeUrl = &apos;/resume.pdf&apos;</code> in <code className="text-slate-200">src/data/profile.ts</code></li>
             </ol>
           </div>
 

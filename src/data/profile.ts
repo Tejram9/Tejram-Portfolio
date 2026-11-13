@@ -1,17 +1,20 @@
 export const profileData = {
   name: "Tejram Dudhapachare",
   fullName: "Tejram Kisan Dudhapachare",
-  eyebrow: "COMPUTER SCIENCE ENGINEERING STUDENT | DEVELOPER",
+  brandName: "TEJRAM",
+  portraitUrl: "/tejram-portrait.jpg",
+  eyebrow: "COMPUTER SCIENCE ENGINEERING STUDENT // SSGMCE SHEGAON",
+  mainHeadline: "Turning Ideas Into Digital Reality.",
   headline: {
-    line1: "Building ideas.",
-    line2: "Turning them into reality.",
+    line1: "Turning Ideas",
+    line2: "Into Digital Reality.",
   },
   roles: [
     "Aspiring Software Developer",
     "Computer Science Engineering Student",
-    "Full-Stack & Backend Development Enthusiast",
+    "Full-Stack & Backend Systems Enthusiast",
   ],
-  bio: "I'm a Computer Science Engineering student passionate about software development, backend engineering and building technology that solves real-world problems.",
+  bio: "Computer Science Engineering student at SSGMCE Shegaon with an 8.63 CGPA. Dedicated to crafting resilient backend architectures, intuitive digital interfaces, and intelligent software that solves tangible real-world problems.",
   extendedBio: [
     "I am currently in my second year of Computer Science Engineering at Shri Sant Gajanan Maharaj College of Engineering (SSGMCE), Shegaon, affiliated with Sant Gadge Baba Amravati University (SGBAU).",
     "My journey in engineering is driven by curiosity and pragmatism: taking an abstract idea, architecting a sustainable backend, designing an intuitive interface, and turning it into an interactive, functional product that solves an everyday friction point.",
@@ -41,14 +44,14 @@ export const profileData = {
     ],
   },
   location: "Maharashtra, India",
-  availabilityStatus: "Available for technical internships, hackathons & open source collaboration",
-  currentFocus: "Java, Data Structures & Algorithms, Spring Boot & Distributed Systems",
+  availabilityStatus: "Open for technical internships, hackathons & open source collaboration",
+  currentFocus: "Java, Data Structures & Algorithms, Spring Boot & Scalable Web Architecture",
   socialLinks: {
     github: "https://github.com/Tejram9",
-    linkedin: "https://www.linkedin.com/in/tejram-dudhapachare", // Editable: replace with official LinkedIn URL
-    email: "tejramkd9@gmail.com", // Editable: replace with official email address
+    linkedin: "https://www.linkedin.com/in/tejram-dudhapachare",
+    email: "tejramkd9@gmail.com",
     collegeUrl: "https://www.ssgmce.ac.in",
-    resumeUrl: "", // Editable: place 'resume.pdf' in the public/ directory or specify an external link here to activate direct download
+    resumeUrl: "", // Place 'resume.pdf' in public/ to activate direct download
   },
   strategicPillars: [
     {
@@ -68,4 +71,3 @@ export const profileData = {
     },
   ],
 };
-

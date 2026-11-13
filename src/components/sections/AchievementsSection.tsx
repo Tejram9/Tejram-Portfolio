@@ -1,122 +1,86 @@
 import React from 'react';
-import { SectionHeading } from '../ui/SectionHeading';
-import { Card } from '../ui/Card';
-import { Badge } from '../ui/Badge';
-import { ScrollReveal } from '../ui/ScrollReveal';
-import { achievementsData, leadershipRoles } from '../../data/achievements';
-import {
-  Trophy,
-  Users,
-  ShieldCheck,
-} from 'lucide-react';
+import { achievementsData } from '../../data/achievements';
+import { Trophy } from 'lucide-react';
 
 export const AchievementsSection: React.FC = () => {
   return (
-    <section id="achievements" className="py-28 relative overflow-hidden bg-space-950 hairline-border-t">
-      {/* Background glow */}
-      <div className="absolute top-1/3 right-1/4 w-[600px] h-[350px] bg-purple-600/08 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-1/4 w-[450px] h-[350px] bg-electric-500/06 rounded-full blur-[160px] pointer-events-none" />
+    <section id="experience" className="py-24 md:py-32 relative overflow-hidden bg-void border-t border-white/5">
+      {/* Anchor alias for #achievements */}
+      <div id="achievements" className="absolute -top-24 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <SectionHeading
-          number="06 //"
-          eyebrow="Milestones & Community"
-          title="Achievements &"
-          highlight="Involvement."
-          description="Competitive recognitions, project exhibitions, and technical advisory participation within the SSGMCE student ecosystem."
-          coordinateTag="AWARDS // SSGMCE_HACKATHONS"
-        />
+      {/* Ghost Background Typography */}
+      <span
+        aria-hidden
+        className="absolute top-1/2 -translate-y-1/2 right-4 font-display text-[16vw] text-white/[0.02] select-none pointer-events-none leading-none tracking-tight"
+      >
+        AWARDS
+      </span>
 
-        {/* Major Verified Competitive Achievements */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {achievementsData.map((item, idx) => (
-            <ScrollReveal
+      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 relative z-10">
+        {/* Section Heading */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div>
+            <p className="font-mono text-xs text-softgrey tracking-widest uppercase mb-4">
+              005 — VERIFIED MILESTONES
+            </p>
+            <h2 className="font-display text-4xl sm:text-6xl md:text-7xl uppercase text-white tracking-tight leading-[0.92]">
+              EXPERIENCE &amp;<br />
+              <span className="text-lime-acid">ACHIEVEMENTS.</span>
+            </h2>
+          </div>
+
+          <div className="max-w-xs">
+            <div className="w-12 h-0.5 bg-lime-acid mb-4" />
+            <p className="font-sans text-xs sm:text-sm text-softgrey leading-relaxed">
+              Competitive recognitions and technical exhibitions earned through active software development. Strictly verified; zero fabricated titles.
+            </p>
+          </div>
+        </div>
+
+        {/* 2-Column Editorial Award Dossiers */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {achievementsData.map((item) => (
+            <div
               key={item.id}
-              direction={idx === 0 ? 'right' : 'left'}
-              delay={idx * 0.1}
-              className="h-full"
+              className="p-8 md:p-10 border border-white/10 bg-[#121410] hover:border-lime-acid/60 transition-all duration-300 flex flex-col justify-between group"
             >
-              <Card
-                className="p-7 md:p-9 flex flex-col justify-between h-full"
-                glow="purple"
-                tacticalBorder
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-3 mb-4">
-                    <Badge variant={idx === 0 ? 'purple' : 'cyan'} size="md" icon={<Trophy className="w-3.5 h-3.5" />}>
-                      {item.badge}
-                    </Badge>
-                    <span className="text-xs font-mono text-purple-300">
+              <div>
+                {/* Header row */}
+                <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-6">
+                  <span className="font-display text-4xl text-lime-acid tracking-tight">
+                    {item.num}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-xs uppercase tracking-widest text-void bg-lime-acid px-3 py-1 font-semibold flex items-center gap-1.5">
+                      <Trophy className="w-3.5 h-3.5" />
+                      <span>{item.badge}</span>
+                    </span>
+                    <span className="font-mono text-xs text-softgrey border border-white/10 px-2.5 py-1">
                       {item.dateOrYear}
                     </span>
                   </div>
-
-                  <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-white tracking-tight">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs font-mono text-purple-400 mt-1 font-semibold">
-                    {item.organizationOrEvent}
-                  </p>
-
-                  <p className="text-xs sm:text-sm text-slate-300 mt-4 leading-relaxed font-normal">
-                    {item.highlightText}
-                  </p>
                 </div>
 
-                <div className="mt-6 pt-5 border-t border-space-750 text-xs text-slate-400 leading-relaxed font-mono">
-                  {item.description}
-                </div>
-              </Card>
-            </ScrollReveal>
-          ))}
-        </div>
+                {/* Title & Organization */}
+                <h3 className="font-display text-2xl md:text-3xl text-white uppercase tracking-tight mb-2 group-hover:text-lime-acid transition-colors">
+                  {item.title}
+                </h3>
+                <p className="font-mono text-xs text-softgrey uppercase tracking-wider mb-6">
+                  {item.organizationOrEvent}
+                </p>
 
-        {/* Community & Leadership Roles (Subject to Confirmation / Editable) */}
-        <div>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
-            <div>
-              <h3 className="text-xl font-display font-bold text-slate-100 flex items-center gap-2.5">
-                <Users className="w-5 h-5 text-purple-400" />
-                <span>Student Community &amp; Technical Advisory</span>
-              </h3>
-              <p className="text-xs text-slate-400 font-mono mt-1">
-                Active campus club participation &amp; advisory roles (SSGMCE Shegaon)
-              </p>
+                {/* Highlight */}
+                <p className="font-sans text-sm text-smoke/90 leading-relaxed mb-6 font-normal">
+                  {item.highlightText}
+                </p>
+              </div>
+
+              {/* Technical description footer */}
+              <div className="pt-6 border-t border-white/10 font-mono text-xs text-softgrey leading-relaxed">
+                {item.description}
+              </div>
             </div>
-
-            <span className="text-[11px] font-mono px-3 py-1 rounded-full bg-space-900 text-purple-300 border border-space-750 self-start sm:self-auto">
-              Campus Registry
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {leadershipRoles.map((role, idx) => (
-              <ScrollReveal key={idx} direction="up" delay={idx * 0.08} className="h-full">
-                <Card className="p-6 h-full flex flex-col justify-between" hoverEffect tacticalBorder>
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs font-mono font-semibold text-purple-400">
-                        {role.title}
-                      </span>
-                      <ShieldCheck className="w-4 h-4 text-electric-400" />
-                    </div>
-
-                    <h4 className="text-base font-semibold text-white font-display">
-                      {role.organization}
-                    </h4>
-
-                    <p className="text-xs text-slate-300 mt-2 leading-relaxed">
-                      {role.scope}
-                    </p>
-                  </div>
-
-                  <div className="mt-4 pt-3 border-t border-space-750 text-[10px] font-mono text-slate-500">
-                    {role.statusNote}
-                  </div>
-                </Card>
-              </ScrollReveal>
-            ))}
-          </div>
+          ))}
         </div>
       </div>
     </section>

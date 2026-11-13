@@ -1,147 +1,21 @@
 import React from 'react';
-import { ArrowUp, Github, Linkedin, Mail, Award, Sparkles } from 'lucide-react';
 import { profileData } from '../../data/profile';
-import { scrollToSection } from '../../lib/utils';
-import { Magnetic } from '../ui/Magnetic';
 
 export const Footer: React.FC = () => {
-  const currentYear = new Date().getFullYear();
-
+  const year = new Date().getFullYear();
   return (
-    <footer className="relative bg-space-950 border-t border-space-750 pt-20 pb-12 overflow-hidden hairline-border-t">
-      {/* Background ambient lighting */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-purple-600/08 blur-[180px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-space-750">
-          {/* Identity & Mission */}
-          <div className="md:col-span-5 space-y-5">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-space-900 border border-purple-500/40 flex items-center justify-center font-mono font-bold text-purple-300 text-xs shadow-[0_0_18px_rgba(168,85,247,0.25)]">
-                TD
-              </div>
-              <div>
-                <span className="font-display font-bold text-white text-lg block tracking-tight">
-                  {profileData.fullName}
-                </span>
-                <span className="text-xs font-mono text-purple-400">
-                  Second-Year CSE @ SSGMCE Shegaon (SGBAU)
-                </span>
-              </div>
-            </div>
-
-            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-sm">
-              Computer Science Engineering student at Shri Sant Gajanan Maharaj College of Engineering, Shegaon. Focused on building pragmatic full-stack solutions, resilient Java backend architectures, and AI integrations.
-            </p>
-
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-space-900 border border-space-750 text-xs font-mono text-purple-300">
-              <Award className="w-3.5 h-3.5 text-electric-400" />
-              <span>ARISE Diwali Portfolio Competition 2026</span>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div className="md:col-span-3 space-y-4">
-            <h4 className="text-xs font-mono uppercase tracking-[0.18em] text-slate-200 font-semibold">
-              Index Navigation
-            </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-400 font-mono">
-              {[
-                { label: '01 // Overview', id: 'hero' },
-                { label: '02 // Philosophy', id: 'about' },
-                { label: '03 // Education Dossier', id: 'education' },
-                { label: '04 // Tech Stack & Skills', id: 'skills' },
-                { label: '05 // Featured Projects', id: 'projects' },
-                { label: '06 // Development Journey', id: 'journey' },
-                { label: '07 // Contact Dispatch', id: 'contact' },
-              ].map((sec) => (
-                <li key={sec.id}>
-                  <button
-                    onClick={() => scrollToSection(sec.id)}
-                    className="hover:text-purple-300 transition-colors focus:outline-none focus:text-purple-300"
-                  >
-                    {sec.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Connect & Institutional Context */}
-          <div className="md:col-span-4 space-y-4">
-            <h4 className="text-xs font-mono uppercase tracking-[0.18em] text-slate-200 font-semibold">
-              Academic Registry
-            </h4>
-            <div className="text-xs text-slate-400 space-y-1.5 font-mono p-4 rounded-xl bg-space-900/80 border border-space-750">
-              <p className="text-slate-100 font-sans font-medium">SSGMCE Shegaon</p>
-              <p>Sant Gadge Baba Amravati University (SGBAU)</p>
-              <p>Bachelor of Engineering &mdash; Class of 2027</p>
-              <p className="text-emerald-400 font-semibold pt-1 border-t border-space-750">
-                Official CGPA: 8.63 (Verified Academic Standing)
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3 pt-2">
-              <Magnetic strength={0.25}>
-                <a
-                  href={profileData.socialLinks.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-space-900 border border-space-750 text-slate-300 hover:text-white hover:border-purple-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-purple-500 block"
-                  aria-label="GitHub Profile"
-                >
-                  <Github className="w-4 h-4" />
-                </a>
-              </Magnetic>
-
-              <Magnetic strength={0.25}>
-                <a
-                  href={profileData.socialLinks.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-space-900 border border-space-750 text-slate-300 hover:text-white hover:border-purple-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-purple-500 block"
-                  aria-label="LinkedIn Profile"
-                >
-                  <Linkedin className="w-4 h-4" />
-                </a>
-              </Magnetic>
-
-              <Magnetic strength={0.25}>
-                <a
-                  href={`mailto:${profileData.socialLinks.email}`}
-                  className="p-3 rounded-xl bg-space-900 border border-space-750 text-slate-300 hover:text-white hover:border-purple-500/50 hover:bg-space-850 transition-all focus:outline-none focus:ring-2 focus:ring-purple-500 block"
-                  aria-label="Send Email"
-                >
-                  <Mail className="w-4 h-4" />
-                </a>
-              </Magnetic>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Credits & Back to Top */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
-          <div>
-            &copy; {currentYear} Tejram Kisan Dudhapachare &bull; Engineered with React 18, Three.js &amp; Tailwind.
-          </div>
-
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5 text-slate-400">
-              <Sparkles className="w-3 h-3 text-purple-400" />
-              <span>SSGMCE Shegaon // 2026</span>
-            </span>
-
-            <Magnetic strength={0.25}>
-              <button
-                onClick={() => scrollToSection('hero')}
-                className="flex items-center gap-1.5 text-purple-400 hover:text-purple-300 transition-colors focus:outline-none"
-                aria-label="Back to top"
-              >
-                <span>Back to Top</span>
-                <ArrowUp className="w-3.5 h-3.5" />
-              </button>
-            </Magnetic>
-          </div>
+    <footer className="bg-void border-t border-white/5 py-10 px-6 md:px-10">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <span className="font-display text-lg text-white">
+          TEJRAM<span className="text-lime-acid">.</span>
+        </span>
+        <p className="font-mono text-xs text-softgrey">
+          © {year} Tejram Kisan Dudhapachare. All rights reserved.
+        </p>
+        <div className="flex items-center gap-6">
+          <a href={profileData.socialLinks.github} target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-softgrey hover:text-lime-acid transition-colors">GitHub</a>
+          <a href={profileData.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-softgrey hover:text-lime-acid transition-colors">LinkedIn</a>
+          <a href={`mailto:${profileData.socialLinks.email}`} className="font-mono text-xs text-softgrey hover:text-lime-acid transition-colors">Email</a>
         </div>
       </div>
     </footer>

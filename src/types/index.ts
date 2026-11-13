@@ -7,57 +7,63 @@ export interface ArchitectureStep {
 
 export interface Project {
   id: string;
+  num: string;
   title: string;
   tagline: string;
-  category: 'Full-Stack' | 'AI & Web' | 'Backend Systems';
-  featured: boolean;
+  category?: 'Full-Stack' | 'AI & Web' | 'Backend Systems';
+  featured?: boolean;
   team?: string;
   description: string;
-  problemStatement: string;
-  solution: string;
-  keyFeatures: string[];
-  technologies: string[];
-  myContribution: string;
-  architectureHighlights: string[];
+  problemStatement?: string;
+  solution?: string;
+  features: string[];
+  keyFeatures?: string[];
+  stack: string[];
+  technologies?: string[];
+  myContribution?: string;
+  architectureHighlights?: string[];
   architecturePipeline?: ArchitectureStep[];
   challengesEncountered?: string[];
-  liveDemoUrl?: string;
+  liveDemoUrl: string;
   githubUrl?: string;
   backendUrl?: string;
+  achievement?: string;
   badge?: string;
   accentColor: string;
   metricsOrHighlight?: string;
 }
 
+export interface SkillItem {
+  name: string;
+  projectIds?: string[];
+  learning?: boolean;
+  category?: string;
+  description?: string;
+}
+
 export interface SkillCategory {
-  title: string;
-  description: string;
-  iconName: string;
-  skills: {
-    name: string;
-    level: 'Project-Tested' | 'Active Exploration' | 'Core Competency';
-    tags?: string[];
-  }[];
+  label: string;
+  skills: SkillItem[];
 }
 
 export interface AchievementItem {
   id: string;
+  num: string;
   title: string;
   organizationOrEvent: string;
   dateOrYear: string;
-  type: 'Award' | 'Showcase' | 'Leadership';
+  type: 'Award' | 'Showcase';
   description: string;
   highlightText: string;
   badge: string;
-  isConfirmedRole?: boolean;
+  verified: boolean;
 }
 
-export interface Milestone {
+export interface JourneyMilestone {
   id: string;
-  period: string;
+  year?: string;
   title: string;
-  category: 'Foundation' | 'Project Execution' | 'Competition' | 'Architectural Growth';
+  category: string;
   description: string;
-  keyLearnings: string[];
-  status: 'Completed' | 'In Progress' | 'Continuous';
+  tags: string[];
 }

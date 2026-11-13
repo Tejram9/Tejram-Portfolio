@@ -1,170 +1,235 @@
 import React from 'react';
-import { SectionHeading } from '../ui/SectionHeading';
-import { Card } from '../ui/Card';
-import { ScrollReveal } from '../ui/ScrollReveal';
+import { motion } from 'framer-motion';
 import { profileData } from '../../data/profile';
-import { StrategicMatrix } from './StrategicMatrix';
-import {
-  Compass,
-  Layers,
-  GitBranch,
-  Terminal,
-  Cpu,
-  Sparkles,
-  CheckCircle2,
-  Quote,
-} from 'lucide-react';
+
+const bioParagraphs = [
+  "I'm Tejram Kisan Dudhapachare, a second-year Computer Science Engineering student at Shri Sant Gajanan Maharaj College of Engineering, Shegaon.",
+  "I enjoy transforming ideas into working software products.",
+  "My interests include Java, backend engineering, full-stack development, AI integration and solving practical problems through technology.",
+  "I believe the best way to learn engineering is to build, experiment and continuously improve.",
+];
+
+const edu = profileData.education;
+
+const credRows = [
+  { key: 'COLLEGE', value: edu.shortName },
+  { key: 'UNIVERSITY', value: 'SGBAU' },
+  { key: 'DEGREE', value: 'BE Computer Science Engineering' },
+  { key: 'CURRENT ACADEMIC STATUS', value: edu.currentYear },
+  { key: 'CGPA', value: edu.cgpa, isHighlight: true },
+];
 
 export const AboutSection: React.FC = () => {
-  const iconMap: Record<string, React.ReactNode> = {
-    Layers: <Layers className="w-5 h-5 text-purple-400" />,
-    Compass: <Compass className="w-5 h-5 text-electric-400" />,
-    GitBranch: <GitBranch className="w-5 h-5 text-accent-orange" />,
-  };
-
   return (
-    <section id="about" className="py-28 relative overflow-hidden bg-space-950 hairline-border-t">
-      {/* Background Ambience Glow */}
-      <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-purple-600/08 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute bottom-1/3 left-1/5 w-[420px] h-[420px] bg-electric-500/06 rounded-full blur-[160px] pointer-events-none" />
+    <section
+      id="about"
+      style={{ backgroundColor: '#F3F1E8', color: '#090B08', position: 'relative', overflow: 'hidden' }}
+      className="py-24 md:py-32"
+    >
+      {/* Background ghost text */}
+      <span
+        aria-hidden
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          fontFamily: "'Anton', sans-serif",
+          fontSize: 'clamp(8rem, 25vw, 22rem)',
+          color: 'transparent',
+          WebkitTextStroke: '1px rgba(0,0,0,0.06)',
+          whiteSpace: 'nowrap',
+          userSelect: 'none',
+          zIndex: 0,
+          lineHeight: 1,
+          letterSpacing: '-0.02em',
+          pointerEvents: 'none',
+        }}
+      >
+        ABOUT
+      </span>
 
-      {/* Strategic grid background */}
-      <div className="absolute inset-0 bg-grid-architectural opacity-20 pointer-events-none" />
+      <div
+        className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16"
+        style={{ position: 'relative', zIndex: 1 }}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <SectionHeading
-          number="01 //"
-          eyebrow="Personal Philosophy & Approach"
-          title="Beyond the"
-          highlight="Code."
-          description="Transforming abstract ideas into dependable software systems through hands-on engineering, intentional architecture, and continuous learning."
-          coordinateTag="SSGMCE // CLASS_OF_2027"
-        />
-
-        {/* Editorial Pull-Quote Callout with Purple Specular Framing */}
-        <ScrollReveal direction="up" delay={0.05}>
-          <div className="mb-14 p-6 sm:p-8 rounded-2xl glass-studio border-l-4 border-l-purple-500 relative corner-crosshairs shadow-xl">
-            <Quote className="w-8 h-8 text-purple-500/30 absolute top-5 right-6" />
-            <p className="text-base sm:text-lg md:text-xl font-display font-medium text-slate-100 italic leading-relaxed max-w-4xl">
-              &quot;Software development is an interplay of strategy, clean data models, resilient APIs, and purposeful user experiences — much like a game of chess where every architectural move sets the stage for future growth.&quot;
+          {/* ── LEFT COLUMN (40%) ── */}
+          <motion.div
+            className="lg:col-span-2"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+            viewport={{ once: true, margin: '-80px' }}
+          >
+            {/* Section label */}
+            <p
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: '0.7rem',
+                letterSpacing: '0.2em',
+                color: '#8A8C85',
+                textTransform: 'uppercase',
+                marginBottom: '1.5rem',
+              }}
+            >
+              002 — ABOUT
             </p>
-            <div className="mt-3 text-xs font-mono text-purple-300 uppercase tracking-widest font-semibold flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-electric-400" />
-              <span>Tejram Kisan Dudhapachare &bull; Second-Year CSE Student @ SSGMCE (SGBAU)</span>
-            </div>
-          </div>
-        </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          {/* Left Column: Editorial Introduction & Student Identity */}
-          <div className="lg:col-span-7 space-y-6">
-            <ScrollReveal direction="right" delay={0.1}>
-            <Card className="p-7 md:p-9" tacticalBorder>
-              <div className="flex items-center gap-2 text-xs font-mono text-purple-400 uppercase tracking-widest mb-4 font-semibold">
-                <Terminal className="w-4 h-4 text-electric-400" />
-                <span>Engineering Mindset // SSGMCE Class of 2027</span>
-              </div>
+            {/* Giant headline */}
+            <h2
+              style={{
+                fontFamily: "'Anton', sans-serif",
+                fontSize: 'clamp(3rem, 7vw, 6.5rem)',
+                letterSpacing: '-0.02em',
+                lineHeight: 0.9,
+                color: '#090B08',
+                textTransform: 'uppercase',
+                marginBottom: '2rem',
+              }}
+            >
+              NOT JUST A<br />
+              DEVELOPER.<br />
+              A PROBLEM<br />
+              <span className="bg-void text-lime-acid px-3 py-0.5 inline-block mt-1 transform -rotate-1 shadow-md">
+                SOLVER.
+              </span>
+            </h2>
 
-              <div className="space-y-4 text-slate-300 text-base md:text-lg leading-relaxed font-normal">
-                {profileData.extendedBio.map((paragraph, idx) => (
-                  <p key={idx}>{paragraph}</p>
-                ))}
-              </div>
+            {/* Charcoal rule */}
+            <div
+              style={{
+                width: '60px',
+                height: '3px',
+                backgroundColor: '#090B08',
+                marginBottom: '2rem',
+              }}
+            />
 
-              {/* Core Tenets Checklist */}
-              <div className="mt-8 pt-6 border-t border-space-750 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {[
-                  'Learning by building real, production-ready platforms',
-                  'Enterprise Java & Spring Boot backend enthusiasm',
-                  'Pragmatic AI integrations tailored for real workflows',
-                  'Strategic schema design before implementation',
-                  'High academic consistency (8.63 CGPA @ SGBAU)',
-                  'Collaborative team execution (TrackX & hackathons)',
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-2.5 text-xs text-slate-300">
-                    <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </Card>
+            {/* Metadata descriptor */}
+            <p
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: '0.75rem',
+                color: '#3D4038',
+                letterSpacing: '0.08em',
+                lineHeight: 1.6,
+                maxWidth: '300px',
+              }}
+            >
+              CSE STUDENT · BUILDER · PRACTICAL PROBLEM SOLVER
+            </p>
+          </motion.div>
 
-            {/* Strategic Chess & Systems Motif Callout */}
-            <div className="p-5 rounded-2xl bg-space-900/90 border border-space-750 flex items-start gap-4">
-              <div className="p-2.5 rounded-xl bg-purple-950/80 border border-purple-800/60 text-purple-300 shrink-0 mt-0.5">
-                <Cpu className="w-5 h-5 text-electric-400" />
-              </div>
-              <div className="space-y-1">
-                <h4 className="text-sm font-display font-semibold text-slate-100 flex items-center gap-2">
-                  <span>The Strategic Interplay</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-850 text-purple-300 border border-purple-900/50">
-                    Tactical Paradigm
-                  </span>
-                </h4>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  In software as in strategy, every preliminary move matters: an unindexed database query or a poorly modeled entity cascades into runtime complexity. I approach full-stack development with proactive foresight, prioritizing stability, maintainability, and clean abstractions.
-                </p>
-              </div>
-            </div>
-            </ScrollReveal>
-          </div>
-
-          {/* Right Column: Three Strategic Pillars */}
-          <div className="lg:col-span-5 space-y-5">
-            <ScrollReveal direction="left" delay={0.15}>
-            <h3 className="text-xs font-mono uppercase tracking-widest text-slate-400 mb-2 font-semibold flex items-center justify-between">
-              <span>Foundational Principles</span>
-              <span className="text-[10px] text-purple-400 font-mono">[03_PILLARS]</span>
-            </h3>
-
-            <div className="space-y-4">
-              {profileData.strategicPillars.map((pillar, idx) => (
-                <Card
-                  key={pillar.title}
-                  hoverEffect
-                  glow="purple"
-                  className="p-6 transition-all duration-300"
+          {/* ── RIGHT COLUMN (60%) ── */}
+          <motion.div
+            className="lg:col-span-3 flex flex-col gap-8"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.1 }}
+            viewport={{ once: true, margin: '-80px' }}
+          >
+            {/* Bio paragraphs */}
+            <div className="flex flex-col gap-5">
+              {bioParagraphs.map((para, i) => (
+                <p
+                  key={i}
+                  style={{
+                    fontFamily: "'Space Grotesk', sans-serif",
+                    fontSize: '1.05rem',
+                    color: '#1A1C18',
+                    lineHeight: 1.75,
+                  }}
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-space-900/90 border border-space-750 shrink-0">
-                      {iconMap[pillar.icon] || <Sparkles className="w-5 h-5 text-purple-400" />}
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xs font-mono text-purple-400 font-bold">
-                          {`0${idx + 1}`}
-                        </span>
-                        <h4 className="text-base font-display font-bold text-slate-100">
-                          {pillar.title}
-                        </h4>
-                      </div>
-                      <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
-                        {pillar.description}
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-
-              {/* Quick Context Card */}
-              <div className="p-5 rounded-2xl bg-gradient-to-br from-purple-950/40 via-space-900 to-space-850 border border-purple-800/40 space-y-2">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-purple-300 font-semibold block flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-accent-orange animate-pulse" />
-                  Current College Milestone
-                </span>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  Currently engaged in 2nd-year curriculum at SSGMCE, Shegaon &mdash; pairing academic rigor in algorithms and DBMS with practical full-stack software prototyping.
+                  {para}
                 </p>
+              ))}
+            </div>
+
+            {/* Education credentials block */}
+            <div
+              style={{
+                backgroundColor: '#FFFFFF',
+                border: '2px solid #090B08',
+                boxShadow: '6px 6px 0px #090B08',
+                padding: '2rem',
+              }}
+            >
+              <div className="flex items-center justify-between border-b-2 border-black/10 pb-3 mb-6">
+                <p
+                  style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: '0.65rem',
+                    letterSpacing: '0.2em',
+                    color: '#3D4038',
+                    textTransform: 'uppercase',
+                    fontWeight: 700,
+                  }}
+                >
+                  ACADEMIC DOSSIER // CREDENTIALS
+                </p>
+                <span className="font-mono text-[10px] bg-void text-lime-acid px-2 py-0.5 uppercase tracking-wider font-semibold">
+                  AUTHENTIC RECORD
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+                {credRows.map(({ key, value, isHighlight }) => (
+                  <div key={key} className={isHighlight ? 'sm:col-span-2' : ''}>
+                    <p
+                      style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: '0.65rem',
+                        letterSpacing: '0.15em',
+                        color: '#8A8C85',
+                        textTransform: 'uppercase',
+                        marginBottom: '0.25rem',
+                      }}
+                    >
+                      {key}
+                    </p>
+                    {isHighlight ? (
+                      <div className="bg-void p-4 flex items-center justify-between border-l-4 border-lime-acid mt-1">
+                        <div>
+                          <span className="font-mono text-[10px] text-softgrey uppercase tracking-widest block mb-0.5">
+                            CUMULATIVE GRADE POINT AVERAGE
+                          </span>
+                          <p
+                            style={{
+                              fontFamily: "'Anton', sans-serif",
+                              fontSize: '3rem',
+                              color: '#D5FF00',
+                              lineHeight: 1,
+                              letterSpacing: '-0.02em',
+                            }}
+                          >
+                            {value}
+                          </p>
+                        </div>
+                        <span className="font-mono text-xs text-softgrey border border-white/20 px-3 py-1">
+                          SCALE: 10.0
+                        </span>
+                      </div>
+                    ) : (
+                      <p
+                        style={{
+                          fontFamily: "'Space Grotesk', sans-serif",
+                          fontSize: '1rem',
+                          color: '#090B08',
+                          fontWeight: 600,
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {value}
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
-            </ScrollReveal>
-          </div>
+          </motion.div>
         </div>
-
-        {/* The Engineering Chessboard & Strategic Systems Matrix */}
-        <ScrollReveal direction="up" delay={0.2}>
-          <StrategicMatrix />
-        </ScrollReveal>
       </div>
     </section>
   );

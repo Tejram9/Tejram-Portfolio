@@ -1,305 +1,512 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import {
-  ArrowDown,
-  ArrowUpRight,
-  Code2,
-  Box,
-  RotateCw,
-  Move3d,
-  Sparkles,
-  ShieldCheck,
-  Cpu,
-} from 'lucide-react';
 import { profileData } from '../../data/profile';
-import { Button } from '../ui/Button';
-import { Badge } from '../ui/Badge';
-import { ResumeButton } from '../ui/ResumeButton';
 import { scrollToSection } from '../../lib/utils';
 import { HeroSculpture } from '../3d/HeroSculpture';
 import { FallbackSculpture } from '../3d/FallbackSculpture';
 import { ThreeErrorBoundary } from '../3d/ErrorBoundary';
 import { useDevicePerformance } from '../../hooks/useDevicePerformance';
 
+// ─── Animation variants ────────────────────────────────────────────────────────
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay },
+});
+
+const fadeIn = (delay = 0) => ({
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 0.6, ease: 'easeOut', delay },
+});
+
+// ─── Scroll indicator ─────────────────────────────────────────────────────────
+const ScrollIndicator: React.FC = () => (
+  <motion.div
+    {...fadeIn(1.4)}
+    className="absolute bottom-6 left-6 md:left-8 z-20 flex flex-col items-center gap-2 cursor-pointer"
+    onClick={() => scrollToSection('about')}
+  >
+    <span
+      className="font-mono text-[10px] tracking-widest uppercase"
+      style={{ color: '#8A8C85', writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+    >
+      SCROLL
+    </span>
+    {/* Animated downward line */}
+    <div className="relative w-px h-12" style={{ background: 'rgba(138,140,133,0.25)' }}>
+      <motion.div
+        className="absolute top-0 left-0 w-full"
+        style={{ background: '#D5FF00', height: '40%' }}
+        animate={{ y: ['0%', '150%'] }}
+        transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+      />
+    </div>
+  </motion.div>
+);
+
+// ─── Ticker ───────────────────────────────────────────────────────────────────
+const TICKER_TEXT =
+  'JAVA DEVELOPER  ·  BACKEND ENGINEERING  ·  FULL-STACK  ·  AI INTEGRATION  ·  OPEN SOURCE  ·  PROBLEM SOLVER  ·  ';
+
+const TickerBar: React.FC = () => (
+  <div
+    className="relative overflow-hidden border-t"
+    style={{
+      background: '#1A1C18',
+      borderColor: 'rgba(255,255,255,0.08)',
+      height: '36px',
+    }}
+  >
+    <div
+      className="flex whitespace-nowrap items-center h-full"
+      style={{ animation: 'ticker 30s linear infinite' }}
+    >
+      {/* Duplicated twice for seamless loop */}
+      {[0, 1].map((n) => (
+        <span
+          key={n}
+          className="font-mono text-[10px] tracking-widest uppercase pr-0"
+          style={{ color: '#8A8C85' }}
+        >
+          {TICKER_TEXT}
+        </span>
+      ))}
+    </div>
+  </div>
+);
+
+// ─── Hero section ─────────────────────────────────────────────────────────────
 export const HeroSection: React.FC = () => {
   const { isMobile, prefersReducedMotion, supportsWebGL } = useDevicePerformance();
-  const [wireframeMode, setWireframeMode] = useState(false);
-  const [autoRotate, setAutoRotate] = useState(true);
+
+  const show3D = supportsWebGL && !prefersReducedMotion && !isMobile;
 
   return (
     <section
       id="hero"
-      className="relative min-h-[96vh] flex items-center justify-center pt-28 pb-20 overflow-hidden"
+      className="relative w-full overflow-hidden"
+      style={{ background: '#090B08', minHeight: '100vh' }}
     >
-      {/* Background Ambience: Deep Obsidian Void with Purple & Cyan Volumetric Lights */}
-      <div className="absolute inset-0 bg-space-950 pointer-events-none" />
-      <div className="absolute top-1/5 left-1/4 w-[560px] h-[560px] bg-purple-600/12 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[520px] h-[520px] bg-electric-500/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute top-2/3 left-1/3 w-[380px] h-[380px] bg-accent-orange/06 rounded-full blur-[150px] pointer-events-none" />
+      {/* ── Background grain + subtle gradient glow ── */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 50% at 70% 50%, rgba(213,255,0,0.03) 0%, transparent 70%)',
+        }}
+      />
 
-      {/* Architectural Dot Grid Overlay */}
-      <div className="absolute inset-0 bg-grid-architectural opacity-30 pointer-events-none" />
+      {/* ── Main two-column grid ── */}
+      <div
+        className="relative z-10 w-full mx-auto px-6 md:px-10 lg:px-16 pt-24 md:pt-28"
+        style={{ maxWidth: '1440px' }}
+      >
+        <div className="flex flex-col md:flex-row md:items-start gap-10 md:gap-6 lg:gap-12">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center min-h-[calc(100vh-160px)]">
-          {/* Left Column: Bold Oversized Typographic Masthead & Personal Identity */}
-          <div className="lg:col-span-7 flex flex-col justify-center space-y-6 md:space-y-8 text-left">
-            {/* Status & Regional Coordinates Eyebrow */}
-            <motion.div
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex flex-wrap items-center gap-3"
-            >
-              <Badge variant="purple" size="md" dot>
+          {/* ════════════════════════════════════════════
+              LEFT COLUMN — Typography block (~55%)
+          ════════════════════════════════════════════ */}
+          <div
+            className="flex flex-col gap-6 md:gap-8"
+            style={{ flex: '0 0 55%', maxWidth: '55%', minWidth: 0 }}
+          >
+            {/* 1. Eyebrow label */}
+            {!prefersReducedMotion ? (
+              <motion.p
+                {...fadeUp(0.1)}
+                className="font-mono uppercase tracking-widest text-[10px] md:text-[11px]"
+                style={{ color: '#8A8C85' }}
+              >
                 {profileData.eyebrow}
-              </Badge>
-
-              <div className="inline-flex items-center gap-2 text-[11px] font-mono text-slate-300 bg-space-900/90 border border-space-750 px-3 py-1 rounded-full shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>SSGMCE Shegaon &bull; SGBAU (8.63 CGPA)</span>
-              </div>
-            </motion.div>
-
-            {/* Bold Oversized Editorial Typography Composition */}
-            <motion.div
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="space-y-3"
-            >
-              {/* Massive Personal Brand Stamp */}
-              <div className="flex items-center gap-3">
-                <span className="font-mono text-xs uppercase tracking-[0.25em] text-purple-400 font-bold">
-                  CREATIVE DEVELOPER //
-                </span>
-                <span className="text-sm font-mono text-electric-400 bg-electric-950/60 border border-electric-500/30 px-2.5 py-0.5 rounded-md">
-                  FULL-STACK &amp; BACKEND
-                </span>
-              </div>
-
-              {/* Main Headline */}
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] font-display font-extrabold text-white tracking-[-0.04em] leading-[1.02]">
-                <span className="block text-slate-100">Turning Ideas</span>
-                <span className="bg-gradient-to-r from-purple-300 via-purple-400 to-electric-400 bg-clip-text text-transparent block">
-                  Into Digital Reality.
-                </span>
-              </h1>
-
-              {/* Personal Name Banner */}
-              <div className="pt-2 flex items-center gap-3">
-                <span className="text-2xl sm:text-3xl font-display font-bold text-slate-100 tracking-tight border-b-2 border-purple-500/60 pb-1 flex items-center gap-2">
-                  <span>{profileData.fullName}</span>
-                  <ShieldCheck className="w-5 h-5 text-electric-400" />
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Supporting Bio with Generous Line-Height */}
-            <motion.p
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg md:text-xl text-slate-300 font-normal leading-relaxed max-w-2xl"
-            >
-              {profileData.bio}
-            </motion.p>
-
-            {/* Currently Engineering & Learning Micro-Spec Terminal */}
-            <motion.div
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="p-4 rounded-xl glass-studio max-w-xl flex items-start gap-3.5 relative corner-crosshairs border-l-4 border-l-purple-500"
-            >
-              <div className="p-2 rounded-lg bg-purple-950/80 border border-purple-800/80 text-purple-300 shrink-0 mt-0.5">
-                <Code2 className="w-4 h-4" />
-              </div>
-              <div className="text-xs space-y-0.5">
-                <span className="font-mono uppercase tracking-wider text-purple-300 font-semibold block flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-accent-orange" />
-                  Currently building &amp; engineering:
-                </span>
-                <p className="text-slate-300 font-sans leading-normal">
-                  {profileData.currentFocus}
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Hero CTA Action Triggers */}
-            <motion.div
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap items-center gap-4 pt-2"
-            >
-              <Button
-                variant="primary"
-                size="lg"
-                magnetic
-                onClick={() => scrollToSection('projects')}
-                iconRight={<ArrowUpRight className="w-4 h-4" />}
+              </motion.p>
+            ) : (
+              <p
+                className="font-mono uppercase tracking-widest text-[10px] md:text-[11px]"
+                style={{ color: '#8A8C85' }}
               >
-                Explore Projects
-              </Button>
+                {profileData.eyebrow}
+              </p>
+            )}
 
-              <Button
-                variant="secondary"
-                size="lg"
-                magnetic
-                onClick={() => scrollToSection('contact')}
+            {/* 2. Giant headline */}
+            <div className="overflow-hidden">
+              {!prefersReducedMotion ? (
+                <>
+                  <motion.div {...fadeUp(0.2)} className="overflow-hidden">
+                    <h1
+                      className="font-display uppercase block"
+                      style={{
+                        fontSize: 'clamp(4.5rem, 10vw, 10rem)',
+                        letterSpacing: '-0.02em',
+                        lineHeight: 0.88,
+                        color: '#F3F1E8',
+                      }}
+                    >
+                      I DON&apos;T JUST
+                    </h1>
+                  </motion.div>
+
+                  <motion.div {...fadeUp(0.3)} className="overflow-hidden">
+                    <h1
+                      className="font-display uppercase block"
+                      style={{
+                        fontSize: 'clamp(4.5rem, 10vw, 10rem)',
+                        letterSpacing: '-0.02em',
+                        lineHeight: 0.88,
+                      }}
+                    >
+                      <span style={{ color: '#F3F1E8' }}>WRITE </span>
+                      <span style={{ color: '#D5FF00' }}>CODE.</span>
+                    </h1>
+                  </motion.div>
+
+                  <motion.div {...fadeUp(0.4)} className="overflow-hidden">
+                    <h1
+                      className="font-display uppercase block"
+                      style={{
+                        fontSize: 'clamp(4.5rem, 10vw, 10rem)',
+                        letterSpacing: '-0.02em',
+                        lineHeight: 0.88,
+                        color: '#F3F1E8',
+                      }}
+                    >
+                      I BUILD IDEAS.
+                    </h1>
+                  </motion.div>
+                </>
+              ) : (
+                <h1
+                  className="font-display uppercase"
+                  style={{
+                    fontSize: 'clamp(4.5rem, 10vw, 10rem)',
+                    letterSpacing: '-0.02em',
+                    lineHeight: 0.88,
+                    color: '#F3F1E8',
+                  }}
+                >
+                  I DON&apos;T JUST WRITE{' '}
+                  <span style={{ color: '#D5FF00' }}>CODE.</span> I BUILD IDEAS.
+                </h1>
+              )}
+            </div>
+
+            {/* 3. Name block */}
+            {!prefersReducedMotion ? (
+              <motion.div {...fadeUp(0.5)} className="flex flex-col leading-none mt-2 md:mt-4">
+                <span
+                  className="font-display uppercase"
+                  style={{
+                    fontSize: 'clamp(2.2rem, 5vw, 5rem)',
+                    letterSpacing: '-0.02em',
+                    color: '#D5FF00',
+                    lineHeight: 1,
+                  }}
+                >
+                  TEJRAM
+                </span>
+                <span
+                  className="font-display uppercase"
+                  style={{
+                    fontSize: 'clamp(2.2rem, 5vw, 5rem)',
+                    letterSpacing: '-0.02em',
+                    lineHeight: 1,
+                    color: 'transparent',
+                    WebkitTextStroke: '1px rgba(243,241,232,0.7)',
+                  }}
+                >
+                  DUDHAPACHARE
+                </span>
+              </motion.div>
+            ) : (
+              <div className="flex flex-col leading-none mt-2 md:mt-4">
+                <span
+                  className="font-display uppercase"
+                  style={{
+                    fontSize: 'clamp(2.2rem, 5vw, 5rem)',
+                    letterSpacing: '-0.02em',
+                    color: '#D5FF00',
+                    lineHeight: 1,
+                  }}
+                >
+                  TEJRAM
+                </span>
+                <span
+                  className="font-display uppercase"
+                  style={{
+                    fontSize: 'clamp(2.2rem, 5vw, 5rem)',
+                    letterSpacing: '-0.02em',
+                    lineHeight: 1,
+                    color: 'transparent',
+                    WebkitTextStroke: '1px rgba(243,241,232,0.7)',
+                  }}
+                >
+                  DUDHAPACHARE
+                </span>
+              </div>
+            )}
+
+            {/* 4. Description */}
+            {!prefersReducedMotion ? (
+              <motion.p
+                {...fadeUp(0.65)}
+                className="text-sm md:text-base leading-relaxed max-w-md"
+                style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: 'rgba(196,198,191,0.8)' }}
               >
-                Contact Me
-              </Button>
-
-              <ResumeButton variant="outline" size="lg" />
-
-              <Button
-                variant="ghost"
-                size="md"
-                magnetic
-                onClick={() => scrollToSection('about')}
-                className="hidden sm:inline-flex text-xs font-mono text-slate-400 hover:text-white"
+                {profileData.tagline}
+              </motion.p>
+            ) : (
+              <p
+                className="text-sm md:text-base leading-relaxed max-w-md"
+                style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: 'rgba(196,198,191,0.8)' }}
               >
-                <span>Read Story</span> &darr;
-              </Button>
-            </motion.div>
+                {profileData.tagline}
+              </p>
+            )}
+
+            {/* 5. CTA buttons */}
+            {!prefersReducedMotion ? (
+              <motion.div {...fadeUp(0.8)} className="flex flex-wrap gap-3 mt-2">
+                <button
+                  onClick={() => scrollToSection('projects')}
+                  className="font-mono text-xs tracking-widest uppercase px-6 py-3 border transition-all duration-200"
+                  style={{
+                    borderColor: '#D5FF00',
+                    color: '#D5FF00',
+                    background: 'transparent',
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.background = '#D5FF00';
+                    (e.currentTarget as HTMLButtonElement).style.color = '#090B08';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
+                    (e.currentTarget as HTMLButtonElement).style.color = '#D5FF00';
+                  }}
+                >
+                  EXPLORE SELECTED WORK
+                </button>
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="font-mono text-xs tracking-widest uppercase px-6 py-3 border transition-all duration-200"
+                  style={{
+                    borderColor: 'rgba(255,255,255,0.2)',
+                    color: '#ffffff',
+                    background: 'transparent',
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = '#ffffff';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.2)';
+                  }}
+                >
+                  LET&apos;S CONNECT
+                </button>
+              </motion.div>
+            ) : (
+              <div className="flex flex-wrap gap-3 mt-2">
+                <button
+                  onClick={() => scrollToSection('projects')}
+                  className="font-mono text-xs tracking-widest uppercase px-6 py-3 border"
+                  style={{ borderColor: '#D5FF00', color: '#D5FF00', background: 'transparent' }}
+                >
+                  EXPLORE SELECTED WORK
+                </button>
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="font-mono text-xs tracking-widest uppercase px-6 py-3 border"
+                  style={{ borderColor: 'rgba(255,255,255,0.2)', color: '#ffffff', background: 'transparent' }}
+                >
+                  LET&apos;S CONNECT
+                </button>
+              </div>
+            )}
           </div>
 
-          {/* Right Column: Cinematic Portrait & 3D Interactive Systems Composition */}
-          <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 relative flex flex-col items-center justify-center min-h-[500px] sm:min-h-[580px] lg:min-h-[640px]"
+          {/* ════════════════════════════════════════════
+              RIGHT COLUMN — Portrait + 3D (~45%)
+          ════════════════════════════════════════════ */}
+          <div
+            className="relative flex flex-col items-center md:items-end"
+            style={{ flex: '0 0 45%', maxWidth: '45%', minWidth: 0 }}
           >
-            {/* Ambient Multi-Layer Radial Glow Behind Composition */}
-            <div className="absolute w-[340px] h-[340px] bg-gradient-to-tr from-purple-600/25 via-electric-500/20 to-accent-orange/15 rounded-full blur-[80px] pointer-events-none" />
+            {/* Portrait composition container */}
+            <div className="relative w-full" style={{ maxWidth: '480px' }}>
 
-            {/* Cinematic Portrait Card with Studio Depth Framing */}
-            <div className="relative z-10 w-full max-w-[380px] sm:max-w-[420px] rounded-3xl p-3 bg-gradient-to-b from-purple-500/30 via-space-850/80 to-space-900 border border-space-700/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] backdrop-blur-xl corner-crosshairs">
-              {/* Tactical Top Spec Bar */}
-              <div className="px-3 py-2 border-b border-space-750/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
-                <span className="flex items-center gap-1.5 text-purple-300 font-semibold">
-                  <Cpu className="w-3.5 h-3.5 text-electric-400" />
-                  ID::TEJRAM_DUDHAPACHARE
-                </span>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-800/60 font-semibold">
-                  ACTIVE
-                </span>
-              </div>
+              {/* Floating metadata labels — desktop only */}
+              <motion.div
+                {...(!prefersReducedMotion ? fadeIn(0.9) : {})}
+                className="hidden md:block absolute z-20 font-mono text-[9px] uppercase tracking-widest px-2.5 py-1.5 border backdrop-blur-sm pointer-events-none whitespace-nowrap"
+                style={{
+                  top: '-14px',
+                  left: '-10px',
+                  borderColor: 'rgba(255,255,255,0.15)',
+                  background: 'rgba(9,11,8,0.85)',
+                  color: '#8A8C85',
+                }}
+              >
+                JAVA DEVELOPER
+              </motion.div>
 
-              {/* Portrait Image Container */}
-              <div className="relative rounded-2xl overflow-hidden aspect-[3/3.8] bg-space-950 my-2 group">
-                <img
-                  src={profileData.portraitUrl}
-                  alt="Tejram Kisan Dudhapachare - Computer Science Engineering Student & Developer"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 filter contrast-[1.03] brightness-[0.98]"
-                  loading="eager"
-                  fetchPriority="high"
-                />
+              <motion.div
+                {...(!prefersReducedMotion ? fadeIn(1.0) : {})}
+                className="hidden md:block absolute z-20 font-mono text-[9px] uppercase tracking-widest px-2.5 py-1.5 border backdrop-blur-sm pointer-events-none whitespace-nowrap"
+                style={{
+                  top: '-14px',
+                  right: '-10px',
+                  borderColor: 'rgba(255,255,255,0.15)',
+                  background: 'rgba(9,11,8,0.85)',
+                  color: '#8A8C85',
+                }}
+              >
+                FULL-STACK ENTHUSIAST
+              </motion.div>
 
-                {/* Subtle Cinematic Vignette & Bottom Shading */}
-                <div className="absolute inset-0 bg-gradient-to-t from-space-950 via-space-950/20 to-transparent opacity-85 pointer-events-none" />
+              <motion.div
+                {...(!prefersReducedMotion ? fadeIn(1.1) : {})}
+                className="hidden md:block absolute z-20 font-mono text-[9px] uppercase tracking-widest px-2.5 py-1.5 border backdrop-blur-sm pointer-events-none whitespace-nowrap"
+                style={{
+                  bottom: show3D ? '220px' : '12px',
+                  left: '-10px',
+                  borderColor: 'rgba(255,255,255,0.15)',
+                  background: 'rgba(9,11,8,0.85)',
+                  color: '#8A8C85',
+                }}
+              >
+                PROJECT BUILDER
+              </motion.div>
 
-                {/* Subtle Chromatic Edge Highlights */}
-                <div className="absolute inset-0 border border-white/10 rounded-2xl pointer-events-none" />
+              <motion.div
+                {...(!prefersReducedMotion ? fadeIn(1.2) : {})}
+                className="hidden md:block absolute z-20 font-mono text-[9px] uppercase tracking-widest px-2.5 py-1.5 border backdrop-blur-sm pointer-events-none whitespace-nowrap"
+                style={{
+                  bottom: show3D ? '220px' : '12px',
+                  right: '-10px',
+                  borderColor: 'rgba(255,255,255,0.15)',
+                  background: 'rgba(9,11,8,0.85)',
+                  color: '#8A8C85',
+                }}
+              >
+                BASED IN INDIA
+              </motion.div>
 
-                {/* Floating Bottom Identity Badge on Portrait */}
-                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-space-950/90 border border-space-750 backdrop-blur-md flex items-center justify-between shadow-2xl">
-                  <div>
-                    <span className="text-xs font-display font-bold text-white block">
-                      Tejram K. Dudhapachare
-                    </span>
-                    <span className="text-[10px] font-mono text-purple-300 block">
-                      SSGMCE Shegaon &bull; SGBAU CSE
-                    </span>
-                  </div>
-                  <div className="text-right font-mono">
-                    <span className="text-[10px] text-slate-400 uppercase block">CGPA</span>
-                    <span className="text-xs font-bold text-emerald-400">8.63</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Embedded 3D Kernel Interactive Canvas Container */}
-              <div className="relative mt-2 rounded-2xl bg-space-950/90 border border-space-750 p-2.5 flex flex-col gap-2">
-                <div className="flex items-center justify-between px-2 text-[10px] font-mono text-slate-400">
-                  <span className="text-purple-300 flex items-center gap-1 font-semibold">
-                    <Move3d className="w-3 h-3 text-electric-400" /> 3D KINETIC KERNEL
-                  </span>
-                  <span>DRAG TO ORBIT</span>
-                </div>
-
-                {/* 3D Canvas Box */}
-                <div
-                  className="w-full h-44 sm:h-48 rounded-xl bg-space-900/80 border border-space-800 relative cursor-grab active:cursor-grabbing overflow-hidden"
-                  data-cursor="ORBIT 3D"
+              {/* Portrait image */}
+              {!prefersReducedMotion ? (
+                <motion.div
+                  initial={{ opacity: 0, x: 40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+                  className="relative overflow-hidden"
+                  style={{
+                    height: 'clamp(340px, 55vw, 500px)',
+                    borderLeft: '2px solid #D5FF00',
+                    boxShadow: '-6px 0 30px rgba(213,255,0,0.12)',
+                  }}
                 >
-                  {supportsWebGL && !prefersReducedMotion ? (
+                  <img
+                    src="/images/tejram-profile.jpg"
+                    alt="Tejram Dudhapachare — Computer Science Engineering Student"
+                    className="w-full h-full"
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: 'center top',
+                      filter: 'grayscale(20%) contrast(1.1)',
+                    }}
+                    loading="eager"
+                  />
+                  {/* Subtle bottom vignette */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: 'linear-gradient(to top, #090B08 0%, transparent 40%)',
+                    }}
+                  />
+                </motion.div>
+              ) : (
+                <div
+                  className="relative overflow-hidden"
+                  style={{
+                    height: 'clamp(340px, 55vw, 500px)',
+                    borderLeft: '2px solid #D5FF00',
+                  }}
+                >
+                  <img
+                    src="/images/tejram-profile.jpg"
+                    alt="Tejram Dudhapachare — Computer Science Engineering Student"
+                    className="w-full h-full"
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: 'center top',
+                      filter: 'grayscale(20%) contrast(1.1)',
+                    }}
+                    loading="eager"
+                  />
+                </div>
+              )}
+
+              {/* 3D Sculpture */}
+              {!prefersReducedMotion ? (
+                <motion.div
+                  {...fadeIn(0.6)}
+                  className="relative mt-4"
+                  style={{
+                    width: '100%',
+                    height: isMobile ? '0px' : '240px',
+                    display: isMobile ? 'none' : 'block',
+                  }}
+                >
+                  {show3D ? (
                     <ThreeErrorBoundary fallback={<FallbackSculpture />}>
                       <Suspense fallback={<FallbackSculpture />}>
-                        <HeroSculpture
-                          isMobile={isMobile}
-                          wireframeMode={wireframeMode}
-                          autoRotate={autoRotate}
-                        />
+                        <HeroSculpture isMobile={isMobile} />
                       </Suspense>
                     </ThreeErrorBoundary>
                   ) : (
                     <FallbackSculpture />
                   )}
+                </motion.div>
+              ) : (
+                <div
+                  className="relative mt-4"
+                  style={{
+                    width: '100%',
+                    height: isMobile ? '0px' : '240px',
+                    display: isMobile ? 'none' : 'block',
+                  }}
+                >
+                  <FallbackSculpture />
                 </div>
-
-                {/* Interactive 3D Control HUD Toggles */}
-                {supportsWebGL && !prefersReducedMotion && (
-                  <div className="flex items-center justify-between px-1 pt-1">
-                    <button
-                      onClick={() => setWireframeMode(!wireframeMode)}
-                      className={`text-[10px] font-mono px-2.5 py-1 rounded-lg flex items-center gap-1.5 transition-colors ${
-                        wireframeMode
-                          ? 'bg-purple-600 text-white font-semibold shadow-sm'
-                          : 'text-slate-400 hover:text-white bg-space-900 border border-space-750'
-                      }`}
-                      title="Toggle Wireframe Lattice"
-                    >
-                      <Box className="w-3 h-3" />
-                      <span>{wireframeMode ? 'Lattice Active' : 'Wireframe'}</span>
-                    </button>
-
-                    <button
-                      onClick={() => setAutoRotate(!autoRotate)}
-                      className={`text-[10px] font-mono px-2.5 py-1 rounded-lg flex items-center gap-1.5 transition-colors ${
-                        !autoRotate
-                          ? 'bg-accent-orange/20 text-accent-orange border border-accent-orange/40 font-semibold'
-                          : 'text-slate-400 hover:text-white bg-space-900 border border-space-750'
-                      }`}
-                      title="Toggle Auto-Rotation"
-                    >
-                      <RotateCw className={`w-3 h-3 ${autoRotate ? 'animate-spin-slow' : ''}`} />
-                      <span>{autoRotate ? 'Rotating' : 'Paused'}</span>
-                    </button>
-                  </div>
-                )}
-              </div>
+              )}
             </div>
-          </motion.div>
+          </div>
         </div>
-
-        {/* Scroll-Down Visual Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="pt-8 flex flex-col items-center justify-center cursor-pointer"
-          onClick={() => scrollToSection('about')}
-        >
-          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-slate-400 hover:text-purple-300 transition-colors flex items-center gap-2">
-            <span>Scroll to Explore Philosophy</span>
-            <ArrowDown className="w-3.5 h-3.5 animate-bounce text-purple-400" />
-          </span>
-        </motion.div>
       </div>
+
+      {/* ── Scroll indicator (absolute, bottom-left) ── */}
+      <ScrollIndicator />
+
+      {/* ── Horizontal ticker ── */}
+      <div className="mt-12 md:mt-16">
+        <TickerBar />
+      </div>
+
+      {/* Mobile layout override */}
+      <style>{`
+        @media (max-width: 767px) {
+          #hero .flex.flex-col.md\\:flex-row {
+            flex-direction: column-reverse;
+          }
+          #hero .flex.flex-col.md\\:flex-row > div {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+          }
+        }
+        @keyframes ticker {
+          0%   { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
     </section>
   );
 };

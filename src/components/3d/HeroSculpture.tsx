@@ -1,78 +1,174 @@
 import React, { useRef, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { OrbitControls, Float, Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
-import { CrystallineCore } from './CrystallineCore';
-import { GyroscopicRings } from './GyroscopicRings';
-import { ConstellationNetwork } from './ConstellationNetwork';
-import { AtmosphericField } from './AtmosphericField';
+import { FallbackSculpture } from './FallbackSculpture';
+import { ThreeErrorBoundary } from './ErrorBoundary';
 
-interface SceneContainerProps {
-  isMobile: boolean;
-  wireframeMode: boolean;
-  autoRotate: boolean;
+// ─── Utility: node positions on sphere ───────────────────────────────────────
+function spherePoint(radius: number, theta: number, phi: number): [number, number, number] {
+  return [
+    radius * Math.sin(phi) * Math.cos(theta),
+    radius * Math.sin(phi) * Math.sin(theta),
+    radius * Math.cos(phi),
+  ];
 }
 
-// Hierarchical scene coordinator handling smooth mouse parallax & orbital dynamics
-function SceneCoordinator({ isMobile, wireframeMode, autoRotate }: SceneContainerProps) {
-  const masterGroupRef = useRef<THREE.Group>(null);
-  const pointerRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+const NODE_COUNT = 8;
+const NODE_POSITIONS: [number, number, number][] = Array.from({ length: NODE_COUNT }, (_, i) => {
+  const theta = (i / NODE_COUNT) * Math.PI * 2;
+  const phi = (Math.PI / 4) + (i % 2) * (Math.PI / 2);
+  return spherePoint(2.4, theta, phi);
+});
 
-  useFrame((state) => {
-    // Smooth lerped pointer coordinates
-    pointerRef.current.x = THREE.MathUtils.lerp(pointerRef.current.x, state.pointer.x, 0.05);
-    pointerRef.current.y = THREE.MathUtils.lerp(pointerRef.current.y, state.pointer.y, 0.05);
+// ─── Lines connecting node pairs ─────────────────────────────────────────────
+function NodeLines() {
+  const pairs: [number, number][] = [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,0],[0,4],[1,5],[2,6],[3,7]];
+  return (
+    <>
+      {pairs.map(([a, b], i) => {
+        const start = new THREE.Vector3(...NODE_POSITIONS[a]);
+        const end = new THREE.Vector3(...NODE_POSITIONS[b]);
+        const points = [start, end];
+        const geo = new THREE.BufferGeometry().setFromPoints(points);
+        return (
+          <lineSegments key={i} geometry={geo}>
+            <lineBasicMaterial color="#D5FF00" transparent opacity={0.18} />
+          </lineSegments>
+        );
+      })}
+    </>
+  );
+}
 
-    if (masterGroupRef.current) {
-      // Subtle layered parallax tilt (responsive to mouse without causing dizziness)
-      masterGroupRef.current.rotation.y = THREE.MathUtils.lerp(
-        masterGroupRef.current.rotation.y,
-        pointerRef.current.x * 0.28,
+// ─── Node sphere dots ─────────────────────────────────────────────────────────
+function NodePoints() {
+  return (
+    <>
+      {NODE_POSITIONS.map((pos, i) => (
+        <mesh key={i} position={pos}>
+          <sphereGeometry args={[0.06, 8, 8]} />
+          <meshStandardMaterial color="#D5FF00" emissive="#D5FF00" emissiveIntensity={1.2} />
+        </mesh>
+      ))}
+    </>
+  );
+}
+
+// ─── Orbital ring ─────────────────────────────────────────────────────────────
+interface OrbitalRingProps {
+  radius: number;
+  tube: number;
+  color: string;
+  opacity: number;
+  rotation?: [number, number, number];
+  speed: number;
+  direction?: 1 | -1;
+}
+function OrbitalRing({ radius, tube, color, opacity, rotation = [0, 0, 0], speed, direction = 1 }: OrbitalRingProps) {
+  const ref = useRef<THREE.Mesh>(null);
+  useFrame(() => {
+    if (ref.current) {
+      ref.current.rotation.z += 0.001 * speed * direction;
+    }
+  });
+  return (
+    <mesh ref={ref} rotation={rotation}>
+      <torusGeometry args={[radius, tube, 16, 100]} />
+      <meshStandardMaterial color={color} transparent opacity={opacity} />
+    </mesh>
+  );
+}
+
+// ─── Main sculpture group ─────────────────────────────────────────────────────
+function DigitalSystemCore() {
+  const groupRef = useRef<THREE.Group>(null);
+  const coreRef = useRef<THREE.Mesh>(null);
+  const outerWireRef = useRef<THREE.Mesh>(null);
+  const { pointer } = useThree();
+
+  useFrame(() => {
+    if (groupRef.current) {
+      // Smooth lerp mouse interaction
+      groupRef.current.rotation.y = THREE.MathUtils.lerp(
+        groupRef.current.rotation.y,
+        pointer.x * 0.3,
         0.05
       );
-      masterGroupRef.current.rotation.x = THREE.MathUtils.lerp(
-        masterGroupRef.current.rotation.x,
-        -pointerRef.current.y * 0.22,
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(
+        groupRef.current.rotation.x,
+        -pointer.y * 0.15,
         0.05
       );
+    }
+
+    if (coreRef.current) {
+      coreRef.current.rotation.y += 0.004;
+      coreRef.current.rotation.x += 0.002;
+    }
+
+    if (outerWireRef.current) {
+      outerWireRef.current.rotation.y -= 0.003;
+      outerWireRef.current.rotation.x -= 0.0015;
     }
   });
 
   return (
-    <group ref={masterGroupRef}>
-      {/* 1. Core Polyhedron Kernel */}
-      <CrystallineCore
-        isMobile={isMobile}
-        wireframeMode={wireframeMode}
-        autoRotate={autoRotate}
-        pointer={pointerRef}
+    <group ref={groupRef}>
+      {/* 1. Central icosahedron — charcoal metallic */}
+      <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.4}>
+        <mesh ref={coreRef}>
+          <icosahedronGeometry args={[1.2, 1]} />
+          <meshStandardMaterial
+            color="#1A1C18"
+            metalness={0.9}
+            roughness={0.1}
+          />
+        </mesh>
+
+        {/* 2. Outer wireframe octahedron — acid lime */}
+        <mesh ref={outerWireRef}>
+          <octahedronGeometry args={[1.8, 0]} />
+          <meshStandardMaterial
+            color="#D5FF00"
+            wireframe
+            transparent
+            opacity={0.4}
+          />
+        </mesh>
+      </Float>
+
+      {/* 3. Orbital rings */}
+      <OrbitalRing
+        radius={2.2} tube={0.015}
+        color="#D5FF00" opacity={0.6}
+        rotation={[Math.PI / 6, 0, 0]}
+        speed={1.2} direction={1}
+      />
+      <OrbitalRing
+        radius={2.6} tube={0.012}
+        color="#ffffff" opacity={0.2}
+        rotation={[Math.PI / 3, 0, 0]}
+        speed={0.8} direction={-1}
+      />
+      <OrbitalRing
+        radius={2.0} tube={0.018}
+        color="#8A8C85" opacity={0.3}
+        rotation={[0, 0, 0]}
+        speed={0.6} direction={1}
       />
 
-      {/* 2. Gyroscopic Coordinate Orbit Rings */}
-      <GyroscopicRings
-        isMobile={isMobile}
-        wireframeMode={wireframeMode}
-        autoRotate={autoRotate}
-      />
+      {/* 4. Node constellation */}
+      <NodePoints />
+      <NodeLines />
 
-      {/* 3. Constellation Node System (Trace lines & data vertices) */}
-      <ConstellationNetwork
-        isMobile={isMobile}
-        autoRotate={autoRotate}
-      />
-
-      {/* 4. Atmospheric Cosmic Particle Field */}
-      <AtmosphericField count={isMobile ? 55 : 100} />
-
-      {/* Tactical Floor Horizon Ring in Electric Purple / Cyan */}
-      <mesh position={[0, isMobile ? -2.3 : -2.6, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[1.0, 1.025, 48]} />
-        <meshBasicMaterial color="#a855f7" transparent opacity={0.35} />
-      </mesh>
+      {/* 5. Sparkles */}
+      <Sparkles count={60} scale={6} size={0.8} speed={0.3} color="#D5FF00" />
     </group>
   );
 }
 
+// ─── Exported component ───────────────────────────────────────────────────────
 export interface HeroSculptureProps {
   isMobile?: boolean;
   wireframeMode?: boolean;
@@ -81,55 +177,42 @@ export interface HeroSculptureProps {
 
 export const HeroSculpture: React.FC<HeroSculptureProps> = ({
   isMobile = false,
-  wireframeMode = false,
-  autoRotate = true,
 }) => {
+  const hasWebGL =
+    typeof window !== 'undefined' &&
+    (!!document.createElement('canvas').getContext('webgl2') ||
+      !!document.createElement('canvas').getContext('webgl'));
+
+  if (!hasWebGL || isMobile) {
+    return <FallbackSculpture />;
+  }
+
   return (
-    <div className="w-full h-full relative select-none touch-none cursor-grab active:cursor-grabbing">
-      <Canvas
-        camera={{ position: [0, 0, isMobile ? 5.8 : 5.1], fov: 45 }}
-        dpr={typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 1.75) : 1}
-        gl={{
-          antialias: true,
-          alpha: true,
-          powerPreference: 'high-performance',
-          stencil: false,
-        }}
-      >
-        <Suspense fallback={null}>
-          {/* Studio Lighting Setup for High-Contrast Creative Studio Aesthetics */}
-          <ambientLight intensity={0.55} color="#0c0d18" />
-          
-          {/* Vibrant Purple Key Light */}
-          <directionalLight position={[6, 7, 5]} intensity={1.9} color="#c084fc" />
-          
-          {/* Electric Cyan Rim Fill */}
-          <directionalLight position={[-6, -4, -4]} intensity={1.6} color="#38bdf8" />
-          
-          {/* Selective Solar Orange Depth Backlight */}
-          <pointLight position={[0, -3, -3.5]} intensity={2.2} color="#f97316" distance={9} />
-          
-          {/* White Specular Accent for Visual Glint */}
-          <pointLight position={[3, -2, 3]} intensity={1.0} color="#ffffff" distance={6} />
+    <div className="w-full h-full relative select-none touch-none">
+      <ThreeErrorBoundary fallback={<FallbackSculpture />}>
+        <Suspense fallback={<FallbackSculpture />}>
+          <Canvas
+            camera={{ position: [0, 0, 5], fov: 50 }}
+            dpr={[1, 1.5]}
+            gl={{ antialias: true, alpha: true }}
+          >
+            {/* Lighting */}
+            <ambientLight intensity={0.4} />
+            <directionalLight position={[5, 5, 5]} intensity={1.5} color="#ffffff" />
+            <pointLight position={[-3, -3, 2]} intensity={0.8} color="#D5FF00" />
 
-          {/* Master 3D Kinetic System */}
-          <SceneCoordinator
-            isMobile={isMobile}
-            wireframeMode={wireframeMode}
-            autoRotate={autoRotate}
-          />
+            <DigitalSystemCore />
 
-          {/* Orbit Controls with bounded angles & smooth rotational damping */}
-          <OrbitControls
-            enableZoom={false}
-            enablePan={false}
-            rotateSpeed={0.7}
-            dampingFactor={0.06}
-            maxPolarAngle={Math.PI / 1.55}
-            minPolarAngle={Math.PI / 2.8}
-          />
+            <OrbitControls
+              enableZoom={false}
+              enablePan={false}
+              rotateSpeed={0.5}
+              dampingFactor={0.08}
+              enableDamping
+            />
+          </Canvas>
         </Suspense>
-      </Canvas>
+      </ThreeErrorBoundary>
     </div>
   );
 };

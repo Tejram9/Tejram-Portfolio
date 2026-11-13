@@ -1,172 +1,79 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { SectionHeading } from '../ui/SectionHeading';
-import { Card } from '../ui/Card';
-import { ScrollReveal } from '../ui/ScrollReveal';
+import React from 'react';
 import { journeyMilestones } from '../../data/journey';
-import {
-  Calendar,
-  CheckCircle2,
-} from 'lucide-react';
 
 export const JourneySection: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<string>('All');
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
-
-  const categories = ['All', 'Foundation', 'Project Execution', 'Competition', 'Architectural Growth'];
-
-  const filteredMilestones = activeCategory === 'All'
-    ? journeyMilestones
-    : journeyMilestones.filter((m) => m.category === activeCategory);
-
   return (
-    <section id="journey" className="py-28 relative overflow-hidden bg-space-950 hairline-border-t">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-purple-600/08 rounded-full blur-[180px] pointer-events-none" />
-      <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-electric-500/06 rounded-full blur-[160px] pointer-events-none" />
+    <section id="journey" className="py-24 md:py-32 relative overflow-hidden bg-void border-t border-white/5">
+      {/* Background Ghost Watermark */}
+      <span
+        aria-hidden
+        className="absolute top-1/3 left-0 font-display text-[15vw] text-white/[0.02] select-none pointer-events-none leading-none tracking-tight"
+      >
+        EVOLUTION
+      </span>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <SectionHeading
-          number="05 //"
-          eyebrow="Progressive Evolution"
-          title="Development"
-          highlight="Journey."
-          description="A chronological narrative charting the transition from algorithmic fundamentals at SSGMCE to enterprise Java backends, hackathons, and AI-driven platforms."
-          coordinateTag="TIMELINE // 2023_PRESENT"
-        />
+      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 relative z-10">
+        {/* Section Heading */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
+          <div>
+            <p className="font-mono text-xs text-softgrey tracking-widest uppercase mb-4">
+              006 — CHRONOLOGY
+            </p>
+            <h2 className="font-display text-4xl sm:text-6xl md:text-7xl uppercase text-white tracking-tight leading-[0.92]">
+              DEVELOPMENT <span className="text-lime-acid">JOURNEY.</span>
+            </h2>
+          </div>
 
-        {/* Interactive Category Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-16">
-          {categories.map((cat) => {
-            const isActive = activeCategory === cat;
-            return (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`relative px-4 py-2 rounded-xl text-xs font-mono tracking-wider transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400 ${
-                  isActive ? 'text-white font-bold' : 'text-slate-400 hover:text-slate-200 bg-space-900 border border-space-750'
-                }`}
-              >
-                {isActive && (
-                  <motion.span
-                    layoutId="journey-filter-pill"
-                    transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-600 to-electric-500 border border-purple-400/50 shadow-[0_0_20px_rgba(168,85,247,0.45)] -z-10"
-                  />
-                )}
-                {cat}
-              </button>
-            );
-          })}
+          <div className="max-w-xs">
+            <div className="w-12 h-0.5 bg-lime-acid mb-4" />
+            <p className="font-sans text-xs sm:text-sm text-softgrey leading-relaxed">
+              The continuous progression from algorithmic CS foundations at SSGMCE to shipping production-deployed full-stack solutions.
+            </p>
+          </div>
         </div>
 
-        <div className="relative mt-8">
-          {/* Vertical Timeline spine line */}
-          <div className="hidden md:block absolute left-1/2 top-4 bottom-4 w-[2px] bg-gradient-to-b from-purple-500 via-electric-400 to-accent-orange -translate-x-1/2 shadow-[0_0_12px_rgba(168,85,247,0.4)]" />
+        {/* Minimal Editorial Vertical Timeline */}
+        <div className="relative border-l border-white/15 ml-4 md:ml-32 space-y-12 pb-6">
+          {journeyMilestones.map((item, idx) => (
+            <div key={item.id} className="relative pl-8 md:pl-12 group">
+              {/* Timeline Node Point */}
+              <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 bg-void border-2 border-white/40 group-hover:border-lime-acid group-hover:bg-lime-acid transition-colors" />
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeCategory}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="space-y-14"
-            >
-              {filteredMilestones.map((milestone, idx) => {
-                const isEven = idx % 2 === 0;
-                const isHovered = hoveredId === milestone.id;
+              {/* Phase label floated left on desktop */}
+              <div className="md:absolute md:-left-32 md:top-1 font-mono text-[11px] text-lime-acid uppercase tracking-widest mb-1 md:mb-0">
+                {item.year || `PHASE 0${idx + 1}`}
+              </div>
 
-                return (
-                  <div
-                    key={milestone.id}
-                    onMouseEnter={() => setHoveredId(milestone.id)}
-                    onMouseLeave={() => setHoveredId(null)}
-                    className="relative grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
-                  >
-                    {/* Left Column (or Empty for Right side) */}
-                    <div
-                      className={`md:col-span-5 ${
-                        isEven ? 'md:text-right' : 'md:order-last md:text-left'
-                      }`}
+              {/* Milestone Content Box */}
+              <div className="p-6 md:p-8 border border-white/10 bg-[#121410] hover:border-lime-acid/50 transition-all duration-200">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                  <span className="font-mono text-xs text-softgrey uppercase tracking-widest">
+                    // {item.category}
+                  </span>
+                </div>
+
+                <h3 className="font-display text-2xl md:text-3xl text-white uppercase tracking-tight mb-3 group-hover:text-lime-acid transition-colors">
+                  {item.title}
+                </h3>
+
+                <p className="font-sans text-sm text-smoke/90 leading-relaxed mb-6 font-normal">
+                  {item.description}
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5">
+                  {item.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 bg-void text-softgrey border border-white/10"
                     >
-                      <ScrollReveal direction={isEven ? 'left' : 'right'} delay={idx * 0.08}>
-                        <Card
-                          className={`p-6 md:p-8 transition-all duration-300 ${
-                            isHovered
-                              ? 'border-purple-400/80 shadow-[0_10px_35px_-10px_rgba(168,85,247,0.4)] scale-[1.01]'
-                              : ''
-                          }`}
-                          glow={isHovered ? 'purple' : 'none'}
-                          tacticalBorder
-                        >
-                          <div
-                            className={`flex items-center gap-2 text-xs font-mono mb-2.5 ${
-                              isEven ? 'md:justify-end' : 'justify-start'
-                            }`}
-                          >
-                            <Calendar className="w-3.5 h-3.5 text-purple-400" />
-                            <span className="text-purple-300 font-semibold">
-                              {milestone.period}
-                            </span>
-                            <span className="text-slate-600">&bull;</span>
-                            <span className="text-slate-400 font-medium">{milestone.category}</span>
-                            {milestone.status === 'Continuous' && (
-                              <span className="ml-1 px-2 py-0.5 rounded bg-purple-950/80 border border-purple-800 text-[9px] font-mono text-purple-300">
-                                In Progress
-                              </span>
-                            )}
-                          </div>
-
-                          <h3 className="text-lg sm:text-xl font-display font-bold text-white flex items-center gap-2">
-                            {milestone.title}
-                          </h3>
-
-                          <p className="text-xs sm:text-sm text-slate-300 mt-2.5 leading-relaxed font-normal">
-                            {milestone.description}
-                          </p>
-
-                          <div className="mt-5 pt-4 border-t border-space-750 space-y-2">
-                            {milestone.keyLearnings.map((learn, i) => (
-                              <div
-                                key={i}
-                                className={`flex items-start gap-2.5 text-xs text-slate-400 ${
-                                  isEven ? 'md:flex-row-reverse md:text-right' : 'text-left'
-                                }`}
-                              >
-                                <CheckCircle2 className="w-3.5 h-3.5 text-purple-400 shrink-0 mt-0.5" />
-                                <span className="leading-relaxed">{learn}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </Card>
-                      </ScrollReveal>
-                    </div>
-
-                    {/* Central Node Badge */}
-                    <div className="hidden md:flex md:col-span-2 items-center justify-center">
-                      <div
-                        className={`w-12 h-12 rounded-full bg-space-950 border-2 transition-all duration-300 flex items-center justify-center text-xs font-mono font-bold z-10 ${
-                          isHovered
-                            ? 'border-purple-400 text-purple-300 scale-125 shadow-[0_0_24px_rgba(168,85,247,0.7)]'
-                            : 'border-space-750 text-slate-400 shadow-[0_0_18px_rgba(0,0,0,0.6)]'
-                        }`}
-                      >
-                        0{idx + 1}
-                      </div>
-                    </div>
-
-                    {/* Empty Spacer Column on Opposite Side */}
-                    <div
-                      className={`hidden md:block md:col-span-5 ${
-                        isEven ? 'md:order-last' : ''
-                      }`}
-                    />
-                  </div>
-                );
-              })}
-            </motion.div>
-          </AnimatePresence>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -3,55 +3,26 @@ import { AchievementItem } from '../types';
 export const achievementsData: AchievementItem[] = [
   {
     id: 'civicserve-hackathon',
+    num: '01',
     title: '4th Place — AI-Tools Hackathon',
-    organizationOrEvent: 'AI Innovation Hackathon',
-    dateOrYear: '2025 - 2026',
+    organizationOrEvent: 'Competitive AI Innovation Challenge',
+    dateOrYear: '2024',
     type: 'Award',
-    badge: 'Hackathon Distinction',
-    highlightText: 'Awarded 4th place for developing CivicServe, an AI-augmented service worker matching engine leveraging OpenRouter LLM capabilities to parse unstructured user requests and connect them with verified local workers.',
-    description: 'Competed with student and developer teams, architecting a full-stack prototype within constrained hackathon deadlines. Recognized by the jury for practical societal utility and effective AI workflow design.',
+    highlightText: 'CivicServe secured 4th place in an intensive AI-tools hackathon by engineering an automated grievance intake workflow powered by OpenRouter LLM parsing and Supabase PostgreSQL persistence.',
+    description: 'Developed an intelligent matching platform connecting urban citizens with verified local service workers, featuring automated natural language requirement extraction and priority queue dispatch.',
+    badge: '4th Place Finalist',
+    verified: true,
   },
   {
     id: 'focuspulse-navonmesh',
-    title: 'Project Expo Showcase — FocusPulse',
-    organizationOrEvent: "Navonmesh'26 Annual Project Exhibition",
-    dateOrYear: '2026',
+    num: '02',
+    title: 'Navonmesh\'26 Technical Showcase',
+    organizationOrEvent: 'Annual Engineering Innovation Exhibition (SSGMCE)',
+    dateOrYear: '2024',
     type: 'Showcase',
-    badge: 'Technical Exhibition',
-    highlightText: "Selected to present FocusPulse (developed with Team TrackX) at SSGMCE's premier annual technical project exposition Navonmesh'26.",
-    description: 'Demonstrated the live productivity analytics platform to visiting faculty, industry evaluators, and peer engineering students, illustrating full-stack Flask architecture and dynamic Chart.js time-tracking mechanisms.',
+    highlightText: 'FocusPulse was selected and presented at Navonmesh\'26, demonstrating an integrated deep-work environment with client-side interval state machines and real-time Chart.js productivity telemetry.',
+    description: 'Exhibited full-stack Python/Flask architecture to faculty, peers, and industry evaluators, receiving commendations for user interface ergonomics and reflective analytics.',
+    badge: 'Official Project Showcase',
+    verified: true,
   },
 ];
-
-export interface LeadershipRole {
-  title: string;
-  organization: string;
-  scope: string;
-  statusNote: string;
-  isConfirmed: boolean;
-}
-
-export const leadershipRoles: LeadershipRole[] = [
-  {
-    title: 'Technical Advisor',
-    organization: "CESSA (Computer Engineering Students' Association)",
-    scope: 'Student Technical Community & Event Advisory',
-    statusNote: 'Subject to formal semester confirmation / Active participant',
-    isConfirmed: true,
-  },
-  {
-    title: 'Technical Advisor',
-    organization: 'ISTE Students Chapter (SSGMCE)',
-    scope: 'Technical workshops, hackathon organizing & peer development',
-    statusNote: 'Subject to formal semester confirmation / Student Member',
-    isConfirmed: true,
-  },
-  {
-    title: 'Open Source Community Advisor',
-    organization: 'Mozilla Campus Club / Open Source Community',
-    scope: 'Open web advocacy, git guidance & student contributor sessions',
-    statusNote: 'Subject to formal semester confirmation / Community Contributor',
-    isConfirmed: true,
-  },
-];
-

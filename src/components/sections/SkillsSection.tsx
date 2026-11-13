@@ -1,209 +1,172 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { SectionHeading } from '../ui/SectionHeading';
-import { ScrollReveal } from '../ui/ScrollReveal';
-import { skillsData, skillsCategories, SkillDetail } from '../../data/skills';
-import {
-  Coffee,
-  Terminal,
-  Code2,
-  FileCode2,
-  Cpu,
-  Layers,
-  Network,
-  Server,
-  Workflow,
-  FlaskConical,
-  Atom,
-  Palette,
-  Layout,
-  Sparkles,
-  Database,
-  ServerCog,
-  HardDrive,
-  Boxes,
-  GitPullRequest,
-  FileSpreadsheet,
-  BarChart3,
-  BrainCircuit,
-  Cloud,
-} from 'lucide-react';
+import { skillsData, currentlyLearningData, SkillCategory } from '../../data/skills';
+import { projectsData } from '../../data/projects';
 
 export const SkillsSection: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [selectedSkill, setSelectedSkill] = useState<SkillDetail | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>('ALL');
 
-  // Icon mapping
-  const iconMap: Record<string, React.ReactNode> = {
-    Coffee: <Coffee className="w-5 h-5" />,
-    Terminal: <Terminal className="w-5 h-5" />,
-    FileCode2: <FileCode2 className="w-5 h-5" />,
-    Code2: <Code2 className="w-5 h-5" />,
-    Cpu: <Cpu className="w-5 h-5" />,
-    Layers: <Layers className="w-5 h-5" />,
-    Network: <Network className="w-5 h-5" />,
-    Server: <Server className="w-5 h-5" />,
-    Workflow: <Workflow className="w-5 h-5" />,
-    FlaskConical: <FlaskConical className="w-5 h-5" />,
-    Atom: <Atom className="w-5 h-5" />,
-    Palette: <Palette className="w-5 h-5" />,
-    Layout: <Layout className="w-5 h-5" />,
-    Sparkles: <Sparkles className="w-5 h-5" />,
-    Database: <Database className="w-5 h-5" />,
-    ServerCog: <ServerCog className="w-5 h-5" />,
-    HardDrive: <HardDrive className="w-5 h-5" />,
-    Boxes: <Boxes className="w-5 h-5" />,
-    GitPullRequest: <GitPullRequest className="w-5 h-5" />,
-    FileSpreadsheet: <FileSpreadsheet className="w-5 h-5" />,
-    BarChart3: <BarChart3 className="w-5 h-5" />,
-    BrainCircuit: <BrainCircuit className="w-5 h-5" />,
-    Cloud: <Cloud className="w-5 h-5" />,
+  const categories = ['ALL', 'PROGRAMMING', 'FRONTEND', 'BACKEND', 'DATABASE', 'TOOLS'];
+
+  const filteredCategories: SkillCategory[] =
+    activeCategory === 'ALL'
+      ? skillsData
+      : skillsData.filter((cat) => cat.label.toUpperCase() === activeCategory);
+
+  const getProjectTitle = (id: string) => {
+    const p = projectsData.find((proj) => proj.id === id);
+    return p ? p.title : id;
   };
 
-  const filteredSkills =
-    activeCategory === 'all'
-      ? skillsData
-      : skillsData.filter((s) => s.category === activeCategory);
-
   return (
-    <section id="skills" className="py-28 relative overflow-hidden bg-space-950 hairline-border-t">
-      {/* Background radial glow */}
-      <div className="absolute top-1/2 left-1/4 w-[500px] h-[350px] bg-purple-600/08 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 w-[450px] h-[350px] bg-electric-500/06 rounded-full blur-[150px] pointer-events-none" />
+    <section id="skills" className="py-24 md:py-32 relative overflow-hidden bg-void border-t border-white/5">
+      {/* Background ghost label */}
+      <span
+        aria-hidden
+        className="absolute bottom-8 left-0 font-display text-[15vw] text-white/[0.02] select-none pointer-events-none leading-none tracking-tight"
+      >
+        TOOLS
+      </span>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <SectionHeading
-          number="03 //"
-          eyebrow="Technical Stack & Competencies"
-          title="Skills &"
-          highlight="Technologies."
-          description="A curated toolkit organized by practical application. Differentiating project-tested technologies from emerging areas of continuous learning."
-          coordinateTag="STACK // 2026_TOOLKIT"
-        />
+      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 relative z-10">
+        {/* Section Heading */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div>
+            <p className="font-mono text-xs text-softgrey tracking-widest uppercase mb-4">
+              004 — TECHNICAL STACK
+            </p>
+            <h2 className="font-display text-4xl sm:text-6xl md:text-7xl uppercase text-white tracking-tight leading-[0.92]">
+              TOOLS OF <span className="text-lime-acid">THE TRADE.</span>
+            </h2>
+          </div>
 
-        {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center gap-2 mb-12 pb-4 border-b border-space-750">
-          {skillsCategories.map((cat) => {
-            const isActive = activeCategory === cat.id;
+          <div className="max-w-sm">
+            <div className="w-12 h-0.5 bg-lime-acid mb-4" />
+            <p className="font-sans text-xs sm:text-sm text-softgrey leading-relaxed">
+              Every technology listed here has been applied directly in practical software builds, backend services, or algorithmic coursework. No arbitrary percentage bars.
+            </p>
+          </div>
+        </div>
+
+        {/* Category Filter Tabs */}
+        <div className="flex flex-wrap gap-2 mb-12 border-b border-white/10 pb-6">
+          {categories.map((cat) => {
+            const isActive = activeCategory === cat;
             return (
               <button
-                key={cat.id}
-                onClick={() => {
-                  setActiveCategory(cat.id);
-                  setSelectedSkill(null);
-                }}
-                className={`relative px-4 py-2 rounded-xl text-xs font-mono tracking-wider transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-purple-400 ${
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`font-mono text-xs uppercase tracking-widest px-4 py-2 transition-all duration-200 border ${
                   isActive
-                    ? 'text-white font-bold'
-                    : 'bg-space-900 hover:bg-space-850 text-slate-400 hover:text-slate-200 border border-space-750'
+                    ? 'bg-lime-acid text-void border-lime-acid font-bold'
+                    : 'text-softgrey border-white/10 hover:border-white/40 hover:text-white bg-[#121410]'
                 }`}
               >
-                {isActive && (
-                  <motion.span
-                    layoutId="skills-filter-pill"
-                    transition={{ type: 'spring', stiffness: 380, damping: 28 }}
-                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-600 to-electric-500 shadow-[0_0_20px_rgba(168,85,247,0.45)] -z-10"
-                  />
-                )}
-                {cat.label}
+                {cat}
               </button>
             );
           })}
         </div>
 
-        {/* Skills Grid */}
-        <ScrollReveal direction="up" delay={0.1}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
-          {filteredSkills.map((skill) => {
-            const isSelected = selectedSkill?.name === skill.name;
-            return (
-              <div
-                key={skill.name}
-                tabIndex={0}
-                role="button"
-                aria-pressed={isSelected}
-                aria-label={`Inspect ${skill.name} technical specification`}
-                onClick={() => setSelectedSkill(isSelected ? null : skill)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    setSelectedSkill(isSelected ? null : skill);
-                  }
-                }}
-                className={`p-5 rounded-2xl transition-all duration-200 cursor-pointer border flex flex-col justify-between focus:outline-none focus:ring-2 focus:ring-purple-400 ${
-                  isSelected
-                    ? 'bg-space-850 border-purple-500 shadow-[0_0_24px_rgba(168,85,247,0.3)]'
-                    : 'glass-card hover:bg-space-850/80 hover:border-purple-500/40'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-3.5">
-                    <div className="p-2.5 rounded-xl bg-space-900 border border-space-750 text-purple-400 transition-colors">
-                      {iconMap[skill.icon] || <Code2 className="w-5 h-5 text-purple-400" />}
+        {/* Categorized Skills Grid */}
+        <div className="space-y-12 mb-16">
+          {filteredCategories.map((catGroup) => (
+            <div key={catGroup.label} className="space-y-4">
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs text-lime-acid uppercase tracking-widest font-semibold">
+                  // {catGroup.label}
+                </span>
+                <div className="flex-1 h-px bg-white/10" />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {catGroup.skills.map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="p-5 border border-white/10 bg-[#121410] hover:border-lime-acid/60 transition-all duration-200 flex flex-col justify-between group"
+                  >
+                    <div>
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <h4 className="font-sans font-bold text-lg text-white group-hover:text-lime-acid transition-colors">
+                          {skill.name}
+                        </h4>
+                        <span className="font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 bg-void text-softgrey border border-white/10">
+                          {skill.projectIds && skill.projectIds.length > 0 ? 'PROJECT-TESTED' : 'CORE'}
+                        </span>
+                      </div>
+
+                      {skill.description && (
+                        <p className="font-sans text-xs text-softgrey leading-relaxed mb-4">
+                          {skill.description}
+                        </p>
+                      )}
                     </div>
 
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-900 border border-space-750 text-slate-300">
-                      {skill.status}
-                    </span>
+                    {/* Connected projects if applicable */}
+                    {skill.projectIds && skill.projectIds.length > 0 && (
+                      <div className="pt-3 border-t border-white/5">
+                        <span className="font-mono text-[9px] uppercase tracking-wider text-softgrey/80 block mb-1.5">
+                          SHIPPED IN:
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {skill.projectIds.map((pid) => (
+                            <span
+                              key={pid}
+                              className="font-mono text-[10px] text-lime-acid bg-void/80 border border-lime-acid/30 px-2 py-0.5"
+                            >
+                              {getProjectTitle(pid)}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
 
-                  <h3 className="text-base font-display font-bold text-slate-100">
-                    {skill.name}
-                  </h3>
+        {/* Continuous Learning Horizon Block */}
+        <div className="border border-white/15 bg-[#161814] p-8 md:p-10 relative overflow-hidden">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8">
+            <div>
+              <span className="font-mono text-[10px] text-lime-acid tracking-widest uppercase px-2.5 py-1 border border-lime-acid/40 bg-void inline-block mb-3">
+                CONTINUOUS MASTERY
+              </span>
+              <h3 className="font-display text-2xl sm:text-3xl text-white uppercase tracking-tight">
+                ACTIVE LEARNING &amp; ENGINEERING FOCUS
+              </h3>
+            </div>
+            <p className="font-sans text-xs text-softgrey max-w-md leading-relaxed">
+              Distinguishing technologies actively deployed in production from computer science subjects under active continuous development.
+            </p>
+          </div>
 
-                  <p className="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
-                    {skill.description}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {currentlyLearningData.map((item, idx) => (
+              <div key={idx} className="p-5 border border-white/10 bg-void flex flex-col justify-between">
+                <div>
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-lime-acid block mb-1">
+                    {item.category}
+                  </span>
+                  <h4 className="font-sans font-bold text-base text-white mb-2">
+                    {item.name}
+                  </h4>
+                  <p className="font-sans text-xs text-smoke/80 leading-relaxed mb-4">
+                    {item.focus}
                   </p>
                 </div>
-
-                {/* Used In Project Chips */}
-                {skill.usedInProjects && skill.usedInProjects.length > 0 && (
-                  <div className="pt-3 mt-4 border-t border-space-750 flex flex-wrap gap-1">
-                    {skill.usedInProjects.map((proj) => (
-                      <span
-                        key={proj}
-                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-900 text-purple-300 border border-purple-900/40"
-                      >
-                        {proj}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                <div className="pt-3 border-t border-white/5 flex items-center justify-between">
+                  <span className="font-mono text-[10px] text-softgrey">Status</span>
+                  <span className="font-mono text-[10px] text-lime-acid flex items-center gap-1.5 font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-lime-acid animate-pulse" />
+                    {item.status}
+                  </span>
+                </div>
               </div>
-            );
-          })}
-        </div>
-        </ScrollReveal>
-
-        {/* Selected Skill Detail Banner */}
-        {selectedSkill && (
-          <div className="mt-8 p-6 rounded-2xl bg-space-900 border border-purple-500/50 shadow-2xl animate-in fade-in duration-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-mono uppercase text-purple-400 font-semibold">
-                  Selected Specification
-                </span>
-                <span className="text-slate-500">•</span>
-                <span className="text-xs font-mono text-slate-200 font-bold">{selectedSkill.name}</span>
-              </div>
-              <p className="text-xs sm:text-sm text-slate-200 max-w-3xl leading-relaxed">
-                {selectedSkill.description}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2 shrink-0">
-              <span className="text-xs font-mono px-3 py-1.5 rounded-lg bg-purple-950/80 border border-purple-800 text-purple-300 font-semibold">
-                {selectedSkill.status}
-              </span>
-              <button
-                onClick={() => setSelectedSkill(null)}
-                className="text-xs font-mono text-slate-400 hover:text-white px-2 py-1"
-              >
-                Dismiss
-              </button>
-            </div>
+            ))}
           </div>
-        )}
+        </div>
       </div>
     </section>
   );

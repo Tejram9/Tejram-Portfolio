@@ -151,7 +151,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       id: `proj-${p.id}`,
       category: 'Projects',
       title: p.title,
-      subtitle: `${p.tagline} • ${p.technologies.slice(0, 3).join(', ')}`,
+      subtitle: `${p.tagline} • ${(p.technologies || p.stack || []).slice(0, 3).join(', ')}`,
       icon: <FolderGit2 className="w-4 h-4 text-purple-400" />,
       action: () => {
         scrollToSection('projects');

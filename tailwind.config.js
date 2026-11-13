@@ -1,86 +1,52 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  darkMode: 'class',
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        // Deep Black & Sophisticated Studio Obsidian
-        space: {
-          950: '#030305', // Deepest void background
-          900: '#07070d', // Obsidian section base
-          850: '#0d0e17', // Studio glass panel
-          800: '#141624', // Elevated surface
-          750: '#1d2033', // Subtle hairline borders
-          700: '#282c46', // Distinctive interactive borders
+        void: '#090B08',
+        lime: {
+          acid: '#D5FF00',
+          dim: '#B8E000',
+          pale: '#E8FF66',
         },
-        // Vibrant Purple Spectrum (Primary Creative Accent)
-        purple: {
-          300: '#d8b4fe',
-          400: '#c084fc',
-          500: '#a855f7',
-          600: '#9333ea',
-          700: '#7e22ce',
-          800: '#6b21a8',
-          900: '#581c87',
-          950: '#2e1065',
-        },
-        // Electric Blue / Cyber Cyan (Systems & Interconnection)
-        electric: {
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          blue: '#3b82f6',
-          indigo: '#6366f1',
-          950: '#082f49',
-        },
-        // Selective Solar Orange / Amber (High-Priority Highlights & Telemetry)
-        accent: {
-          orange: '#f97316',
-          amber: '#fb923c',
-          fire: '#ea580c',
-          glow: 'rgba(249, 115, 22, 0.4)',
-        },
-        cyber: {
-          purple: '#a855f7',
-          cyan: '#38bdf8',
-          blue: '#3b82f6',
-          orange: '#f97316',
-          emerald: '#10b981',
-          rose: '#f43f5e',
-        },
+        offwhite: '#F3F1E8',
+        charcoal: '#1A1C18',
+        olive: '#3D4038',
+        softgrey: '#8A8C85',
+        smoke: '#C4C6BF',
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-        display: ['Space Grotesk', 'Plus Jakarta Sans', 'sans-serif'],
+        display: ['Anton', 'sans-serif'],
+        sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'subtle-grid': 'radial-gradient(circle at 1px 1px, rgba(168, 85, 247, 0.08) 1px, transparent 0)',
-        'hero-glow': 'radial-gradient(circle at 50% 30%, rgba(168, 85, 247, 0.15) 0%, rgba(56, 189, 248, 0.1) 40%, transparent 70%)',
+      fontSize: {
+        'fluid-hero': 'clamp(4rem, 12vw, 11rem)',
+        'fluid-xl': 'clamp(2.5rem, 6vw, 6rem)',
+        'fluid-lg': 'clamp(1.8rem, 4vw, 3.5rem)',
+        'fluid-md': 'clamp(1.2rem, 2.5vw, 2rem)',
+      },
+      letterSpacing: {
+        tightest: '-0.04em',
+        display: '-0.02em',
+        wide: '0.08em',
+        widest: '0.2em',
       },
       animation: {
-        'pulse-subtle': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'float-slow': 'float 6s ease-in-out infinite',
-        'spin-slow': 'spin 22s linear infinite',
-        'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+        'ticker': 'ticker 30s linear infinite',
+        'fade-up': 'fadeUp 0.7s ease forwards',
+        'fade-in': 'fadeIn 0.5s ease forwards',
       },
       keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-8px)' },
-        },
-        glowPulse: {
-          '0%, 100%': { opacity: '0.6' },
-          '50%': { opacity: '1' },
-        },
+        ticker: { '0%': { transform: 'translateX(0%)' }, '100%': { transform: 'translateX(-50%)' } },
+        fadeUp: { '0%': { opacity: '0', transform: 'translateY(24px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+      },
+      backgroundImage: {
+        'grain': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E\")",
       },
     },
   },
   plugins: [],
-}
+};

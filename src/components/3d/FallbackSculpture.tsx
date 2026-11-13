@@ -2,103 +2,127 @@ import React from 'react';
 
 export const FallbackSculpture: React.FC = () => {
   return (
-    <div className="w-full h-full flex items-center justify-center relative select-none">
+    <div className="w-full h-full flex items-center justify-center relative select-none overflow-hidden">
       {/* Background radial glow */}
-      <div className="absolute w-72 h-72 rounded-full bg-purple-600/20 blur-3xl pointer-events-none" />
-      <div className="absolute w-48 h-48 rounded-full bg-electric-500/15 blur-2xl pointer-events-none" />
+      <div
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          width: '200px',
+          height: '200px',
+          background: 'radial-gradient(circle, rgba(213,255,0,0.08) 0%, transparent 70%)',
+          filter: 'blur(30px)',
+        }}
+      />
 
-      {/* SVG Kinetic Sculpture */}
+      {/* SVG Node Network */}
       <svg
-        className="w-72 h-72 md:w-96 md:h-96"
-        viewBox="0 0 400 400"
+        width="300"
+        height="300"
+        viewBox="0 0 300 300"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        style={{ maxWidth: '100%', maxHeight: '100%' }}
       >
         <defs>
-          <linearGradient id="coreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#c084fc" stopOpacity="0.9" />
-            <stop offset="50%" stopColor="#a855f7" stopOpacity="0.95" />
-            <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.9" />
-          </linearGradient>
-          <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#a855f7" stopOpacity="0.8" />
-            <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#f97316" stopOpacity="0.8" />
-          </linearGradient>
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="6" result="blur" />
+          <style>{`
+            @keyframes dash {
+              0% { stroke-dashoffset: 300; }
+              100% { stroke-dashoffset: 0; }
+            }
+            @keyframes dashRev {
+              0% { stroke-dashoffset: 0; }
+              100% { stroke-dashoffset: -300; }
+            }
+            @keyframes pulseNode {
+              0%, 100% { opacity: 0.6; r: 4; }
+              50% { opacity: 1; r: 5.5; }
+            }
+            @keyframes rotateSlow {
+              from { transform: rotate(0deg); transform-origin: 150px 150px; }
+              to { transform: rotate(360deg); transform-origin: 150px 150px; }
+            }
+            @keyframes rotateSlowRev {
+              from { transform: rotate(0deg); transform-origin: 150px 150px; }
+              to { transform: rotate(-360deg); transform-origin: 150px 150px; }
+            }
+            .ring1 { animation: rotateSlow 20s linear infinite; }
+            .ring2 { animation: rotateSlowRev 28s linear infinite; }
+            .line-anim { animation: dash 3s ease-in-out infinite alternate; stroke-dasharray: 300; }
+            .line-anim-rev { animation: dashRev 4s ease-in-out infinite alternate; stroke-dasharray: 300; }
+            .node-pulse { animation: pulseNode 2s ease-in-out infinite; }
+            .node-pulse-delay { animation: pulseNode 2s ease-in-out 0.7s infinite; }
+            .node-pulse-delay2 { animation: pulseNode 2s ease-in-out 1.4s infinite; }
+          `}</style>
+          <filter id="limeglow">
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
+          <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#2a2e28" />
+            <stop offset="60%" stopColor="#1A1C18" />
+            <stop offset="100%" stopColor="#0d0f0d" />
+          </radialGradient>
         </defs>
 
-        {/* Outer Orbit Ring with Dash Animation */}
+        {/* Outer orbit ring */}
         <ellipse
-          cx="200"
-          cy="200"
-          rx="170"
-          ry="65"
-          transform="rotate(-25 200 200)"
-          stroke="url(#ringGrad)"
-          strokeWidth="1.5"
-          strokeDasharray="6 8"
-          className="animate-[spin_40s_linear_infinite]"
-        />
-
-        {/* Counter Orbit Ring */}
-        <ellipse
-          cx="200"
-          cy="200"
-          rx="155"
-          ry="55"
-          transform="rotate(45 200 200)"
-          stroke="#38bdf8"
-          strokeWidth="1.2"
-          strokeOpacity="0.6"
+          className="ring1"
+          cx="150" cy="150" rx="118" ry="45"
+          stroke="#D5FF00" strokeWidth="1" strokeOpacity="0.35"
           strokeDasharray="4 6"
-          className="animate-[spin_30s_linear_infinite_reverse]"
         />
 
-        {/* Third Orbit Ring in Solar Orange */}
+        {/* Middle ring tilted */}
         <ellipse
-          cx="200"
-          cy="200"
-          rx="140"
-          ry="75"
-          transform="rotate(75 200 200)"
-          stroke="#f97316"
-          strokeWidth="1"
-          strokeOpacity="0.5"
+          className="ring2"
+          cx="150" cy="150" rx="95" ry="90"
+          transform="rotate(60 150 150)"
+          stroke="#ffffff" strokeWidth="0.8" strokeOpacity="0.15"
           strokeDasharray="3 5"
         />
 
-        {/* Central Faceted Hexagonal Core */}
+        {/* Connector lines between nodes */}
+        <line className="line-anim" x1="92" y1="90" x2="150" y2="150" stroke="#D5FF00" strokeWidth="0.8" strokeOpacity="0.5" />
+        <line className="line-anim-rev" x1="208" y1="90" x2="150" y2="150" stroke="#D5FF00" strokeWidth="0.8" strokeOpacity="0.5" />
+        <line className="line-anim" x1="230" y1="175" x2="150" y2="150" stroke="#D5FF00" strokeWidth="0.8" strokeOpacity="0.4" />
+        <line className="line-anim-rev" x1="70" y1="175" x2="150" y2="150" stroke="#D5FF00" strokeWidth="0.8" strokeOpacity="0.4" />
+        <line className="line-anim" x1="150" y1="230" x2="150" y2="150" stroke="#D5FF00" strokeWidth="0.8" strokeOpacity="0.3" />
+        <line className="line-anim-rev" x1="92" y1="90" x2="208" y2="90" stroke="#8A8C85" strokeWidth="0.6" strokeOpacity="0.3" />
+        <line className="line-anim" x1="230" y1="175" x2="150" y2="230" stroke="#8A8C85" strokeWidth="0.6" strokeOpacity="0.3" />
+        <line className="line-anim-rev" x1="70" y1="175" x2="150" y2="230" stroke="#8A8C85" strokeWidth="0.6" strokeOpacity="0.3" />
+
+        {/* Central core hexagon */}
         <polygon
-          points="200,120 270,160 270,240 200,280 130,240 130,160"
+          points="150,118 176,134 176,166 150,182 124,166 124,134"
           fill="url(#coreGrad)"
-          stroke="#c084fc"
-          strokeWidth="2"
-          filter="url(#glow)"
-          opacity="0.85"
+          stroke="#D5FF00"
+          strokeWidth="1.2"
+          strokeOpacity="0.7"
+          filter="url(#limeglow)"
         />
-
-        {/* Inner Octahedron Lattice */}
+        {/* Inner diamond */}
         <polygon
-          points="200,145 245,200 200,255 155,200"
-          fill="#0a0c16"
-          stroke="#38bdf8"
-          strokeWidth="1.5"
-          opacity="0.9"
+          points="150,130 162,150 150,170 138,150"
+          fill="#1A1C18"
+          stroke="#D5FF00"
+          strokeWidth="1"
+          strokeOpacity="0.9"
         />
+        {/* Core center dot */}
+        <circle cx="150" cy="150" r="4" fill="#D5FF00" filter="url(#limeglow)" />
+        <circle cx="150" cy="150" r="2" fill="#ffffff" />
 
-        {/* Core Radiating Point */}
-        <circle cx="200" cy="200" r="14" fill="#f97316" filter="url(#glow)" />
-        <circle cx="200" cy="200" r="6" fill="#ffffff" />
-
-        {/* Satellite Vertex Constellation Nodes */}
-        <circle cx="90" cy="180" r="4" fill="#38bdf8" filter="url(#glow)" />
-        <circle cx="310" cy="160" r="4.5" fill="#a855f7" filter="url(#glow)" />
-        <circle cx="280" cy="290" r="3.5" fill="#f97316" filter="url(#glow)" />
-        <circle cx="120" cy="270" r="4" fill="#c084fc" filter="url(#glow)" />
+        {/* Orbital node points */}
+        <circle className="node-pulse" cx="92" cy="90" r="4" fill="#D5FF00" filter="url(#limeglow)" />
+        <circle className="node-pulse-delay" cx="208" cy="90" r="4" fill="#D5FF00" filter="url(#limeglow)" />
+        <circle className="node-pulse-delay2" cx="230" cy="175" r="3.5" fill="#D5FF00" filter="url(#limeglow)" />
+        <circle className="node-pulse" cx="70" cy="175" r="3.5" fill="#D5FF00" filter="url(#limeglow)" />
+        <circle className="node-pulse-delay" cx="150" cy="230" r="4" fill="#D5FF00" filter="url(#limeglow)" />
+        <circle cx="92" cy="90" r="8" fill="#D5FF00" fillOpacity="0.08" />
+        <circle cx="208" cy="90" r="8" fill="#D5FF00" fillOpacity="0.08" />
+        <circle cx="230" cy="175" r="7" fill="#D5FF00" fillOpacity="0.08" />
+        <circle cx="70" cy="175" r="7" fill="#D5FF00" fillOpacity="0.08" />
+        <circle cx="150" cy="230" r="8" fill="#D5FF00" fillOpacity="0.08" />
       </svg>
     </div>
   );
